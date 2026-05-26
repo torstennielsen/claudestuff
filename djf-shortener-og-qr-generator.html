@@ -1,0 +1,1550 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>URL Shortener · Forslag til Danmarks Jægerforbund</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fraunces:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f6f4ef;
+    --bg-alt: #ecebe4;
+    --ink: #14201a;
+    --ink-soft: #4a5650;
+    --accent: #1f4a3a;
+    --accent-strong: #133024;
+    --accent-soft: #d9e6df;
+    --line: #d8d5cc;
+    --good: #1f7a4d;
+    --warn: #b06a1a;
+    --bad: #9a2b2b;
+    --card: #ffffff;
+    --radius: 18px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+  .container.wide { max-width: 1320px; }
+
+  /* ---------- NAV ---------- */
+  nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(246, 244, 239, 0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .container {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 32px;
+  }
+  .brand { font-family: 'Fraunces', serif; font-weight: 600; font-size: 20px; letter-spacing: -0.01em; }
+  .brand span { color: var(--accent); }
+  .nav-links { display: flex; gap: 24px; font-size: 14px; font-weight: 500; }
+  .nav-links a { color: var(--ink-soft); text-decoration: none; transition: color .2s; }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ---------- HERO ---------- */
+  header.hero {
+    padding: 120px 0 100px;
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+  }
+  header.hero::before {
+    content: ''; position: absolute; top: -200px; right: -200px;
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, var(--accent-soft) 0%, transparent 70%);
+    z-index: 0;
+  }
+  .hero-inner { position: relative; z-index: 1; }
+  .eyebrow {
+    display: inline-block;
+    font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--accent);
+    padding: 8px 14px; background: var(--accent-soft);
+    border-radius: 100px; margin-bottom: 28px;
+  }
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(42px, 5.5vw, 76px);
+    line-height: 1.02; letter-spacing: -0.025em;
+    font-weight: 600;
+    margin-bottom: 28px;
+    max-width: 950px;
+  }
+  h1 em { font-style: italic; color: var(--accent); }
+  .lede {
+    font-size: 21px; color: var(--ink-soft); max-width: 720px;
+    line-height: 1.55; font-weight: 400;
+  }
+  .hero-meta {
+    display: flex; gap: 48px; margin-top: 64px;
+    padding-top: 32px; border-top: 1px solid var(--line);
+    flex-wrap: wrap;
+  }
+  .hero-meta div { font-size: 14px; }
+  .hero-meta .label { color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.08em; font-size: 12px; font-weight: 600; margin-bottom: 4px; }
+  .hero-meta .value { font-weight: 600; }
+
+  /* ---------- SECTIONS ---------- */
+  section { padding: 100px 0; }
+  section.alt { background: var(--bg-alt); }
+  .section-head { margin-bottom: 56px; max-width: 760px; }
+  .section-head .eyebrow { margin-bottom: 20px; }
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(32px, 3.5vw, 48px);
+    line-height: 1.1; letter-spacing: -0.02em;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  h2 em { font-style: italic; color: var(--accent); }
+  h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 26px; font-weight: 600; letter-spacing: -0.01em;
+    margin-bottom: 12px;
+  }
+  .section-lede { font-size: 19px; color: var(--ink-soft); }
+
+  /* ---------- WHAT IS ---------- */
+  .what-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    margin-top: 48px;
+  }
+  .what-card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 36px 32px;
+    transition: transform .25s, box-shadow .25s;
+  }
+  .what-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -20px rgba(20,32,26,0.15); }
+  .what-num {
+    font-family: 'Fraunces', serif; font-size: 14px; font-weight: 600;
+    color: var(--accent); margin-bottom: 24px; display: block;
+  }
+  .what-card h3 { font-size: 22px; }
+  .what-card p { color: var(--ink-soft); font-size: 15px; }
+
+  .visual-demo {
+    margin-top: 56px; background: var(--card); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 48px;
+    display: grid; grid-template-columns: 1fr auto 1fr; gap: 32px; align-items: center;
+  }
+  .demo-box { text-align: center; }
+  .demo-label { font-size: 12px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 12px; }
+  .demo-url-long {
+    font-family: 'JetBrains Mono', monospace; font-size: 13px;
+    background: var(--bg-alt); padding: 16px 20px; border-radius: 8px;
+    color: var(--ink-soft); word-break: break-all;
+  }
+  .demo-url-short {
+    font-family: 'JetBrains Mono', monospace; font-size: 18px;
+    background: var(--accent); color: white; padding: 16px 20px; border-radius: 8px;
+    font-weight: 600;
+  }
+  .demo-arrow { font-size: 32px; color: var(--accent); }
+  .demo-qr {
+    width: 90px; height: 90px; background: white; border: 2px solid var(--ink);
+    margin: 12px auto 0;
+    display: grid; grid-template-columns: repeat(8, 1fr); gap: 1px; padding: 6px;
+  }
+  .demo-qr div { background: var(--ink); }
+  .demo-qr div.off { background: white; }
+
+  /* ---------- FEATURES NEEDED ---------- */
+  .req-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;
+    margin-top: 48px;
+  }
+  .req-card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 28px 24px;
+  }
+  .req-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: var(--accent-soft); color: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; font-weight: 700; margin-bottom: 18px;
+    font-family: 'Fraunces', serif;
+  }
+  .req-card h4 { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+  .req-card p { font-size: 14px; color: var(--ink-soft); }
+
+  /* ---------- OVERVEJELSER ---------- */
+  .considerations {
+    margin-top: 48px;
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
+  }
+  .consider-card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 30px 32px;
+    border-left: 4px solid var(--accent);
+  }
+  .consider-card h4 {
+    font-family: 'Fraunces', serif; font-size: 20px;
+    font-weight: 600; margin-bottom: 10px;
+  }
+  .consider-card p { color: var(--ink-soft); font-size: 15px; margin-bottom: 12px; }
+  .consider-card .question {
+    font-style: italic; font-size: 14px;
+    color: var(--accent);
+    padding: 10px 14px; background: var(--accent-soft);
+    border-radius: 8px;
+    display: block;
+  }
+
+  /* ---------- APPROACHES ---------- */
+  .approaches { display: grid; gap: 32px; margin-top: 48px; }
+  .approach {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: var(--radius); overflow: hidden;
+  }
+  .approach-head {
+    padding: 40px 48px 28px;
+    border-bottom: 1px solid var(--line);
+  }
+  .approach-tag {
+    display: inline-block; font-size: 12px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 6px 12px; border-radius: 100px; margin-bottom: 16px;
+  }
+  .approach-tag.os { background: #e3f1e8; color: #1f7a4d; }
+  .approach-tag.com { background: #fff0d6; color: #8b5a1a; }
+  .approach-tag.custom { background: var(--accent); color: white; }
+  .approach-head h3 { font-size: 32px; margin-bottom: 8px; }
+  .approach-sub { color: var(--ink-soft); font-size: 16px; max-width: 740px; }
+
+  .products {
+    padding: 36px 48px 44px;
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
+  }
+  .product {
+    border: 1px solid var(--line); border-radius: 12px;
+    padding: 24px 26px; background: var(--bg);
+    display: flex; flex-direction: column;
+  }
+  .product-name {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 12px;
+  }
+  .product-name h4 {
+    font-family: 'Fraunces', serif; font-size: 22px; font-weight: 600;
+  }
+  .product-price {
+    font-family: 'Fraunces', serif; font-size: 18px; font-weight: 600;
+    color: var(--accent); white-space: nowrap;
+  }
+  .product-tech {
+    font-size: 12px; color: var(--ink-soft);
+    text-transform: uppercase; letter-spacing: 0.08em;
+    font-weight: 600; margin-bottom: 12px;
+  }
+  .product-desc { font-size: 14px; color: var(--ink-soft); margin-bottom: 14px; }
+  .product-feats {
+    list-style: none; font-size: 13px; margin-top: auto;
+    padding-top: 12px; border-top: 1px dashed var(--line);
+  }
+  .product-feats li {
+    display: flex; align-items: center; gap: 8px;
+    padding: 4px 0;
+  }
+  .product-feats .y { color: var(--good); font-weight: 700; }
+  .product-feats .p { color: var(--warn); font-weight: 700; }
+  .product-feats .n { color: var(--bad); font-weight: 700; }
+
+  /* Custom approach: single product layout */
+  .custom-product {
+    grid-column: 1 / -1;
+    padding: 0;
+    background: transparent; border: 0;
+  }
+  .custom-grid {
+    display: grid; grid-template-columns: 1.4fr 1fr; gap: 36px;
+  }
+  .custom-feats { background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 24px 28px; }
+  .custom-cost { background: var(--accent); color: white; border-radius: 12px; padding: 28px 32px; }
+  .custom-cost h5 { font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.7; margin-bottom: 12px; font-weight: 600; }
+  .custom-cost .big-num {
+    font-family: 'Fraunces', serif; font-size: 36px; font-weight: 600;
+    margin-bottom: 4px; letter-spacing: -0.02em;
+  }
+  .custom-cost .sub { font-size: 14px; opacity: 0.85; margin-bottom: 20px; }
+  .custom-cost ul { list-style: none; }
+  .custom-cost ul li {
+    font-size: 14px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.18);
+  }
+  .custom-cost ul li:last-child { border-bottom: 0; }
+  .custom-cost ul li strong { display: block; font-size: 12px; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 2px; font-weight: 600; }
+  .custom-feats h5 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-soft); margin-bottom: 14px; font-weight: 700; }
+  .custom-feats ul { list-style: none; }
+  .custom-feats ul li {
+    display: grid; grid-template-columns: 24px 1fr; gap: 14px;
+    padding: 10px 0; border-bottom: 1px solid var(--line);
+    font-size: 14px;
+  }
+  .custom-feats ul li:last-child { border-bottom: 0; }
+  .custom-feats .y { color: var(--good); font-weight: 700; }
+  .custom-feats .desc { display: block; font-size: 12px; color: var(--ink-soft); margin-top: 2px; }
+
+  /* ---------- FINDER (INTERACTIVE) ---------- */
+  .finder {
+    margin-top: 48px;
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: var(--radius); overflow: hidden;
+    display: grid; grid-template-columns: 380px 1fr;
+  }
+  .finder-criteria {
+    background: var(--bg);
+    padding: 36px 36px;
+    border-right: 1px solid var(--line);
+  }
+  .finder-criteria h4 {
+    font-family: 'Fraunces', serif; font-size: 20px;
+    font-weight: 600; margin-bottom: 6px;
+  }
+  .finder-criteria .help {
+    font-size: 13px; color: var(--ink-soft); margin-bottom: 24px;
+  }
+  .crit { margin-bottom: 22px; }
+  .crit-label {
+    display: block; font-size: 12px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--ink); margin-bottom: 8px;
+  }
+  .crit-options {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 10px; padding: 4px;
+  }
+  .crit-options label {
+    cursor: pointer; padding: 8px 6px; text-align: center;
+    font-size: 12px; font-weight: 500;
+    border-radius: 6px; transition: all .15s;
+    color: var(--ink-soft);
+    user-select: none;
+  }
+  .crit-options input { display: none; }
+  .crit-options input:checked + span {
+    background: var(--accent); color: white; font-weight: 600;
+  }
+  .crit-options label span {
+    display: block; padding: 8px 4px; border-radius: 6px;
+    transition: all .15s;
+  }
+  .crit-options label:hover span { background: var(--accent-soft); color: var(--accent); }
+  .crit-options input:checked + span:hover { background: var(--accent); color: white; }
+  .finder-reset {
+    margin-top: 16px; width: 100%;
+    background: transparent; border: 1px solid var(--line);
+    padding: 10px; border-radius: 8px;
+    font-family: 'Inter', sans-serif; font-size: 13px; color: var(--ink-soft);
+    cursor: pointer; transition: all .15s;
+  }
+  .finder-reset:hover { background: var(--accent-soft); color: var(--accent); border-color: var(--accent-soft); }
+
+  .finder-results {
+    padding: 36px;
+    max-height: 720px;
+    overflow-y: auto;
+  }
+  .finder-results h4 {
+    font-family: 'Fraunces', serif; font-size: 20px;
+    font-weight: 600; margin-bottom: 6px;
+  }
+  .finder-results .help {
+    font-size: 13px; color: var(--ink-soft); margin-bottom: 24px;
+  }
+  .result {
+    display: grid; grid-template-columns: auto 1fr auto; gap: 18px;
+    padding: 16px 18px; border: 1px solid var(--line);
+    border-radius: 12px; margin-bottom: 10px;
+    align-items: center;
+    background: var(--card); transition: all .25s;
+  }
+  .result.top { background: var(--accent-soft); border-color: var(--accent); }
+  .result-rank {
+    font-family: 'Fraunces', serif; font-size: 22px; font-weight: 700;
+    color: var(--accent); width: 36px; text-align: center;
+  }
+  .result-body { min-width: 0; }
+  .result-head {
+    display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
+    margin-bottom: 4px;
+  }
+  .result-name {
+    font-family: 'Fraunces', serif; font-size: 18px; font-weight: 600;
+  }
+  .result-cat {
+    font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    padding: 3px 8px; border-radius: 100px;
+  }
+  .result-cat.os { background: #e3f1e8; color: #1f7a4d; }
+  .result-cat.com { background: #fff0d6; color: #8b5a1a; }
+  .result-cat.custom { background: var(--accent); color: white; }
+  .result-reasons {
+    font-size: 12px; color: var(--ink-soft);
+    line-height: 1.5;
+  }
+  .result-reasons .pos { color: var(--good); font-weight: 600; }
+  .result-reasons .neg { color: var(--bad); font-weight: 600; }
+  .result-meta {
+    text-align: right; min-width: 90px;
+  }
+  .result-score {
+    font-family: 'Fraunces', serif; font-size: 22px; font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .result-score-label {
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--ink-soft); font-weight: 600; margin-top: 4px;
+  }
+  .result-price {
+    font-size: 12px; color: var(--ink-soft); margin-top: 6px;
+    font-weight: 500;
+  }
+
+  /* ---------- COMPARISON ---------- */
+  .compare-wrap { overflow-x: auto; margin-top: 48px; border-radius: var(--radius); border: 1px solid var(--line); background: var(--card); }
+  table.compare {
+    width: 100%; border-collapse: collapse; font-size: 13px;
+    min-width: 1100px;
+  }
+  table.compare th, table.compare td {
+    padding: 14px 16px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top;
+  }
+  table.compare thead th {
+    background: var(--bg-alt); font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink);
+    white-space: nowrap;
+  }
+  table.compare thead th small {
+    display: block; font-weight: 400; font-size: 10px; letter-spacing: 0; text-transform: none; color: var(--ink-soft); margin-top: 2px;
+  }
+  table.compare tbody tr:last-child td { border-bottom: 0; }
+  table.compare td.feature { font-weight: 600; min-width: 170px; font-size: 13px; }
+  table.compare .y { color: var(--good); font-weight: 700; }
+  table.compare .p { color: var(--warn); font-weight: 700; }
+  table.compare .n { color: var(--bad); font-weight: 700; }
+  table.compare td small { display: block; color: var(--ink-soft); font-weight: 400; margin-top: 4px; font-size: 11px; }
+  table.compare th.group-os { background: #e3f1e8 !important; color: #1f7a4d; }
+  table.compare th.group-com { background: #fff0d6 !important; color: #8b5a1a; }
+  table.compare th.group-custom { background: var(--accent-soft) !important; color: var(--accent); }
+
+  /* ---------- RECOMMEND ---------- */
+  .recommend {
+    background: var(--accent); color: white;
+    border-radius: var(--radius); padding: 56px 48px;
+    margin-top: 48px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+  }
+  .recommend h3 { color: white; font-size: 30px; margin-bottom: 16px; }
+  .recommend p { color: rgba(255,255,255,0.85); font-size: 16px; margin-bottom: 12px; }
+  .recommend ul { list-style: none; }
+  .recommend ul li {
+    padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.15);
+    font-size: 14px;
+  }
+  .recommend ul li:last-child { border-bottom: 0; }
+  .recommend ul li strong { display: block; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.7); margin-bottom: 4px; font-weight: 600; }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    padding: 48px 0 64px;
+    border-top: 1px solid var(--line); background: var(--bg);
+    font-size: 13px; color: var(--ink-soft);
+  }
+  footer .container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  /* ---------- MOBILE ---------- */
+  @media (max-width: 880px) {
+    .container { padding: 0 24px; }
+    nav .container { padding: 16px 24px; }
+    .nav-links { display: none; }
+    header.hero { padding: 80px 0 64px; }
+    h1 { font-size: 42px; }
+    section { padding: 64px 0; }
+    .what-grid { grid-template-columns: 1fr; }
+    .visual-demo { grid-template-columns: 1fr; padding: 32px; }
+    .demo-arrow { transform: rotate(90deg); }
+    .considerations { grid-template-columns: 1fr; }
+    .approach-head { padding: 32px; }
+    .products { grid-template-columns: 1fr; padding: 28px 32px 36px; }
+    .custom-grid { grid-template-columns: 1fr; }
+    .recommend { grid-template-columns: 1fr; padding: 40px 32px; }
+    .hero-meta { gap: 24px; }
+    .finder { grid-template-columns: 1fr; }
+    .finder-criteria { border-right: 0; border-bottom: 1px solid var(--line); padding: 28px; }
+    .finder-results { padding: 28px; max-height: none; }
+    .result { grid-template-columns: auto 1fr; }
+    .result-meta { grid-column: 2; text-align: left; margin-top: 4px; }
+  }
+
+  @media print {
+    nav { position: static; }
+    section { padding: 40px 0; page-break-inside: avoid; }
+    .approach, .what-card, .req-card, .consider-card { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <div class="brand">URL Shortener · <span>Beslutningsoplæg</span></div>
+    <div class="nav-links">
+      <a href="#hvad">Hvad er det</a>
+      <a href="#krav">Krav</a>
+      <a href="#overvejelser">Overvejelser</a>
+      <a href="#muligheder">Muligheder</a>
+      <a href="#finder">Find din løsning</a>
+      <a href="#sammenligning">Sammenligning</a>
+      <a href="#anbefaling">Anbefaling</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container hero-inner">
+    <span class="eyebrow">Beslutningsoplæg · Danmarks Jægerforbund</span>
+    <h1>Tre veje til en <em>egen URL-forkorter</em> med QR-koder.</h1>
+    <p class="lede">Et kortfattet oplæg til, hvad en URL-shortener er, hvilke funktioner I bør kigge efter, hvilke overvejelser I bør gøre jer — og hvad ni realistiske løsninger koster pr. måned. Open source, kommerciel SaaS eller en custom-bygget løsning i Blazor/Umbraco.</p>
+    <div class="hero-meta">
+      <div>
+        <div class="label">Forventet volumen</div>
+        <div class="value">Under 500 links/md</div>
+      </div>
+      <div>
+        <div class="label">Priser angivet i</div>
+        <div class="value">DKK pr. måned</div>
+      </div>
+      <div>
+        <div class="label">Valutakurs</div>
+        <div class="value">1 USD ≈ 6,45 DKK</div>
+      </div>
+      <div>
+        <div class="label">Dato</div>
+        <div class="value">Maj 2026</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="hvad">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Kapitel 01</span>
+      <h2>Hvad er en <em>URL-shortener</em> — og hvorfor?</h2>
+      <p class="section-lede">Kort fortalt: et værktøj, der oversætter en lang, uhåndterlig adresse til en kort, læselig adresse på jeres eget domæne — og samtidig laver QR-koden, der peger samme vej.</p>
+    </div>
+
+    <div class="what-grid">
+      <div class="what-card">
+        <span class="what-num">01 / Korte links</span>
+        <h3>Pænere kommunikation</h3>
+        <p>I stedet for <em>jaegerforbundet.dk/aktiviteter/2026/sommer-kursus/tilmelding?ref=mag</em> får man <em>jf.dk/sommer</em> — kortere, lettere at huske og mere brugbart i tryksager og oplæg.</p>
+      </div>
+      <div class="what-card">
+        <span class="what-num">02 / QR-koder</span>
+        <h3>Print og digitalt</h3>
+        <p>Hvert kort link kan automatisk få sin egen QR-kode, så det samme link kan bruges i magasiner, plakater, skilte og digitale kanaler — uden at I skal generere QR-koder i et andet værktøj.</p>
+      </div>
+      <div class="what-card">
+        <span class="what-num">03 / Kontrol</span>
+        <h3>Mål, ændr, udløb</h3>
+        <p>I ser hvor mange klik et link har fået, kan ændre destinationen efter at materialet er trykt, og kan sætte et udløb — så links til afsluttede arrangementer automatisk peger et nyt sted hen.</p>
+      </div>
+    </div>
+
+    <div class="visual-demo">
+      <div class="demo-box">
+        <div class="demo-label">Lang URL</div>
+        <div class="demo-url-long">jaegerforbundet.dk/uddannelse/jagttegn/tilmelding-efteraar-2026?campaign=magasin</div>
+      </div>
+      <div class="demo-arrow">→</div>
+      <div class="demo-box">
+        <div class="demo-label">Kort link + QR</div>
+        <div class="demo-url-short">jf.dk/jagttegn</div>
+        <div class="demo-qr" aria-hidden="true">
+          <div></div><div class="off"></div><div></div><div></div><div class="off"></div><div></div><div></div><div class="off"></div>
+          <div></div><div></div><div class="off"></div><div></div><div></div><div class="off"></div><div></div><div></div>
+          <div class="off"></div><div></div><div></div><div class="off"></div><div></div><div></div><div class="off"></div><div></div>
+          <div></div><div class="off"></div><div></div><div></div><div></div><div class="off"></div><div></div><div class="off"></div>
+          <div></div><div></div><div class="off"></div><div></div><div class="off"></div><div></div><div></div><div></div>
+          <div class="off"></div><div></div><div></div><div class="off"></div><div></div><div></div><div class="off"></div><div></div>
+          <div></div><div class="off"></div><div></div><div></div><div></div><div class="off"></div><div></div><div></div>
+          <div></div><div></div><div class="off"></div><div></div><div class="off"></div><div></div><div></div><div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="krav" class="alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Kapitel 02</span>
+      <h2>Funktioner vi <em>vurderer</em> på</h2>
+      <p class="section-lede">De fem funktioner I har bedt om at vurdere løsningerne på. Disse går igen i sammenligningstabellen længere nede.</p>
+    </div>
+
+    <div class="req-grid">
+      <div class="req-card">
+        <div class="req-icon">1</div>
+        <h4>Shorten</h4>
+        <p>Forkortelse af lange URL'er til korte, mindeværdige links — gerne på eget domæne.</p>
+      </div>
+      <div class="req-card">
+        <div class="req-icon">2</div>
+        <h4>QR-kode</h4>
+        <p>Indbygget QR-generering, så I aldrig skal i et andet værktøj for at hente en QR-kode.</p>
+      </div>
+      <div class="req-card">
+        <div class="req-icon">3</div>
+        <h4>Tidsintervaller / udløb</h4>
+        <p>Mulighed for at sætte fra-/til-dato på et link, så det automatisk udløber efter en kampagne.</p>
+      </div>
+      <div class="req-card">
+        <div class="req-icon">4</div>
+        <h4>Tekst-side uden URL</h4>
+        <p>Hvis man <em>ikke</em> angiver en URL der skal redirectes til, vises i stedet en tekst i Jægerforbundets eget design.</p>
+      </div>
+      <div class="req-card">
+        <div class="req-icon">5</div>
+        <h4>Tekst ved udløb</h4>
+        <p>Når et link er udløbet, vises en defineret tekst — i stedet for en "404 not found".</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="overvejelser">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Kapitel 03</span>
+      <h2>Overvejelser <em>før</em> I vælger</h2>
+      <p class="section-lede">Inden valget mellem open source, SaaS eller custom, er der en række spørgsmål, der bør besvares. Svarene flytter typisk anbefalingen markant.</p>
+    </div>
+
+    <div class="considerations">
+
+      <div class="consider-card">
+        <h4>01 · Antal brugere</h4>
+        <p>Hvor mange medarbejdere skal oprette og redigere links? 1–2 superbrugere stiller andre krav end 10–20 fordelt på flere afdelinger.</p>
+        <span class="question">Hvem skal kunne logge ind — og hvor mange?</span>
+      </div>
+
+      <div class="consider-card">
+        <h4>02 · Volumen (links og klik)</h4>
+        <p>Antal nye links pr. måned afgør hvilken SaaS-plan I rammer, og om en gratis plan er nok. Antal klik/scanninger pr. md. afgør analytics-grænser.</p>
+        <span class="question">Hvor mange links og hvor mange klik/scan forventer I pr. md.?</span>
+      </div>
+
+      <div class="consider-card">
+        <h4>03 · Domæne og branding</h4>
+        <p>Skal links ligge på jaegerforbundet.dk, på et kortere brand-domæne (fx jf.dk), eller på udbyderens domæne? Eget domæne er vigtigt for genkendelighed.</p>
+        <span class="question">Har I et kort domæne klar — eller skal et nyt registreres?</span>
+      </div>
+
+      <div class="consider-card">
+        <h4>04 · GDPR og dataplacering</h4>
+        <p>Klik-data kan være personhenførbart (IP, lokation). Med SaaS ligger data hos tredjepart — typisk i USA/EU, og kræver en databehandleraftale. Selvhostet og custom holder data hos jer.</p>
+        <span class="question">Hvor må klik-data ligge geografisk — og kræver I DBA?</span>
+      </div>
+
+      <div class="consider-card">
+        <h4>05 · Brand- og designkrav</h4>
+        <p>Skal tekst-siderne (krav 4 og 5) ligne resten af jaegerforbundet.dk fuldt ud, eller er et "neutralt" design acceptabelt? Fuld designfrihed peger mod custom.</p>
+        <span class="question">Skal udløbsside og tekstside leve op til design­guiden?</span>
+      </div>
+
+      <div class="consider-card">
+        <h4>06 · Hvem redigerer indhold?</h4>
+        <p>Marketing-folk, IT-folk eller begge? Standard SaaS har pænt admin-UI; selvhostet open source er mere teknisk; custom på Umbraco lægger redigeringen i marketings vante værktøj.</p>
+        <span class="question">Hvor skal indhold redigeres — og af hvem?</span>
+      </div>
+
+      <div class="consider-card">
+        <h4>07 · IT-drift og kompetencer</h4>
+        <p>Selvhostet og custom kræver, at I har (eller køber) drift-kompetencer: opdateringer, backup, certifikater, monitorering. SaaS fjerner alt det.</p>
+        <span class="question">Har I IT-ressourcer til at drifte en selvhostet løsning?</span>
+      </div>
+
+      <div class="consider-card">
+        <h4>08 · Integrationer</h4>
+        <p>Skal links kunne oprettes automatisk fra fx mail-platform, CRM, magasin-værktøj? Alle løsninger har API — men kvaliteten varierer.</p>
+        <span class="question">Skal andre systemer kunne oprette links automatisk?</span>
+      </div>
+
+      <div class="consider-card">
+        <h4>09 · Login og adgang</h4>
+        <p>Skal brugere kunne logge ind med Microsoft 365 / Google Workspace (SSO)? Roller og rettigheder pr. afdeling? Det er en feature i dyrere SaaS-tiers eller skal bygges i custom.</p>
+        <span class="question">Skal SSO og rolle-styring være på plads fra start?</span>
+      </div>
+
+      <div class="consider-card">
+        <h4>10 · Levetid og exit</h4>
+        <p>Hvad sker der, hvis I om 3 år vil skifte løsning? Eksisterende links skal stadig virke. Eget domæne + eksport-mulighed (CSV/API) er nøglen til at undgå låsning.</p>
+        <span class="question">Hvordan flytter vi links ud, hvis vi skifter system senere?</span>
+      </div>
+
+      <div class="consider-card">
+        <h4>11 · Analytics-behov</h4>
+        <p>Hvor dyb indsigt behøver I? Antal klik, geografi, enhed, UTM-værdier? Jo flere krav, jo dyrere SaaS-plan — eller mere udvikling på custom.</p>
+        <span class="question">Hvilke tal vil I se — og hvor længe skal de gemmes?</span>
+      </div>
+
+      <div class="consider-card">
+        <h4>12 · Budget-profil</h4>
+        <p>Foretrækker I en lav, forudsigelig månedlig udgift (SaaS), en lav drift med engangsinvestering (custom) eller næsten ingen løbende udgifter mod arbejde fra IT (open source)?</p>
+        <span class="question">Hvad passer bedst til budgetstrukturen — drift eller anlæg?</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="muligheder" class="alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Kapitel 04</span>
+      <h2>Tre <em>tilgange</em> — ni produkter</h2>
+      <p class="section-lede">Inden for hver af de tre tilgange (open source, kommerciel SaaS og custom) er der flere konkrete kandidater. Her er de mest relevante.</p>
+    </div>
+
+    <div class="approaches">
+
+      <!-- OPEN SOURCE -->
+      <div class="approach">
+        <div class="approach-head">
+          <span class="approach-tag os">Tilgang 1 · Open source · Selvhostet</span>
+          <h3>Selv-hostet open source</h3>
+          <p class="approach-sub">Softwaren er gratis. I driver den selv — typisk på en lille server, evt. på en I allerede har. Lav løbende udgift, men kræver IT-kompetencer. Pris pr. md. = drift af server (eller 0 kr. hvis I bruger eksisterende infrastruktur).</p>
+        </div>
+        <div class="products">
+
+          <div class="product">
+            <div class="product-name">
+              <h4>Shlink</h4>
+              <span class="product-price">~80 kr./md.</span>
+            </div>
+            <div class="product-tech">PHP · Aktivt projekt · Anbefales</div>
+            <p class="product-desc">Den mest modne af de moderne open source-shorteners. QR-koden hentes ved at tilføje <em>/qr-code</em> til ethvert kort link. Godt admin-UI og REST API. Multi-domæne understøttet.</p>
+            <ul class="product-feats">
+              <li><span class="y">✓</span> Shorten på eget domæne</li>
+              <li><span class="y">✓</span> QR-kode indbygget</li>
+              <li><span class="y">✓</span> Udløb (validSince/Until)</li>
+              <li><span class="p">△</span> Tekstsider kræver tilpasning</li>
+            </ul>
+          </div>
+
+          <div class="product">
+            <div class="product-name">
+              <h4>Kutt</h4>
+              <span class="product-price">~80 kr./md.</span>
+            </div>
+            <div class="product-tech">Node.js · Modern · Privacy-first</div>
+            <p class="product-desc">Moderne Node.js-løsning der ikke logger IP eller persondata. Indbygget QR, password-beskyttelse, beskrivelser pr. link og udløbstid. Browser-extension findes.</p>
+            <ul class="product-feats">
+              <li><span class="y">✓</span> Shorten + custom domæne</li>
+              <li><span class="y">✓</span> QR-kode indbygget</li>
+              <li><span class="y">✓</span> Udløbstid pr. link</li>
+              <li><span class="p">△</span> Tekstsider kræver tilpasning</li>
+            </ul>
+          </div>
+
+          <div class="product">
+            <div class="product-name">
+              <h4>YOURLS</h4>
+              <span class="product-price">~50 kr./md.</span>
+            </div>
+            <div class="product-tech">PHP · Klassiker · Plugin-baseret</div>
+            <p class="product-desc">Den ældste og mest udbredte open source-shortener. Slankt kernesystem, alt andet via plugins (inkl. QR). Meget let at hoste, men UI'et er teknisk.</p>
+            <ul class="product-feats">
+              <li><span class="y">✓</span> Shorten på eget domæne</li>
+              <li><span class="y">✓</span> QR via plugin</li>
+              <li><span class="p">△</span> Udløb via plugin</li>
+              <li><span class="p">△</span> Tekstsider kræver custom</li>
+            </ul>
+          </div>
+
+          <div class="product">
+            <div class="product-name">
+              <h4>Polr</h4>
+              <span class="product-price">~50 kr./md.</span>
+            </div>
+            <div class="product-tech">PHP · Simpel · Themable</div>
+            <p class="product-desc">Letvægts-shortener med pænt UI og temaer. God hvis kravene er simple. QR kræver lille tilpasning. Mindre aktivt vedligeholdt end Shlink og Kutt.</p>
+            <ul class="product-feats">
+              <li><span class="y">✓</span> Shorten + brand-API</li>
+              <li><span class="p">△</span> QR via udvidelse</li>
+              <li><span class="n">✗</span> Begrænset udløbsstyring</li>
+              <li><span class="n">✗</span> Ingen tekstsider</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- KOMMERCIEL -->
+      <div class="approach">
+        <div class="approach-head">
+          <span class="approach-tag com">Tilgang 2 · Kommerciel SaaS</span>
+          <h3>Færdig cloud-tjeneste</h3>
+          <p class="approach-sub">I drift fra dag ét, ingen server, pænt UI til marketing-folk. Til gengæld månedlig licens og data hos tredjepart. Priser er listepriser pr. måned i DKK — omregnet fra USD/EUR med kurs ca. 6,45.</p>
+        </div>
+        <div class="products">
+
+          <div class="product">
+            <div class="product-name">
+              <h4>Short.io</h4>
+              <span class="product-price">0–310 kr./md.</span>
+            </div>
+            <div class="product-tech">Free / Personal / Team · Anbefales</div>
+            <p class="product-desc">Free-plan: 1.000 brandede links/md, 50.000 klik, 5 custom domæner, QR. Personal: ca. 116 kr./md ($18) tilføjer udløbsregler. Team: ca. 310 kr./md ($48).</p>
+            <ul class="product-feats">
+              <li><span class="y">✓</span> QR i alle planer (også Free)</li>
+              <li><span class="y">✓</span> Custom domæne på Free</li>
+              <li><span class="y">✓</span> Udløb (betalt plan)</li>
+              <li><span class="p">△</span> Begrænset designfrihed</li>
+            </ul>
+          </div>
+
+          <div class="product">
+            <div class="product-name">
+              <h4>Bitly</h4>
+              <span class="product-price">65–1.285 kr./md.</span>
+            </div>
+            <div class="product-tech">Markedsleder · Bred adoption</div>
+            <p class="product-desc">Branchens største. Starter: 65 kr./md ($10) — kun 50 links/md. Growth: 187 kr./md ($29) — 500 links/md, 10 QR. Premium: 1.285 kr./md ($199). QR-kvoter er begrænsede.</p>
+            <ul class="product-feats">
+              <li><span class="y">✓</span> Stærkt brand-genkendeligt</li>
+              <li><span class="p">△</span> QR-kvoter selv på Pro</li>
+              <li><span class="y">✓</span> Udløb (Premium)</li>
+              <li><span class="n">✗</span> Få links/md i lave planer</li>
+            </ul>
+          </div>
+
+          <div class="product">
+            <div class="product-name">
+              <h4>Rebrandly</h4>
+              <span class="product-price">0–639 kr./md.</span>
+            </div>
+            <div class="product-tech">Branded links · 500K+ brands</div>
+            <p class="product-desc">Free: 1 domæne, ubegrænsede klik. Essentials: 84 kr./md ($13) — 250 links + QR. Professional: 206 kr./md ($32) — 1.500 links + QR. Stærkt fokus på brandede links.</p>
+            <ul class="product-feats">
+              <li><span class="y">✓</span> QR uden vandmærke fra betalt plan</li>
+              <li><span class="y">✓</span> Udløb på avancerede planer</li>
+              <li><span class="y">✓</span> Mange brand-features</li>
+              <li><span class="p">△</span> Begrænset designfrihed</li>
+            </ul>
+          </div>
+
+          <div class="product">
+            <div class="product-name">
+              <h4>T.LY</h4>
+              <span class="product-price">32–322 kr./md.</span>
+            </div>
+            <div class="product-tech">Prisvenlig · QR-fokus</div>
+            <p class="product-desc">Hobby: 32 kr./md ($5) — 500 links/md, perfekt fit til volumen. Basic: 129 kr./md ($20) — 4.000 links. QR-kode er en kernefeature, ikke en tilføjelse.</p>
+            <ul class="product-feats">
+              <li><span class="y">✓</span> QR med design-tilpasning</li>
+              <li><span class="y">✓</span> Smart URLs &amp; OneLinks</li>
+              <li><span class="y">✓</span> Udløb</li>
+              <li><span class="p">△</span> Begrænset designfrihed</li>
+            </ul>
+          </div>
+
+          <div class="product">
+            <div class="product-name">
+              <h4>Dub.co</h4>
+              <span class="product-price">0–484 kr./md.</span>
+            </div>
+            <div class="product-tech">Modern · Open source kerne</div>
+            <p class="product-desc">Free: 25 links/md, 1.000 klik. Pro: 161 kr./md ($25) — 1.000 links. Modern UI, automatisk QR, custom domæner. Open source kerne — kan også selvhostes.</p>
+            <ul class="product-feats">
+              <li><span class="y">✓</span> Automatisk QR pr. link</li>
+              <li><span class="y">✓</span> Udløb + planlagte links</li>
+              <li><span class="y">✓</span> Moderne UI</li>
+              <li><span class="p">△</span> Få links på Free</li>
+            </ul>
+          </div>
+
+          <div class="product">
+            <div class="product-name">
+              <h4>TinyURL</h4>
+              <span class="product-price">65–650 kr./md.</span>
+            </div>
+            <div class="product-tech">Klassiker · Simpel</div>
+            <p class="product-desc">Velkendt brand. Pro: 65 kr./md ($10) — brandede links + QR. Bulk: 650 kr./md ($100). Mere fokus på enkelhed end avancerede features. Brand-genkendelse er stærkt.</p>
+            <ul class="product-feats">
+              <li><span class="y">✓</span> Stærkt brand</li>
+              <li><span class="y">✓</span> QR på Pro</li>
+              <li><span class="p">△</span> Begrænset analytics</li>
+              <li><span class="p">△</span> Få avancerede features</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- CUSTOM -->
+      <div class="approach">
+        <div class="approach-head">
+          <span class="approach-tag custom">Tilgang 3 · Custom · Bygget af os</span>
+          <h3>Skræddersyet i Blazor eller Umbraco</h3>
+          <p class="approach-sub">En løsning udviklet specifikt til Jægerforbundet og hostet på jeres egen server. Tekst-sider, udløbsbeskeder og QR-koder lever i samme design som resten af jaegerforbundet.dk — og redigeres af marketing-teamet selv, hvis vi bygger på Umbraco.</p>
+        </div>
+        <div class="products">
+
+          <div class="product custom-product">
+            <div class="custom-grid">
+
+              <div class="custom-feats">
+                <h5>Funktioner</h5>
+                <ul>
+                  <li><span class="y">✓</span><span>Shorten på eget domæne <span class="desc">jf.dk eller subdomæne — fuldt under jeres kontrol</span></span></li>
+                  <li><span class="y">✓</span><span>QR-kode i eget design <span class="desc">Genereres med QRCoder (.NET) — downloades direkte fra admin</span></span></li>
+                  <li><span class="y">✓</span><span>Udløb og tidsintervaller <span class="desc">Start- og slutdato pr. link</span></span></li>
+                  <li><span class="y">✓</span><span>Tekst-side uden URL <span class="desc">Fuld redigerbar i Umbraco-backoffice i Jægerforbundets design</span></span></li>
+                  <li><span class="y">✓</span><span>Tekst ved udløb <span class="desc">Egen "udløbet"-side pr. link eller én delt redigerbar tekst</span></span></li>
+                  <li><span class="y">✓</span><span>Hostes på jeres egen server <span class="desc">Ingen ekstra hosting-omkostning hvis I allerede har infrastruktur</span></span></li>
+                </ul>
+              </div>
+
+              <div class="custom-cost">
+                <h5>Engangsudvikling</h5>
+                <div class="big-num">~28.500 kr.</div>
+                <div class="sub">30 timer opsætning på jeres egen server (à 950 kr./t)</div>
+                <ul>
+                  <li>
+                    <strong>Løbende service</strong>
+                    5–10 timer/år · ca. 4.750–9.500 kr./år · ~400–800 kr./md.
+                  </li>
+                  <li>
+                    <strong>Hosting</strong>
+                    0 kr. ekstra — hostes på jeres eksisterende server
+                  </li>
+                  <li>
+                    <strong>Time-to-market</strong>
+                    Ca. 3–5 uger fra opstart til driftklar
+                  </li>
+                </ul>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="finder">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Kapitel 05 · Interaktiv</span>
+      <h2>Find <em>den rigtige løsning</em> til jer</h2>
+      <p class="section-lede">Vælg de kriterier der vejer tungest for jer — så ranker oversigten de 11 løsninger efter, hvor godt de matcher. Justér frit. Ingen valg er forkerte.</p>
+    </div>
+
+    <div class="finder">
+
+      <div class="finder-criteria">
+        <h4>Jeres kriterier</h4>
+        <p class="help">Vælg ét svar pr. spørgsmål. Anbefalingerne opdateres med det samme.</p>
+
+        <div class="crit">
+          <span class="crit-label">Volumen — links pr. md.</span>
+          <div class="crit-options" data-criterion="volume">
+            <label><input type="radio" name="volume" value="low" checked><span>Under 500</span></label>
+            <label><input type="radio" name="volume" value="mid"><span>500–2.000</span></label>
+            <label><input type="radio" name="volume" value="high"><span>Over 2.000</span></label>
+          </div>
+        </div>
+
+        <div class="crit">
+          <span class="crit-label">Brand på tekstsider</span>
+          <div class="crit-options" data-criterion="brand">
+            <label><input type="radio" name="brand" value="critical" checked><span>Kritisk</span></label>
+            <label><input type="radio" name="brand" value="important"><span>Vigtigt</span></label>
+            <label><input type="radio" name="brand" value="nice"><span>Ikke vigtigt</span></label>
+          </div>
+        </div>
+
+        <div class="crit">
+          <span class="crit-label">IT-kapacitet til drift</span>
+          <div class="crit-options" data-criterion="it">
+            <label><input type="radio" name="it" value="strong"><span>Stærk</span></label>
+            <label><input type="radio" name="it" value="light" checked><span>Begrænset</span></label>
+            <label><input type="radio" name="it" value="none"><span>Ingen</span></label>
+          </div>
+        </div>
+
+        <div class="crit">
+          <span class="crit-label">Budget-profil</span>
+          <div class="crit-options" data-criterion="budget">
+            <label><input type="radio" name="budget" value="free"><span>Helt gratis</span></label>
+            <label><input type="radio" name="budget" value="monthly" checked><span>Lav md.</span></label>
+            <label><input type="radio" name="budget" value="onetime"><span>Engangs OK</span></label>
+          </div>
+        </div>
+
+        <div class="crit">
+          <span class="crit-label">Hvor må data ligge</span>
+          <div class="crit-options" data-criterion="data">
+            <label><input type="radio" name="data" value="own"><span>Hos os</span></label>
+            <label><input type="radio" name="data" value="eu" checked><span>EU OK</span></label>
+            <label><input type="radio" name="data" value="any"><span>Ligegyldigt</span></label>
+          </div>
+        </div>
+
+        <div class="crit">
+          <span class="crit-label">Time-to-market</span>
+          <div class="crit-options" data-criterion="time">
+            <label><input type="radio" name="time" value="now"><span>I dag</span></label>
+            <label><input type="radio" name="time" value="weeks" checked><span>Få uger</span></label>
+            <label><input type="radio" name="time" value="months"><span>Måneder OK</span></label>
+          </div>
+        </div>
+
+        <button class="finder-reset" id="finder-reset">Nulstil til standardvalg</button>
+      </div>
+
+      <div class="finder-results" id="finder-results">
+        <h4>Bedst egnede løsninger</h4>
+        <p class="help">Rangeret efter samlet fit-score baseret på jeres valg.</p>
+        <!-- Results injected by JS -->
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="sammenligning" class="alt">
+  <div class="container wide">
+    <div class="section-head">
+      <span class="eyebrow">Kapitel 06</span>
+      <h2>Alle ni løsninger <em>side om side</em></h2>
+      <p class="section-lede">✓ = fuldt understøttet · △ = delvist eller kræver tilpasning · ✗ = ikke understøttet. Tabellen kan scrolles vandret.</p>
+    </div>
+
+    <div class="compare-wrap">
+      <table class="compare">
+        <thead>
+          <tr>
+            <th rowspan="2">Funktion / krav</th>
+            <th colspan="4" class="group-os">Open source</th>
+            <th colspan="6" class="group-com">Kommerciel SaaS</th>
+            <th class="group-custom">Custom</th>
+          </tr>
+          <tr>
+            <th>Shlink<small>PHP</small></th>
+            <th>Kutt<small>Node.js</small></th>
+            <th>YOURLS<small>PHP</small></th>
+            <th>Polr<small>PHP</small></th>
+            <th>Short.io<small>SaaS</small></th>
+            <th>Bitly<small>SaaS</small></th>
+            <th>Rebrandly<small>SaaS</small></th>
+            <th>T.LY<small>SaaS</small></th>
+            <th>Dub.co<small>SaaS</small></th>
+            <th>TinyURL<small>SaaS</small></th>
+            <th>Blazor / Umbraco<small>Bygget af os</small></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="feature">1. Shorten</td>
+            <td class="y">✓</td>
+            <td class="y">✓</td>
+            <td class="y">✓</td>
+            <td class="y">✓</td>
+            <td class="y">✓</td>
+            <td class="y">✓</td>
+            <td class="y">✓</td>
+            <td class="y">✓</td>
+            <td class="y">✓</td>
+            <td class="y">✓</td>
+            <td class="y">✓</td>
+          </tr>
+          <tr>
+            <td class="feature">2. QR-kode</td>
+            <td class="y">✓<small>Indbygget</small></td>
+            <td class="y">✓<small>Indbygget</small></td>
+            <td class="p">△<small>Via plugin</small></td>
+            <td class="p">△<small>Via udvidelse</small></td>
+            <td class="y">✓<small>Alle planer</small></td>
+            <td class="p">△<small>Begr. kvoter</small></td>
+            <td class="y">✓<small>Fra betalt</small></td>
+            <td class="y">✓<small>Kernefeature</small></td>
+            <td class="y">✓<small>Automatisk</small></td>
+            <td class="p">△<small>Pro-plan</small></td>
+            <td class="y">✓<small>Eget design</small></td>
+          </tr>
+          <tr>
+            <td class="feature">3. Udløb</td>
+            <td class="y">✓</td>
+            <td class="y">✓</td>
+            <td class="p">△<small>Plugin</small></td>
+            <td class="n">✗</td>
+            <td class="y">✓<small>Betalt</small></td>
+            <td class="y">✓<small>Premium</small></td>
+            <td class="y">✓<small>Avanceret</small></td>
+            <td class="y">✓</td>
+            <td class="y">✓</td>
+            <td class="p">△</td>
+            <td class="y">✓</td>
+          </tr>
+          <tr>
+            <td class="feature">4. Tekst-side uden URL</td>
+            <td class="p">△<small>Egen tilpasning</small></td>
+            <td class="p">△<small>Egen tilpasning</small></td>
+            <td class="n">✗</td>
+            <td class="n">✗</td>
+            <td class="p">△<small>Link Gallery</small></td>
+            <td class="n">✗</td>
+            <td class="p">△<small>Landing Page</small></td>
+            <td class="p">△<small>OneLink</small></td>
+            <td class="p">△</td>
+            <td class="n">✗</td>
+            <td class="y">✓<small>Fuld design</small></td>
+          </tr>
+          <tr>
+            <td class="feature">5. Tekst ved udløb</td>
+            <td class="p">△<small>Fallback-URL</small></td>
+            <td class="p">△<small>Fallback-URL</small></td>
+            <td class="n">✗</td>
+            <td class="n">✗</td>
+            <td class="p">△<small>Fallback-URL</small></td>
+            <td class="p">△</td>
+            <td class="p">△</td>
+            <td class="p">△</td>
+            <td class="p">△</td>
+            <td class="n">✗</td>
+            <td class="y">✓<small>Direkte tekst</small></td>
+          </tr>
+          <tr style="background: var(--bg-alt);">
+            <td class="feature">Pris pr. md.</td>
+            <td><strong>~80 kr.</strong><small>Drift</small></td>
+            <td><strong>~80 kr.</strong><small>Drift</small></td>
+            <td><strong>~50 kr.</strong><small>Drift</small></td>
+            <td><strong>~50 kr.</strong><small>Drift</small></td>
+            <td><strong>0–310 kr.</strong></td>
+            <td><strong>65–1.285 kr.</strong></td>
+            <td><strong>0–639 kr.</strong></td>
+            <td><strong>32–322 kr.</strong></td>
+            <td><strong>0–484 kr.</strong></td>
+            <td><strong>65–650 kr.</strong></td>
+            <td><strong>~400–800 kr.</strong><small>Service amortiseret</small></td>
+          </tr>
+          <tr>
+            <td class="feature">Engangsudgift</td>
+            <td>6–12 t<small>Opsætning</small></td>
+            <td>6–10 t<small>Opsætning</small></td>
+            <td>4–8 t<small>Opsætning</small></td>
+            <td>4–8 t<small>Opsætning</small></td>
+            <td>0 kr.</td>
+            <td>0 kr.</td>
+            <td>0 kr.</td>
+            <td>0 kr.</td>
+            <td>0 kr.</td>
+            <td>0 kr.</td>
+            <td><strong>~28.500 kr.</strong><small>30 timer</small></td>
+          </tr>
+          <tr>
+            <td class="feature">Data hos</td>
+            <td>Jer</td>
+            <td>Jer</td>
+            <td>Jer</td>
+            <td>Jer</td>
+            <td>USA/EU</td>
+            <td>USA</td>
+            <td>USA/EU</td>
+            <td>USA</td>
+            <td>USA/EU</td>
+            <td>USA</td>
+            <td>Jer</td>
+          </tr>
+          <tr>
+            <td class="feature">Hvem opdaterer?</td>
+            <td>IT</td>
+            <td>IT</td>
+            <td>IT</td>
+            <td>IT</td>
+            <td>Marketing</td>
+            <td>Marketing</td>
+            <td>Marketing</td>
+            <td>Marketing</td>
+            <td>Marketing</td>
+            <td>Marketing</td>
+            <td>Marketing<small>(Umbraco)</small></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="margin-top: 28px; font-size: 13px; color: var(--ink-soft); max-width: 900px;">
+      USD-priser omregnet til DKK med kurs ca. 6,45 pr. 20. maj 2026. SaaS-priser er listepriser ved månedlig fakturering — typisk 15–20 % rabat ved årlig betaling. Drift på open source-løsninger antager en lille VPS (Hetzner/DigitalOcean) — kan være gratis hvis hostet på eksisterende infrastruktur. Custom-løsning hostes på jeres egen server — derfor ingen hosting-pris.
+    </p>
+  </div>
+</section>
+
+<section id="anbefaling">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Kapitel 07</span>
+      <h2>Vores <em>anbefaling</em></h2>
+      <p class="section-lede">Med en forventet volumen under 500 links pr. måned, og krav 4 og 5 om tekstsider i eget design som de afgørende — er valget reelt mellem en lav-budget pilot og en custom, brand-ægte løsning.</p>
+    </div>
+
+    <div class="recommend">
+      <div>
+        <h3>Custom på Umbraco — det eneste valg, der fuldt opfylder alle 5 krav</h3>
+        <p>Med 30 timers opsætning på jeres egen server og kun 5–10 timers service pr. år, lander engangsinvesteringen på ca. 28.500 kr., og den løbende udgift på cirka 400–800 kr./md. Det er konkurrencedygtigt med en mellem-SaaS — men I får til gengæld fuld designfrihed, ingen tredjeparts-låsning, og marketing kan selv redigere alle tekster i Umbraco.</p>
+        <p>Hvis tekstsiderne (krav 4 og 5) <em>skal</em> ligne resten af jaegerforbundet.dk, er det den eneste mulighed, der fuldt rammer kravene.</p>
+      </div>
+      <div>
+        <ul>
+          <li><strong>Hurtig pilot uden udgift</strong>Short.io Free eller Dub.co Free — kør et par måneder for at samle erfaring uden investering.</li>
+          <li><strong>Billigst i drift</strong>T.LY Hobby — 32 kr./md., 500 links/md., QR indbygget. God hvis brandkrav på tekstsider er sekundære.</li>
+          <li><strong>Mest fleksibel SaaS</strong>Short.io Personal — 116 kr./md., dækker volumen og giver alle udløbsregler.</li>
+          <li><strong>Open source-vej</strong>Shlink — hvis IT-drift er på plads og marketing kan leve med et teknisk admin-UI.</li>
+          <li><strong>Strategisk valg</strong>Custom Umbraco — 28.500 kr. engangs + 400–800 kr./md. service. Den eneste 100 % brand-ægte løsning.</li>
+          <li><strong>Næste skridt</strong>Gennemgang af oplægget på et fælles møde — vi besvarer overvejelses-spørgsmålene sammen og lander en retning.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div>Beslutningsoplæg · URL Shortener · Danmarks Jægerforbund · Maj 2026</div>
+    <div>Priser opdateret 20.05.2026 · Valutakurs 1 USD ≈ 6,45 DKK</div>
+  </div>
+</footer>
+
+<script>
+(function() {
+  // Solutions data — id, name, category, price, and score modifiers per criterion-option.
+  // Scores: +3 perfect fit, +2 good, +1 ok, 0 neutral, -2 bad, -3 deal-breaker.
+  const solutions = [
+    {
+      id: 'shlink', name: 'Shlink', cat: 'os', catLabel: 'Open source',
+      price: '~80 kr./md.', desc: 'PHP, indbygget QR',
+      reasons: {
+        volume: { low: 'Ingen volumen-grænser', mid: 'Ingen grænser', high: 'Ingen grænser — skalerer fint' },
+        brand: { critical: 'Tekstsider kræver custom-tilpasning', important: 'Begrænset designfrihed på tekstsider', nice: 'Standard UI er fint' },
+        it: { strong: 'Passer perfekt med IT-drift', light: 'Kræver lidt opsætning', none: 'Kræver IT-ressourcer at drifte' },
+        budget: { free: 'Næsten gratis — kun server-drift', monthly: 'Meget lav md.-omkostning (~80 kr.)', onetime: 'Lav opsætning + lav md.-pris' },
+        data: { own: 'Data ligger hos jer', eu: 'Data ligger hos jer/EU', any: 'Data hos jer' },
+        time: { now: 'Kræver opsætning (1-2 uger)', weeks: 'Klar på få uger', months: 'God tid til ordentlig opsætning' }
+      },
+      scores: {
+        volume: { low: 2, mid: 2, high: 3 },
+        brand: { critical: -2, important: 0, nice: 1 },
+        it: { strong: 3, light: 0, none: -3 },
+        budget: { free: 1, monthly: 3, onetime: 2 },
+        data: { own: 3, eu: 3, any: 1 },
+        time: { now: -1, weeks: 2, months: 2 }
+      }
+    },
+    {
+      id: 'kutt', name: 'Kutt', cat: 'os', catLabel: 'Open source',
+      price: '~80 kr./md.', desc: 'Node.js, privacy-first',
+      reasons: {
+        volume: { low: 'Ingen volumen-grænser', mid: 'Ingen grænser', high: 'Ingen grænser' },
+        brand: { critical: 'Tekstsider kræver custom-tilpasning', important: 'Begrænset designfrihed', nice: 'Standard UI er fint' },
+        it: { strong: 'Passer godt med Node.js-drift', light: 'Kræver opsætning', none: 'Kræver IT-ressourcer' },
+        budget: { free: 'Næsten gratis', monthly: 'Lav md.-omkostning', onetime: 'Lav opsætning' },
+        data: { own: 'Data hos jer, ingen IP-logning', eu: 'Data hos jer', any: 'Data hos jer' },
+        time: { now: 'Kræver opsætning', weeks: 'Klar på få uger', months: 'God tid' }
+      },
+      scores: {
+        volume: { low: 2, mid: 2, high: 3 },
+        brand: { critical: -2, important: 0, nice: 1 },
+        it: { strong: 3, light: 0, none: -3 },
+        budget: { free: 1, monthly: 3, onetime: 2 },
+        data: { own: 3, eu: 3, any: 1 },
+        time: { now: -1, weeks: 2, months: 2 }
+      }
+    },
+    {
+      id: 'yourls', name: 'YOURLS', cat: 'os', catLabel: 'Open source',
+      price: '~50 kr./md.', desc: 'PHP-klassiker, plugin-baseret',
+      reasons: {
+        volume: { low: 'Ingen grænser', mid: 'Ingen grænser', high: 'Ingen grænser' },
+        brand: { critical: 'Ingen tekstside-funktion', important: 'Ingen tekstside-funktion', nice: 'Teknisk UI' },
+        it: { strong: 'Let at drifte for IT', light: 'Kræver opsætning', none: 'Kræver IT' },
+        budget: { free: 'Næsten gratis', monthly: 'Billigst i drift', onetime: 'Lav opsætning' },
+        data: { own: 'Data hos jer', eu: 'Data hos jer', any: 'Data hos jer' },
+        time: { now: 'Kræver opsætning', weeks: 'Hurtig opsætning', months: 'God tid' }
+      },
+      scores: {
+        volume: { low: 2, mid: 2, high: 3 },
+        brand: { critical: -3, important: -2, nice: 0 },
+        it: { strong: 3, light: 1, none: -3 },
+        budget: { free: 2, monthly: 3, onetime: 2 },
+        data: { own: 3, eu: 3, any: 1 },
+        time: { now: 0, weeks: 3, months: 2 }
+      }
+    },
+    {
+      id: 'polr', name: 'Polr', cat: 'os', catLabel: 'Open source',
+      price: '~50 kr./md.', desc: 'PHP, simpel og themable',
+      reasons: {
+        volume: { low: 'Ingen grænser', mid: 'Ingen grænser', high: 'Ingen grænser' },
+        brand: { critical: 'Ingen tekstside-funktion', important: 'Ingen tekstside-funktion', nice: 'Pænt simpelt UI' },
+        it: { strong: 'Let at drifte', light: 'Kræver opsætning', none: 'Kræver IT' },
+        budget: { free: 'Næsten gratis', monthly: 'Billigst', onetime: 'Lav opsætning' },
+        data: { own: 'Data hos jer', eu: 'Data hos jer', any: 'Data hos jer' },
+        time: { now: 'Kræver opsætning', weeks: 'Hurtig opsætning', months: 'God tid' }
+      },
+      scores: {
+        volume: { low: 2, mid: 2, high: 2 },
+        brand: { critical: -3, important: -2, nice: 1 },
+        it: { strong: 3, light: 1, none: -3 },
+        budget: { free: 2, monthly: 3, onetime: 2 },
+        data: { own: 3, eu: 3, any: 1 },
+        time: { now: 0, weeks: 3, months: 2 }
+      }
+    },
+    {
+      id: 'shortio', name: 'Short.io', cat: 'com', catLabel: 'Kommerciel',
+      price: '0–310 kr./md.', desc: 'SaaS, Free dækker 1.000 links',
+      reasons: {
+        volume: { low: 'Free-plan dækker (1.000 links/md)', mid: 'Personal/Team dækker', high: 'Team eller Enterprise' },
+        brand: { critical: 'Link Gallery — begrænset design', important: 'Pæne landing pages', nice: 'Pænt UI ud af boksen' },
+        it: { strong: 'Ikke et IT-projekt', light: 'Klar fra start, intet IT-arbejde', none: 'Klar fra start, ingen drift' },
+        budget: { free: 'Free-plan er gratis', monthly: 'Lav md.-pris (Free/Personal)', onetime: 'Ingen engangsudgift' },
+        data: { own: 'Data hos Short.io', eu: 'EU-region tilgængelig', any: 'Ingen begrænsning' },
+        time: { now: 'Klar samme dag', weeks: 'Klar på dag 1', months: 'Klar straks' }
+      },
+      scores: {
+        volume: { low: 3, mid: 2, high: 1 },
+        brand: { critical: -2, important: 1, nice: 2 },
+        it: { strong: 1, light: 3, none: 3 },
+        budget: { free: 3, monthly: 3, onetime: 1 },
+        data: { own: -3, eu: 1, any: 2 },
+        time: { now: 3, weeks: 2, months: 0 }
+      }
+    },
+    {
+      id: 'bitly', name: 'Bitly', cat: 'com', catLabel: 'Kommerciel',
+      price: '65–1.285 kr./md.', desc: 'Markedsleder, begrænset volumen',
+      reasons: {
+        volume: { low: 'Kræver Growth-plan (187 kr.)', mid: 'Kræver Premium (1.285 kr.)', high: 'Dyr for høj volumen' },
+        brand: { critical: 'Ingen tekstside-funktion', important: 'Ingen tekstside-funktion', nice: 'Velkendt brand' },
+        it: { strong: 'Ikke et IT-projekt', light: 'Klar fra start', none: 'Klar fra start' },
+        budget: { free: 'Free har kun 10 links/md', monthly: 'Dyr ved fuld funktion', onetime: 'Ingen engangsudgift' },
+        data: { own: 'Data hos Bitly (USA)', eu: 'Data i USA', any: 'Ingen begrænsning' },
+        time: { now: 'Klar samme dag', weeks: 'Klar straks', months: 'Klar straks' }
+      },
+      scores: {
+        volume: { low: 0, mid: -1, high: -1 },
+        brand: { critical: -3, important: -2, nice: 1 },
+        it: { strong: 0, light: 2, none: 3 },
+        budget: { free: 0, monthly: 0, onetime: 1 },
+        data: { own: -3, eu: -1, any: 2 },
+        time: { now: 3, weeks: 2, months: 0 }
+      }
+    },
+    {
+      id: 'rebrandly', name: 'Rebrandly', cat: 'com', catLabel: 'Kommerciel',
+      price: '0–639 kr./md.', desc: 'Brandede links, Free-plan',
+      reasons: {
+        volume: { low: 'Essentials dækker (250 links)', mid: 'Professional dækker', high: 'Growth eller Enterprise' },
+        brand: { critical: 'Landing Pages — begrænset design', important: 'Pæne brandede links', nice: 'Stærkt brand-fokus' },
+        it: { strong: 'Ikke et IT-projekt', light: 'Klar fra start', none: 'Klar fra start' },
+        budget: { free: 'Free-plan tilgængelig', monthly: 'Lav md.-pris (Essentials 84 kr.)', onetime: 'Ingen engangsudgift' },
+        data: { own: 'Data hos Rebrandly', eu: 'EU-option tilgængelig', any: 'Ingen begrænsning' },
+        time: { now: 'Klar samme dag', weeks: 'Klar straks', months: 'Klar straks' }
+      },
+      scores: {
+        volume: { low: 2, mid: 2, high: 1 },
+        brand: { critical: -2, important: 1, nice: 2 },
+        it: { strong: 1, light: 3, none: 3 },
+        budget: { free: 2, monthly: 2, onetime: 1 },
+        data: { own: -3, eu: 1, any: 2 },
+        time: { now: 3, weeks: 2, months: 0 }
+      }
+    },
+    {
+      id: 'tly', name: 'T.LY', cat: 'com', catLabel: 'Kommerciel',
+      price: '32–322 kr./md.', desc: 'Prisvenlig, QR-fokus',
+      reasons: {
+        volume: { low: 'Hobby (32 kr.) dækker præcis 500/md', mid: 'Basic (129 kr.) dækker 4.000', high: 'Pro dækker 10.000' },
+        brand: { critical: 'OneLinks — begrænset design', important: 'Smart URLs', nice: 'God QR-tilpasning' },
+        it: { strong: 'Ikke et IT-projekt', light: 'Klar fra start', none: 'Klar fra start' },
+        budget: { free: 'Ingen fri plan', monthly: 'Billigste fulde SaaS (32 kr.)', onetime: 'Ingen engangsudgift' },
+        data: { own: 'Data hos T.LY (USA)', eu: 'Data i USA', any: 'Ingen begrænsning' },
+        time: { now: 'Klar samme dag', weeks: 'Klar straks', months: 'Klar straks' }
+      },
+      scores: {
+        volume: { low: 3, mid: 2, high: 2 },
+        brand: { critical: -2, important: 1, nice: 2 },
+        it: { strong: 1, light: 3, none: 3 },
+        budget: { free: -1, monthly: 3, onetime: 1 },
+        data: { own: -3, eu: -1, any: 2 },
+        time: { now: 3, weeks: 2, months: 0 }
+      }
+    },
+    {
+      id: 'dub', name: 'Dub.co', cat: 'com', catLabel: 'Kommerciel',
+      price: '0–484 kr./md.', desc: 'Modern, automatisk QR',
+      reasons: {
+        volume: { low: 'Free har kun 25 links — Pro nødvendig', mid: 'Pro (161 kr.) dækker 1.000', high: 'Business dækker 10.000' },
+        brand: { critical: 'Begrænset designfrihed', important: 'Modern UI', nice: 'Smukt UI' },
+        it: { strong: 'Ikke et IT-projekt', light: 'Klar fra start', none: 'Klar fra start' },
+        budget: { free: 'Free-plan (få links)', monthly: 'Pro 161 kr./md.', onetime: 'Ingen engangsudgift' },
+        data: { own: 'Data hos Dub', eu: 'EU-option', any: 'Ingen begrænsning' },
+        time: { now: 'Klar samme dag', weeks: 'Klar straks', months: 'Klar straks' }
+      },
+      scores: {
+        volume: { low: 0, mid: 3, high: 2 },
+        brand: { critical: -2, important: 1, nice: 2 },
+        it: { strong: 1, light: 3, none: 3 },
+        budget: { free: 1, monthly: 1, onetime: 1 },
+        data: { own: -3, eu: 1, any: 2 },
+        time: { now: 3, weeks: 2, months: 0 }
+      }
+    },
+    {
+      id: 'tinyurl', name: 'TinyURL', cat: 'com', catLabel: 'Kommerciel',
+      price: '65–650 kr./md.', desc: 'Klassiker, simpel',
+      reasons: {
+        volume: { low: 'Pro-plan dækker', mid: 'Bulk-plan kan være nødvendig', high: 'Bulk-plan' },
+        brand: { critical: 'Ingen tekstside-funktion', important: 'Begrænset', nice: 'Velkendt brand' },
+        it: { strong: 'Ikke et IT-projekt', light: 'Klar fra start', none: 'Klar fra start' },
+        budget: { free: 'Pro starter på 65 kr.', monthly: 'Lav md.-pris', onetime: 'Ingen engangsudgift' },
+        data: { own: 'Data hos TinyURL', eu: 'Data i USA', any: 'Ingen begrænsning' },
+        time: { now: 'Klar samme dag', weeks: 'Klar straks', months: 'Klar straks' }
+      },
+      scores: {
+        volume: { low: 1, mid: 0, high: 0 },
+        brand: { critical: -3, important: -2, nice: 1 },
+        it: { strong: 1, light: 3, none: 3 },
+        budget: { free: -1, monthly: 2, onetime: 1 },
+        data: { own: -3, eu: -1, any: 2 },
+        time: { now: 3, weeks: 2, months: 0 }
+      }
+    },
+    {
+      id: 'custom', name: 'Custom (Blazor / Umbraco)', cat: 'custom', catLabel: 'Custom',
+      price: '~400–800 kr./md. + 28.500 kr. engangs',
+      desc: 'Bygget af os, hostet hos jer',
+      reasons: {
+        volume: { low: 'Skalerer som I vil', mid: 'Skalerer som I vil', high: 'Skalerer som I vil' },
+        brand: { critical: 'Fuld design­frihed — eneste der 100 % rammer kravet', important: 'Fuld designfrihed', nice: 'Designkrav kan være overkill' },
+        it: { strong: 'I drifter selv efter overlevering', light: 'Vi drifter mod service-aftale', none: 'Vi drifter mod service-aftale' },
+        budget: { free: 'Kræver engangsinvestering', monthly: 'Forudsigelig md.-udgift', onetime: 'Engangs + lav md.-pris — perfekt fit' },
+        data: { own: 'Data hostes hos jer', eu: 'Data hostes hos jer/EU', any: 'Data hostes hos jer' },
+        time: { now: 'Tager 3–5 uger at bygge', weeks: 'Klar på 3–5 uger', months: 'God tid til ordentlig udvikling' }
+      },
+      scores: {
+        volume: { low: 2, mid: 2, high: 3 },
+        brand: { critical: 3, important: 3, nice: 0 },
+        it: { strong: 3, light: 2, none: 1 },
+        budget: { free: -2, monthly: 2, onetime: 3 },
+        data: { own: 3, eu: 3, any: 1 },
+        time: { now: -3, weeks: 1, months: 3 }
+      }
+    }
+  ];
+
+  // Compute fit score based on current selections.
+  // Returns array of { solution, score, percent, topReasons } sorted by score desc.
+  function rank(selections) {
+    const ranked = solutions.map(sol => {
+      let raw = 0;
+      const maxPossible = Object.keys(selections).length * 3;
+      const minPossible = Object.keys(selections).length * -3;
+      const reasons = [];
+      Object.keys(selections).forEach(crit => {
+        const opt = selections[crit];
+        const score = sol.scores[crit][opt];
+        raw += score;
+        reasons.push({ crit, score, text: sol.reasons[crit][opt] });
+      });
+      // Normalize to 0–100. raw can be from minPossible to maxPossible.
+      const percent = Math.round(((raw - minPossible) / (maxPossible - minPossible)) * 100);
+      // Pick top 2 positive reasons and any strong negative
+      const sortedReasons = reasons.slice().sort((a, b) => b.score - a.score);
+      const positives = sortedReasons.filter(r => r.score >= 2).slice(0, 2);
+      const strongNeg = sortedReasons.filter(r => r.score <= -2).slice(-1);
+      const topReasons = positives.concat(strongNeg);
+      return { sol, raw, percent, topReasons };
+    });
+    ranked.sort((a, b) => b.raw - a.raw);
+    return ranked;
+  }
+
+  function render() {
+    const selections = {};
+    document.querySelectorAll('.crit-options').forEach(group => {
+      const crit = group.dataset.criterion;
+      const checked = group.querySelector('input:checked');
+      if (checked) selections[crit] = checked.value;
+    });
+    const ranked = rank(selections);
+    const out = document.getElementById('finder-results');
+    // Keep the header
+    const headerHTML = '<h4>Bedst egnede løsninger</h4><p class="help">Rangeret efter samlet fit-score baseret på jeres valg.</p>';
+    const top3 = new Set(ranked.slice(0, 3).map(r => r.sol.id));
+    const items = ranked.map((r, i) => {
+      const reasonsHTML = r.topReasons.map(reason => {
+        const cls = reason.score >= 2 ? 'pos' : (reason.score <= -2 ? 'neg' : '');
+        const prefix = reason.score >= 2 ? '+ ' : (reason.score <= -2 ? '− ' : '');
+        return '<span class="' + cls + '">' + prefix + reason.text + '</span>';
+      }).join(' · ');
+      return '<div class="result' + (top3.has(r.sol.id) ? ' top' : '') + '">' +
+        '<div class="result-rank">' + (i + 1) + '</div>' +
+        '<div class="result-body">' +
+          '<div class="result-head">' +
+            '<span class="result-name">' + r.sol.name + '</span>' +
+            '<span class="result-cat ' + r.sol.cat + '">' + r.sol.catLabel + '</span>' +
+          '</div>' +
+          '<div class="result-reasons">' + reasonsHTML + '</div>' +
+        '</div>' +
+        '<div class="result-meta">' +
+          '<div class="result-score">' + r.percent + '%</div>' +
+          '<div class="result-score-label">Fit</div>' +
+          '<div class="result-price">' + r.sol.price + '</div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+    out.innerHTML = headerHTML + items;
+  }
+
+  document.querySelectorAll('.crit-options input').forEach(input => {
+    input.addEventListener('change', render);
+  });
+
+  const defaults = { volume: 'low', brand: 'critical', it: 'light', budget: 'monthly', data: 'eu', time: 'weeks' };
+  document.getElementById('finder-reset').addEventListener('click', function() {
+    Object.keys(defaults).forEach(crit => {
+      const input = document.querySelector('input[name="' + crit + '"][value="' + defaults[crit] + '"]');
+      if (input) input.checked = true;
+    });
+    render();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
