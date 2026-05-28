@@ -165,8 +165,11 @@
 
   /* ─── Erstat ét element ──────────────────────────────────────────────── */
   function replaceTrigger(el) {
-    /* Native share (iOS Safari, Android Chrome, m.fl.) */
-    if (navigator.share) {
+    /* Native share kun på rigtige touch-enheder (iOS/Android) —
+       desktop Chrome understøtter navigator.share men vi foretrækker
+       ikoner der, så vi tjekker for touch-support som proxy for mobil. */
+    var isTouchDevice = navigator.maxTouchPoints > 0 || 'ontouchstart' in window;
+    if (navigator.share && isTouchDevice) {
       el.addEventListener('click', function () {
         navigator.share({ title: currentTitle(), url: currentUrl() })
           .catch(function () { /* bruger annullerede – ignorer */ });
@@ -193,15 +196,4 @@
     el.replaceWith(wrapper);
   }
 
-  /* ─── Init ───────────────────────────────────────────────────────────── */
-  function init() {
-    injectStyles();
-    document.querySelectorAll('.js-del-artikel').forEach(replaceTrigger);
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
-})();
+  /* ─── Init ─────────────────────────────────────────────────────────────
