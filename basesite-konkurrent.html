@@ -4,565 +4,556 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Basesite.dk — Konkurrentanalyse & SWOT 2026</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
     --ink: #0d0d0d;
     --paper: #f5f2eb;
     --accent: #c8320a;
+    --accent2: #1a5276;
     --muted: #6b6460;
     --line: #d4cfc6;
-    --s: #1a472a;
-    --w: #7a1c1c;
-    --o: #0a3d6b;
-    --t: #5a3d00;
     --card: #fefcf7;
   }
-
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); font-size: 15px; line-height: 1.65; }
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--paper);
-    color: var(--ink);
-    font-size: 15px;
-    line-height: 1.65;
-  }
-
-  /* HEADER */
   header {
     background: var(--ink);
     color: var(--paper);
-    padding: 60px 48px 48px;
+    padding: 64px 48px 52px;
     position: relative;
     overflow: hidden;
   }
   header::before {
     content: '';
     position: absolute;
-    top: -40px; right: -40px;
-    width: 280px; height: 280px;
+    top: -60px; right: -60px;
+    width: 320px; height: 320px;
     border-radius: 50%;
     background: var(--accent);
-    opacity: .12;
+    opacity: .1;
   }
-  .header-eyebrow {
-    font-size: 11px;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 14px;
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: 200px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: var(--accent2);
+    opacity: .08;
   }
-  header h1 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(42px, 7vw, 80px);
-    line-height: 1;
-    letter-spacing: .02em;
-    margin-bottom: 16px;
-  }
-  header p {
-    color: #aaa;
-    max-width: 520px;
-    font-size: 14px;
-  }
-  .header-meta {
-    margin-top: 32px;
-    display: flex;
-    gap: 32px;
-    flex-wrap: wrap;
-  }
-  .meta-pill {
-    background: rgba(255,255,255,.07);
-    border: 1px solid rgba(255,255,255,.12);
-    border-radius: 4px;
-    padding: 6px 14px;
-    font-size: 12px;
-    color: #ccc;
-  }
+  .eyebrow { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+  header h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(44px, 8vw, 88px); line-height: .95; letter-spacing: .02em; margin-bottom: 20px; }
+  header h1 span { color: var(--accent); }
+  header p { color: #aaa; max-width: 540px; font-size: 14px; }
+  .header-meta { margin-top: 36px; display: flex; gap: 12px; flex-wrap: wrap; }
+  .mpill { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); border-radius: 4px; padding: 6px 14px; font-size: 12px; color: #ccc; }
 
-  /* LAYOUT */
-  .container {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 0 32px;
-  }
+  .container { max-width: 1000px; margin: 0 auto; padding: 0 40px; }
 
-  section {
-    padding: 56px 0;
-    border-bottom: 1px solid var(--line);
-  }
+  section { padding: 60px 0; border-bottom: 1px solid var(--line); }
   section:last-child { border-bottom: none; }
+  .slabel { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  h2 { font-family: 'Bebas Neue', sans-serif; font-size: 38px; letter-spacing: .03em; margin-bottom: 36px; }
 
-  .section-label {
-    font-size: 11px;
-    letter-spacing: .16em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 8px;
-  }
-  h2 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 36px;
-    letter-spacing: .03em;
-    margin-bottom: 32px;
-    color: var(--ink);
-  }
+  /* INTRO */
+  .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 28px; }
+  .ibox { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 22px 24px; }
+  .ibox h4 { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: 10px; }
+  .ibox p { font-size: 13.5px; line-height: 1.6; }
+  .ibox ul { list-style: none; padding: 0; }
+  .ibox ul li { font-size: 13.5px; padding: 3px 0 3px 18px; position: relative; }
+  .ibox ul li::before { content: '·'; position: absolute; left: 6px; color: var(--accent); font-weight: 700; }
 
-  /* INTRO BOX */
-  .intro-box {
-    background: var(--card);
-    border-left: 4px solid var(--accent);
-    padding: 24px 28px;
-    border-radius: 0 6px 6px 0;
-    margin-bottom: 32px;
-  }
-  .intro-box p { color: #444; font-size: 14.5px; }
+  /* COMPARISON TABLE */
+  .ctable { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--line); font-size: 13px; }
+  .ctable thead tr { background: var(--ink); color: var(--paper); }
+  .ctable thead th { padding: 12px 16px; text-align: left; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; font-weight: 600; }
+  .ctable tbody tr { border-bottom: 1px solid var(--line); }
+  .ctable tbody tr:last-child { border-bottom: none; }
+  .ctable tbody tr:hover { background: #faf7f1; }
+  .ctable td { padding: 14px 16px; vertical-align: top; line-height: 1.5; }
+  .ctable td:first-child { font-weight: 600; font-size: 13.5px; min-width: 160px; }
+  .ctable td:first-child small { display: block; font-weight: 400; font-size: 11px; color: var(--muted); margin-top: 3px; }
 
-  /* COMPETITOR TABLE */
-  .comp-grid {
-    display: grid;
-    gap: 20px;
-  }
-  .comp-card {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    overflow: hidden;
-  }
-  .comp-head {
-    display: grid;
-    grid-template-columns: 200px 1fr 1fr;
-    background: var(--ink);
-    color: var(--paper);
-    font-size: 11px;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    padding: 10px 20px;
-  }
-  .comp-row {
-    display: grid;
-    grid-template-columns: 200px 1fr 1fr;
-    padding: 16px 20px;
-    border-bottom: 1px solid var(--line);
-    gap: 16px;
-    align-items: start;
-  }
-  .comp-row:last-child { border-bottom: none; }
-  .comp-row:nth-child(even) { background: #faf8f3; }
-  .comp-name {
-    font-weight: 600;
-    font-size: 14px;
-  }
-  .comp-sub {
-    font-size: 12px;
-    color: var(--muted);
-    margin-top: 2px;
-  }
-  .comp-pro { color: #1a472a; font-size: 13px; }
-  .comp-con { color: #7a1c1c; font-size: 13px; }
-  .tag {
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 3px;
-    font-size: 11px;
-    font-weight: 500;
-    margin: 2px 2px 2px 0;
-  }
-  .tag-saas { background: #e8f4fd; color: #0a3d6b; }
-  .tag-agency { background: #fdf0e8; color: #7a3500; }
-  .tag-free { background: #e8f7f0; color: #1a472a; }
-  .tag-dk { background: #f0e8f7; color: #3d1a7a; }
+  /* score stars */
+  .score { display: flex; gap: 3px; margin-top: 5px; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--line); }
+  .dot.on { background: var(--accent); }
+  .score-label { font-size: 11px; color: var(--muted); margin-left: 6px; align-self: center; }
 
-  /* POSITIONING MAP */
-  .map-wrap {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    padding: 32px;
-  }
-  .pos-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-top: 16px;
-  }
-  .pos-q {
-    padding: 20px;
-    border-radius: 6px;
-    font-size: 13.5px;
-  }
-  .pos-q h4 { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 8px; }
-  .q1 { background: #e8f4fd; color: #0a3d6b; }
-  .q2 { background: #e8f7f0; color: #1a472a; }
-  .q3 { background: #fff3e0; color: #5a3d00; }
-  .q4 { background: #fce8e8; color: #7a1c1c; }
-  .pos-dot { font-size: 18px; margin-right: 6px; }
+  /* tags */
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 11px; font-weight: 500; margin: 2px 2px 2px 0; }
+  .t-saas { background: #e8f4fd; color: #0a3d6b; }
+  .t-diy  { background: #fdf0e8; color: #7a3500; }
+  .t-bureau { background: #f3e8fd; color: #3d1a7a; }
+  .t-dk   { background: #e8f7f0; color: #1a472a; }
+  .t-free { background: #fff3cd; color: #7a5500; }
+  .good   { color: #1a5276; }
+  .bad    { color: #922b21; }
+
+  /* PRICE TABLE */
+  .ptable-wrap { overflow-x: auto; }
+  .ptable { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .ptable thead tr { background: var(--ink); color: var(--paper); }
+  .ptable thead th { padding: 12px 14px; text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: .1em; }
+  .ptable tbody tr { border-bottom: 1px solid var(--line); background: var(--card); }
+  .ptable tbody tr:nth-child(even) { background: #faf7f1; }
+  .ptable tbody tr.highlight { background: #fff8f0; border-left: 3px solid var(--accent); }
+  .ptable td { padding: 12px 14px; vertical-align: top; line-height: 1.5; }
+  .ptable td:first-child { font-weight: 600; }
+  .price-high { color: #922b21; font-weight: 500; }
+  .price-mid  { color: #7a5500; font-weight: 500; }
+  .price-low  { color: #1a5276; font-weight: 500; }
+  .price-best { color: #1a472a; font-weight: 600; }
+  td.center { text-align: center; }
+  .check { color: #1a472a; font-weight: 700; }
+  .cross { color: #922b21; }
+  .partial { color: #7a5500; }
+
+  /* SPEED TABLE */
+  .speed-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .speed-card { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 20px; text-align: center; }
+  .speed-card.best { border-color: var(--accent); background: #fff8f4; }
+  .speed-card h4 { font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+  .speed-num { font-family: 'Bebas Neue', sans-serif; font-size: 42px; color: var(--accent); line-height: 1; margin-bottom: 6px; }
+  .speed-card p { font-size: 12px; color: var(--muted); line-height: 1.5; }
+  .speed-badge { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 3px; margin-top: 8px; font-weight: 600; }
+  .badge-fast { background: #e8f7f0; color: #1a472a; }
+  .badge-mid  { background: #fff3cd; color: #7a5500; }
+  .badge-slow { background: #fce8e8; color: #922b21; }
 
   /* SWOT */
-  .swot-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    overflow: hidden;
-  }
-  .swot-q {
-    padding: 32px;
-    position: relative;
-  }
-  .swot-q:nth-child(1) { background: #e8f7f0; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .swot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .swot-q { padding: 32px; position: relative; }
+  .swot-q:nth-child(1) { background: #eaf7f0; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .swot-q:nth-child(2) { background: #fce8e8; border-bottom: 1px solid var(--line); }
   .swot-q:nth-child(3) { background: #e8f4fd; border-right: 1px solid var(--line); }
-  .swot-q:nth-child(4) { background: #fff3e0; }
-  .swot-letter {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 72px;
-    line-height: 1;
-    opacity: .08;
-    position: absolute;
-    top: 12px;
-    right: 16px;
-  }
-  .swot-q h3 {
-    font-size: 13px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: .1em;
-    margin-bottom: 16px;
-  }
+  .swot-q:nth-child(4) { background: #fff8e1; }
+  .swot-letter { font-family: 'Bebas Neue', sans-serif; font-size: 80px; line-height: 1; opacity: .07; position: absolute; top: 8px; right: 14px; }
+  .swot-q h3 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; margin-bottom: 16px; }
   .swot-q:nth-child(1) h3 { color: #1a472a; }
   .swot-q:nth-child(2) h3 { color: #7a1c1c; }
   .swot-q:nth-child(3) h3 { color: #0a3d6b; }
   .swot-q:nth-child(4) h3 { color: #5a3d00; }
   .swot-q ul { list-style: none; padding: 0; }
-  .swot-q ul li {
-    padding: 6px 0 6px 20px;
-    position: relative;
-    font-size: 13.5px;
-    border-bottom: 1px solid rgba(0,0,0,.06);
-    line-height: 1.5;
-  }
+  .swot-q ul li { padding: 7px 0 7px 22px; position: relative; font-size: 13.5px; border-bottom: 1px solid rgba(0,0,0,.06); line-height: 1.5; }
   .swot-q ul li:last-child { border-bottom: none; }
   .swot-q:nth-child(1) ul li::before { content: '✓'; position: absolute; left: 0; color: #1a472a; font-weight: 700; }
-  .swot-q:nth-child(2) ul li::before { content: '✗'; position: absolute; left: 0; color: #7a1c1c; font-weight: 700; }
+  .swot-q:nth-child(2) ul li::before { content: '−'; position: absolute; left: 0; color: #7a1c1c; font-weight: 700; }
   .swot-q:nth-child(3) ul li::before { content: '→'; position: absolute; left: 0; color: #0a3d6b; font-weight: 700; }
   .swot-q:nth-child(4) ul li::before { content: '!'; position: absolute; left: 0; color: #5a3d00; font-weight: 700; }
 
-  /* RECOMMENDATIONS */
-  .rec-list {
-    display: grid;
-    gap: 16px;
-  }
-  .rec-item {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-left: 4px solid var(--accent);
-    border-radius: 0 8px 8px 0;
-    padding: 20px 24px;
-    display: grid;
-    grid-template-columns: 40px 1fr;
-    gap: 16px;
-    align-items: start;
-  }
-  .rec-num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 32px;
-    color: var(--accent);
-    line-height: 1;
-  }
-  .rec-item h4 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+  /* RECS */
+  .rec-list { display: grid; gap: 16px; }
+  .rec-item { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0; padding: 20px 24px; display: grid; grid-template-columns: 44px 1fr; gap: 16px; align-items: start; }
+  .rec-num { font-family: 'Bebas Neue', sans-serif; font-size: 34px; color: var(--accent); line-height: 1; }
+  .rec-item h4 { font-size: 14.5px; font-weight: 600; margin-bottom: 6px; }
   .rec-item p { font-size: 13.5px; color: #555; }
 
-  /* FOOTER */
-  footer {
-    background: var(--ink);
-    color: #666;
-    padding: 32px 48px;
-    font-size: 12px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+  footer { background: var(--ink); color: #666; padding: 32px 48px; font-size: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
   footer span { color: var(--accent); }
 
-  @media (max-width: 640px) {
+  @media (max-width: 680px) {
     header { padding: 40px 24px 32px; }
     .container { padding: 0 20px; }
-    .comp-head, .comp-row { grid-template-columns: 1fr; }
-    .comp-head span:not(:first-child) { display: none; }
-    .swot-grid, .pos-grid { grid-template-columns: 1fr; }
-    footer { flex-direction: column; gap: 8px; }
+    .intro-grid { grid-template-columns: 1fr; }
+    .swot-grid { grid-template-columns: 1fr; }
+    .speed-grid { grid-template-columns: 1fr 1fr; }
+    .ctable, .ptable { font-size: 12px; }
+    footer { flex-direction: column; }
   }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="header-eyebrow">Konkurrentanalyse · Maj 2026</div>
-  <h1>Basesite.dk</h1>
-  <p>Markedspositionering, konkurrentlandskab og strategisk SWOT for færdige hjemmesidekoncepter til danske foreninger og forbund.</p>
+  <div class="eyebrow">Konkurrentanalyse · Maj 2026</div>
+  <h1>Base<span>site</span>.dk</h1>
+  <p>Markedspositionering, prissammenligning, onboarding-analyse og strategisk SWOT for basesite.dk — færdige hjemmesidekoncepter til foreninger, forbund og mindre virksomheder.</p>
   <div class="header-meta">
-    <span class="meta-pill">Segment: Foreninger & forbund</span>
-    <span class="meta-pill">Marked: Danmark</span>
-    <span class="meta-pill">Platform: Umbraco multisite</span>
-    <span class="meta-pill">Udarbejdet: Maj 2026</span>
+    <span class="mpill">Segment: Foreninger, forbund & SMV</span>
+    <span class="mpill">Marked: Danmark</span>
+    <span class="mpill">Platform: Umbraco multisite</span>
+    <span class="mpill">Maj 2026</span>
   </div>
 </header>
 
 <div class="container">
 
-  <!-- INTRO -->
+  <!-- HVAD ER BASESITE -->
   <section>
-    <div class="section-label">Kontekst</div>
+    <div class="slabel">Produktdefinition</div>
     <h2>Hvad er Basesite?</h2>
-    <div class="intro-box">
-      <p>Basesite.dk leverer færdige, branchetilpassede hjemmesidekoncepter til foreninger, forbund og klubber i Danmark — bygget på Umbraco multisite. Konceptet adskiller sig fra standard bureauydelser ved at tilbyde et struktureret udgangspunkt (skabelon + indhold) der kan deployeres hurtigt uden at starte fra bunden. Primær målgruppe er sportsorganisationer, faglige forbund og frivillige foreninger med begrænset IT-kapacitet.</p>
-    </div>
-    <p style="color:var(--muted); font-size:14px;">Analysen dækker direkte SaaS-konkurrenter (foreningsplatforme med hjemmesidefunktion), bureaukonkurrenter der specialiserer sig i foreningssites samt positioneringsmulighederne i markedet.</p>
-  </section>
-
-  <!-- KONKURRENTER -->
-  <section>
-    <div class="section-label">Konkurrentlandskab</div>
-    <h2>Direkte & Indirekte Konkurrenter</h2>
-
-    <div class="comp-grid">
-      <div class="comp-card">
-        <div class="comp-head">
-          <span>Konkurrent</span>
-          <span>Styrker</span>
-          <span>Svagheder ift. Basesite</span>
-        </div>
-
-        <div class="comp-row">
-          <div>
-            <div class="comp-name">Holdsport.dk</div>
-            <div class="comp-sub"><span class="tag tag-saas">SaaS</span><span class="tag tag-free">Gratis basis</span></div>
-            <div style="font-size:12px; color:var(--muted); margin-top:6px;">2M+ brugere DK</div>
-          </div>
-          <div class="comp-pro">
-            Gratis hjemmeside inkl. Stor brugerbase. Integreret med kalender, kontingent, MobilePay og app. Netop 2M+ trænere/medlemmer i systemet.
-          </div>
-          <div class="comp-con">
-            Cookie-cutter design — ingen branchetilpasning. Svagt til forbund med mange underforeninger. Låst til Holdsport-platformen. Begrænset CMS-frihed.
-          </div>
-        </div>
-
-        <div class="comp-row">
-          <div>
-            <div class="comp-name">Conventus.dk</div>
-            <div class="comp-sub"><span class="tag tag-saas">SaaS</span><span class="tag tag-dk">Dansk</span></div>
-            <div style="font-size:12px; color:var(--muted); margin-top:6px;">3.000+ foreninger</div>
-          </div>
-          <div class="comp-pro">
-            Stærk i kommunal integration og administrationsmoduler. Foretrukket system i mange kommuner. Priser fra 50 kr./md.
-          </div>
-          <div class="comp-con">
-            Hjemmesidedelen er sekundær — primær fokus er administration. Design er forældet og ikke branchetilpasset. Begrænset visuelt råderum.
-          </div>
-        </div>
-
-        <div class="comp-row">
-          <div>
-            <div class="comp-name">Foreningssider.dk</div>
-            <div class="comp-sub"><span class="tag tag-saas">SaaS</span><span class="tag tag-dk">Dansk</span></div>
-            <div style="font-size:12px; color:var(--muted); margin-top:6px;">Lavpris SaaS</div>
-          </div>
-          <div class="comp-pro">
-            Hurtig opstart — komplet site klar på få minutter. Lav månedlig pris. Indhold med eksempeltekster fra dag 1.
-          </div>
-          <div class="comp-con">
-            Meget generisk design uden branchedifferentiering. Lille udviklingshold. Begrænset mulighed for custom integrationer eller forbundsstruktur.
-          </div>
-        </div>
-
-        <div class="comp-row">
-          <div>
-            <div class="comp-name">GoMinisite / DGI</div>
-            <div class="comp-sub"><span class="tag tag-saas">SaaS</span></div>
-            <div style="font-size:12px; color:var(--muted); margin-top:6px;">DGI-aftale</div>
-          </div>
-          <div class="comp-pro">
-            50% rabat via DGI-aftale. Stor tillid hos idrætsforeninger p.g.a. DGI-stempel.
-          </div>
-          <div class="comp-con">
-            Afhænger af DGI-partnerskab. Samme generiske platform-udfordringer. Svag på B2B-forbund og ikke-idrætsforeninger.
-          </div>
-        </div>
-
-        <div class="comp-row">
-          <div>
-            <div class="comp-name">Bureauer (Diviso, Eksponent, MCB)</div>
-            <div class="comp-sub"><span class="tag tag-agency">Bureau</span></div>
-            <div style="font-size:12px; color:var(--muted); margin-top:6px;">Custom Umbraco</div>
-          </div>
-          <div class="comp-pro">
-            Fuld fleksibilitet. Høj kvalitet. Kan løse komplekse multisite-setups og integrationer (ERP, CRM).
-          </div>
-          <div class="comp-con">
-            Høj pris og lang leveringstid — uattraktivt for de fleste foreninger. Ingen færdig skabelon. Kræver teknisk indkøbskompetence hos kunden.
-          </div>
-        </div>
-
-        <div class="comp-row">
-          <div>
-            <div class="comp-name">WordPress/Wix/Squarespace</div>
-            <div class="comp-sub"><span class="tag tag-saas">DIY</span></div>
-            <div style="font-size:12px; color:var(--muted); margin-top:6px;">Generiske platforme</div>
-          </div>
-          <div class="comp-pro">
-            Lav pris, stor kendskabsgrad. Masser af templates.
-          </div>
-          <div class="comp-con">
-            Kræver selv opsætning og vedligehold. Ingen forståelse for foreningsstruktur. Support er global, ikke dansk.
-          </div>
-        </div>
-
+    <div class="intro-grid">
+      <div class="ibox">
+        <h4>Kerneprodukt</h4>
+        <p>Færdige, branchetilpassede hjemmesidekoncepter bygget på Umbraco multisite. Kunden får et komplet site med struktur, design og hjælp til indhold — klar til at gå live hurtigt uden at starte fra bunden.</p>
+      </div>
+      <div class="ibox">
+        <h4>Målgrupper</h4>
+        <ul>
+          <li>Sportsklubber, foreninger og forbund</li>
+          <li>Håndværkere og servicevirksomheder</li>
+          <li>Friskoler og uddannelsesinstitutioner</li>
+          <li>Campingpladser og aktivitetscentre</li>
+          <li>Brancheorganisationer og paraplyorganisationer</li>
+          <li>Øvrige SMV med 1–50 ansatte</li>
+        </ul>
+      </div>
+      <div class="ibox">
+        <h4>Hvad adskiller Basesite fra konkurrenterne?</h4>
+        <ul>
+          <li>Umbraco-fundament — enterprise-kvalitet CMS</li>
+          <li>Branchespecifikt indhold og design fra dag 1</li>
+          <li>Support og hjælp til indhold inkluderet</li>
+          <li>Dansk support med faglig IT-baggrund</li>
+          <li>Multisite: forbund/kæder kan køre mange sites fra én platform</li>
+        </ul>
+      </div>
+      <div class="ibox">
+        <h4>Markedets grundlæggende problem</h4>
+        <p>De fleste SMV og foreninger er fanget i et dilemma: DIY-platforme (Wix, Squarespace) er billige men generiske og kræver tid. Bureau-builds er professionelle men for dyre og langsomme. <strong>Basesite udfylder hullet.</strong></p>
       </div>
     </div>
   </section>
 
-  <!-- POSITIONERING -->
+  <!-- KONKURRENTOVERSIGT -->
   <section>
-    <div class="section-label">Markedspositionering</div>
-    <h2>Basesite's Plads i Markedet</h2>
-    <div class="map-wrap">
-      <p style="font-size:14px; color:var(--muted); margin-bottom:20px;">Akser: <strong>X</strong> = Pris (lav → høj) &nbsp;|&nbsp; <strong>Y</strong> = Branchetilpasning (generisk → specialiseret)</p>
-      <div class="pos-grid">
-        <div class="pos-q q1">
-          <h4>Lav pris · Specialiseret</h4>
-          <p><span class="pos-dot">🎯</span><strong>Basesite.dk</strong> — her er den strategiske sweet spot. Færdigt koncept, Umbraco-kvalitet, foreningsspecifik.</p>
-        </div>
-        <div class="pos-q q2">
-          <h4>Høj pris · Specialiseret</h4>
-          <p><span class="pos-dot">🏢</span>Diviso, MCB, Eksponent — custom Umbraco for forbund med budget.</p>
-        </div>
-        <div class="pos-q q4">
-          <h4>Lav pris · Generisk</h4>
-          <p><span class="pos-dot">📦</span>Holdsport, Conventus, Foreningssider — bred SaaS uden branchedifferentiering.</p>
-        </div>
-        <div class="pos-q q3">
-          <h4>Høj pris · Generisk</h4>
-          <p><span class="pos-dot">⚠️</span>Klassiske webbureau-sites uden foreningserfaring — ingen klar vinder her.</p>
-        </div>
+    <div class="slabel">Konkurrentlandskab</div>
+    <h2>Konkurrenter Kortlagt</h2>
+    <table class="ctable">
+      <thead>
+        <tr>
+          <th>Konkurrent</th>
+          <th>Type & segment</th>
+          <th>Styrker</th>
+          <th>Svagheder ift. Basesite</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Wix<small>wix.com</small></td>
+          <td><span class="tag t-diy">DIY SaaS</span><br>Alle brancher</td>
+          <td class="good">Lav pris. Mange skabeloner (900+). Drag-and-drop. Verdenskendt. App-marked.</td>
+          <td class="bad">Ingen dansk support (kun engelsk). Generisk — ingen branchekendskab. Kunden skal selv bygge alt. Reklamer på gratis plan. Svag til forbundsstrukturer.</td>
+        </tr>
+        <tr>
+          <td>Squarespace<small>squarespace.com</small></td>
+          <td><span class="tag t-diy">DIY SaaS</span><br>Kreative, SMV</td>
+          <td class="good">Smukt design. Relativt lavt abonnement. AI-hjælp til tekst. Godt til visuelle brancher.</td>
+          <td class="bad">Intet dansk sprog i admin. Ingen dansk support. Kunden skal selv lave alt indhold. Begrænset til globale skabeloner — ingen DA-branchetilpasning.</td>
+        </tr>
+        <tr>
+          <td>WordPress + hosting<small>wp.com / one.com / dandomain</small></td>
+          <td><span class="tag t-diy">DIY open source</span><br>Alle brancher</td>
+          <td class="good">Gratis kernesoftware. Maksimal fleksibilitet. Stort plugin-bibliotek. Dansk hosting tilgængeligt.</td>
+          <td class="bad">Kræver teknisk viden. Ansvar for opdateringer, sikkerhed og backup. Ingen hjælp til indhold. Kan hurtigt koste mere end antaget (plugins, tema, hosting, support).</td>
+        </tr>
+        <tr>
+          <td>Holdsport.dk<small>holdsport.dk</small></td>
+          <td><span class="tag t-saas">SaaS</span><span class="tag t-dk">Dansk</span><br>Idrætsforeninger</td>
+          <td class="good">Gratis basis. 2M+ brugere. Integreret med kontingent, MobilePay, kalender og app. Stor tillid i idrætsmiljøet.</td>
+          <td class="bad">Låst til sportsforeninger. Generisk design uden branchetilpasning. Ingen mulighed for håndværkere, friskoler, campingpladser. Begrænset CMS-frihed.</td>
+        </tr>
+        <tr>
+          <td>Conventus.dk<small>web.conventus.dk</small></td>
+          <td><span class="tag t-saas">SaaS</span><span class="tag t-dk">Dansk</span><br>Foreninger & kommuner</td>
+          <td class="good">3.000+ foreninger. Stærk i kommunal integration. Foreningssystem med hjemmeside inkl. Gratis basis, PRO fra 175 kr./md.</td>
+          <td class="bad">Primært foreningsadministration — hjemmesiden er sekundær. Forældet design. Kun relevant for foreninger, ikke SMV. Ingen branchetilpasning.</td>
+        </tr>
+        <tr>
+          <td>Foreningssider.dk<small>foreningssider.dk</small></td>
+          <td><span class="tag t-saas">SaaS</span><span class="tag t-dk">Dansk</span><br>Foreninger</td>
+          <td class="good">Hurtig opstart. Komplet site med eksempeltekster fra dag 1. Lav månedlig pris. Brugervenlig for ikke-tekniske.</td>
+          <td class="bad">Meget generisk. Kun for foreninger. Lille udviklingshold. Ingen custom integrationer. Ingen branchedifferentiering.</td>
+        </tr>
+        <tr>
+          <td>Webbureau (lokal)<small>næmt.nu, hjemmesideogmarketing.dk m.fl.</small></td>
+          <td><span class="tag t-bureau">Bureau</span><span class="tag t-dk">Dansk</span><br>Håndværkere, SMV</td>
+          <td class="good">Skræddersyet design. Personlig service. Dansk support. Kendte af målgruppen. Levering 2–4 uger typisk.</td>
+          <td class="bad">Engangsudgift på 5.000–20.000 kr. + løbende vedligeholdelse. Begrænset skalerbarhed. Varier meget i kvalitet. Typisk WordPress uden CMS-dybde.</td>
+        </tr>
+        <tr>
+          <td>Diviso / MCB / Eksponent<small>Custom Umbraco</small></td>
+          <td><span class="tag t-bureau">Bureau</span><span class="tag t-dk">Dansk</span><br>Mid-market, enterprise</td>
+          <td class="good">Fuld Umbraco-fleksibilitet. Komplekse integrationer. Høj kvalitet. Samme tekniske platform som Basesite.</td>
+          <td class="bad">30.000–200.000+ kr. etablering. Lang leveringstid. Kræver teknisk indkøbskompetence. Ikke relevant for lille forening eller håndværker.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- PRISSAMMENLIGNING -->
+  <section>
+    <div class="slabel">Prisanalyse</div>
+    <h2>Hvad Koster Det — Samlet Oversigt</h2>
+    <p style="font-size:14px; color:var(--muted); margin-bottom:24px;">Alle priser ekskl. moms. Etablering = oprettelse/design/opsætning. Drift = løbende abonnement pr. måned. Indhold = hjælp til tekst og billeder.</p>
+    <div class="ptable-wrap">
+      <table class="ptable">
+        <thead>
+          <tr>
+            <th>Løsning</th>
+            <th>Etablering</th>
+            <th>Drift / md.</th>
+            <th>Indhold</th>
+            <th>DK support</th>
+            <th>Branche-tilpasning</th>
+            <th>Time-to-live</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="highlight">
+            <td>Basesite.dk<small>Umbraco multisite koncept</small></td>
+            <td class="price-best">Pakkebaseret<br><small>Inkl. design + indhold</small></td>
+            <td class="price-best">Abonnement<br><small>Inkl. hosting + support</small></td>
+            <td class="center check">✓ Inkluderet</td>
+            <td class="center check">✓ Dansk</td>
+            <td class="center check">✓ Ja</td>
+            <td class="center"><strong>Dage–uger</strong></td>
+          </tr>
+          <tr>
+            <td>Wix<small>Combo/Business plan</small></td>
+            <td class="price-low">0 kr.</td>
+            <td class="price-low">65–250 kr./md.</td>
+            <td class="center cross">✗ Selv</td>
+            <td class="center cross">✗ Engelsk</td>
+            <td class="center cross">✗ Nej</td>
+            <td class="center">Timer (DIY)<br><small>Uger i praksis</small></td>
+          </tr>
+          <tr>
+            <td>Squarespace<small>Personal/Business</small></td>
+            <td class="price-low">0 kr.</td>
+            <td class="price-low">110–200 kr./md.</td>
+            <td class="center cross">✗ Selv</td>
+            <td class="center cross">✗ Engelsk</td>
+            <td class="center cross">✗ Nej</td>
+            <td class="center">Timer (DIY)<br><small>Uger i praksis</small></td>
+          </tr>
+          <tr>
+            <td>WordPress + hosting<small>one.com / dandomain</small></td>
+            <td class="price-low">0–3.000 kr.<br><small>Tema + plugins</small></td>
+            <td class="price-low">30–150 kr./md.</td>
+            <td class="center cross">✗ Selv</td>
+            <td class="center partial">~ DK hosting</td>
+            <td class="center partial">~ Plugins</td>
+            <td class="center">Uger–måneder<br><small>Teknisk krav</small></td>
+          </tr>
+          <tr>
+            <td>Holdsport<small>Gratis / PRO</small></td>
+            <td class="price-low">0 kr.</td>
+            <td class="price-low">0–? kr./md.</td>
+            <td class="center partial">~ Skabelon</td>
+            <td class="center check">✓ Dansk</td>
+            <td class="center cross">✗ Kun sport</td>
+            <td class="center"><strong>Timer</strong></td>
+          </tr>
+          <tr>
+            <td>Conventus<small>Basis / PRO</small></td>
+            <td class="price-low">0 kr.</td>
+            <td class="price-low">0–175 kr./md.</td>
+            <td class="center partial">~ Skabelon</td>
+            <td class="center check">✓ Dansk</td>
+            <td class="center cross">✗ Kun forening</td>
+            <td class="center"><strong>Dage</strong></td>
+          </tr>
+          <tr>
+            <td>Lokal webbureau<small>Håndværker/SMV-sites</small></td>
+            <td class="price-mid">5.000–20.000 kr.</td>
+            <td class="price-mid">200–800 kr./md.<br><small>Vedligehold + hosting</small></td>
+            <td class="center partial">~ Betalt ekstra</td>
+            <td class="center check">✓ Dansk</td>
+            <td class="center partial">~ Delvist</td>
+            <td class="center">2–6 uger</td>
+          </tr>
+          <tr>
+            <td>Custom Umbraco-bureau<small>Diviso, MCB, Eksponent</small></td>
+            <td class="price-high">30.000–200.000+ kr.</td>
+            <td class="price-high">1.000–5.000 kr./md.</td>
+            <td class="center partial">~ Betalt ekstra</td>
+            <td class="center check">✓ Dansk</td>
+            <td class="center check">✓ Fuld</td>
+            <td class="center">2–6 måneder</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- TIME TO LIVE + SUPPORT -->
+  <section>
+    <div class="slabel">Onboarding & Support</div>
+    <h2>Hvor Hurtigt Er Man Kørende?</h2>
+    <p style="font-size:14px; color:var(--muted); margin-bottom:28px;">For en forening eller SMV uden dedikeret IT-afdeling er tid og hjælp mindst ligeså vigtig som pris. Her er den reelle brugeroplevelse for de tre primære veje.</p>
+
+    <div class="speed-grid" style="margin-bottom:32px;">
+      <div class="speed-card">
+        <h4>Wix / Squarespace / WordPress</h4>
+        <div class="speed-num">6–12</div>
+        <p><strong>uger i virkeligheden</strong> — trods markedsføring om "minutter". Kunden starter fra blank side, finder selv indhold, billeder og tekster. Mange giver op halvvejs.</p>
+        <span class="speed-badge badge-slow">Høj egenindsats</span>
+      </div>
+      <div class="speed-card">
+        <h4>Lokal webbureau</h4>
+        <div class="speed-num">3–6</div>
+        <p><strong>uger gennemsnit</strong>. Professionel proces, men kunden skal stadig levere alt indhold (tekster, billeder). Forsinkelser er normen, ikke undtagelsen.</p>
+        <span class="speed-badge badge-mid">Moderat egenindsats</span>
+      </div>
+      <div class="speed-card best">
+        <h4>Basesite.dk</h4>
+        <div class="speed-num">1–2</div>
+        <p><strong>uger realistisk</strong> — branchespecifikt indhold er allerede struktureret. Support og hjælp til indhold er inkluderet. Kunden godkender, tilpasser og går live.</p>
+        <span class="speed-badge badge-fast">Lav egenindsats</span>
+      </div>
+    </div>
+
+    <div class="intro-grid">
+      <div class="ibox">
+        <h4>Hvad "hjælp til indhold" reelt betyder for kunden</h4>
+        <ul>
+          <li>Slipper for at starte med blank skærm</li>
+          <li>Redigeringsguides og skabelontekster der passer branchen</li>
+          <li>Support der forstår konteksten (forening, håndværker osv.)</li>
+          <li>Ingen forvirring om hosting, domæne, SSL og opdateringer</li>
+          <li>Ét kontaktpunkt — ikke tre leverandører at koordinere</li>
+        </ul>
+      </div>
+      <div class="ibox">
+        <h4>Hvad "ingen hjælp" koster i praksis (DIY)</h4>
+        <ul>
+          <li>8–20 timer frivilliges tid til opsætning</li>
+          <li>Forsinket launch = mistet momentum og motivation</li>
+          <li>Lavere kvalitet = dårligere troværdighed online</li>
+          <li>Ingen dansk support når noget driller</li>
+          <li>Site forlades hurtigt hvis det er svært at opdatere</li>
+        </ul>
       </div>
     </div>
   </section>
 
   <!-- SWOT -->
   <section>
-    <div class="section-label">Strategisk analyse</div>
+    <div class="slabel">Strategisk analyse</div>
     <h2>SWOT — Basesite.dk</h2>
     <div class="swot-grid">
-
       <div class="swot-q">
         <div class="swot-letter">S</div>
         <h3>Styrker</h3>
         <ul>
-          <li>Umbraco-fundament — enterprise CMS med skalerbarhed og driftsikkerhed</li>
-          <li>Multisite-arkitektur: forbund kan drive mange underforeningssites fra én platform</li>
+          <li>Umbraco — enterprise-kvalitet CMS til en overkommelig pris</li>
+          <li>Multisite-arkitektur: forbund/kæder driver mange sites fra én platform</li>
           <li>Branchespecifikt indhold og design fra dag 1 — ingen blank side</li>
-          <li>Hurtig time-to-launch sammenlignet med custom bureau-builds</li>
-          <li>Diviso-backing: 20+ års IT-erfaring, Umbraco-certificering, dansk support</li>
-          <li>Konkurrencedygtig pris ift. bureauydelse med samme CMS</li>
+          <li>Support og hjælp til indhold inkluderet — lav egenindsats for kunden</li>
+          <li>Dansk support med IT-faglig baggrund (Diviso, 20+ år)</li>
+          <li>Dækker BÅDE foreninger og SMV — bredere adressérbart marked</li>
+          <li>Hurtig time-to-launch vs. bureaubuilds</li>
+          <li>Én leverandør for hosting, CMS og support — ingen koordination</li>
         </ul>
       </div>
-
       <div class="swot-q">
         <div class="swot-letter">W</div>
         <h3>Svagheder</h3>
         <ul>
-          <li>Lav kendskabsgrad — nyt produkt uden stor markedseksponering</li>
-          <li>Ingen integreret medlemsadministration (kræver Conventus/Holdsport som supplement)</li>
-          <li>Ingen freemium- eller gratis-tier som Holdsport/Conventus tilbyder</li>
-          <li>Kræver en vis teknisk forståelse hos kunden ift. Umbraco-redaktion</li>
-          <li>Begrænset indhold på basesite.dk — svært at evaluere produktet</li>
-          <li>Lille salgsteam til at nå mange potentielle foreningskunder</li>
+          <li>Lav kendskabsgrad — nyt produkt, endnu ikke etableret brand</li>
+          <li>Ingen synlig prisstruktur på basesite.dk — barriere for selvbetjent evaluering</li>
+          <li>Ingen freemium-tier som Holdsport/Conventus tilbyder</li>
+          <li>Ingen integreret foreningsadministration (kontingent, MobilePay)</li>
+          <li>Begrænset markedsføringsindsats og synlighed på Google</li>
+          <li>Lille team — begrænset skalerbarhed i salgskapacitet</li>
+          <li>Ingen viste cases eller branche-demos på sitet</li>
         </ul>
       </div>
-
       <div class="swot-q">
         <div class="swot-letter">O</div>
         <h3>Muligheder</h3>
         <ul>
-          <li>Mange forbund mangler professionel digital tilstedeværelse — ikke dækket af Holdsport/Conventus</li>
-          <li>Forbund-til-mange-foreninger modellen: sælg ét forbund, få 50+ sites</li>
-          <li>Umbraco Cloud giver nem skalering og lav driftsomkostning pr. site</li>
-          <li>Integration med Conventus/Holdsport som komplementær løsning, ikke konkurrent</li>
-          <li>Offentlig finansiering og kommunale puljer til foreningsdigitalisering</li>
-          <li>AI-drevet content-onboarding kan sænke opsætningstiden yderligere</li>
-          <li>Tilbud til brancheorganisationer og arbejdsgiverforeninger (B2B-forbund)</li>
+          <li>Enorm SMV-base i DK: 200.000+ enkeltmandsfirmaer og mikrovirksomheder</li>
+          <li>Forbund-til-mange-model: ét salg = 30–100 sites på samme infrastruktur</li>
+          <li>Håndværkere og servicevirksomheder er underservicerede af eksisterende SaaS</li>
+          <li>Friskoler og privatskoler: behov for professionelt site, begrænset IT-ressourcer</li>
+          <li>Campingpladser: seasonal content-behov som passer Umbraco-CMS godt</li>
+          <li>AI-drevet content-onboarding kan sænke opsætningstid yderligere</li>
+          <li>DGI/DIF/brancheorganisation-partnerskaber som distributions-multiplikator</li>
+          <li>Kommunale puljer og digitaliseringsstøtte til foreninger</li>
+          <li>SEO-mulighed: ingen konkurrenter dominerer long-tail branche-søgninger</li>
         </ul>
       </div>
-
       <div class="swot-q">
         <div class="swot-letter">T</div>
         <h3>Trusler</h3>
         <ul>
-          <li>Holdsport udvider løbende sit hjemmesidetilbud og har 2M+ brugere som distributionskanal</li>
-          <li>Conventus er forankret i mange kommuner — svær at erstatte</li>
-          <li>DIY-platforme (Wix, Squarespace) bliver stadig nemmere og billigere</li>
-          <li>Lave skifteomkostninger hos kunden — nemt at gå til konkurrent</li>
-          <li>Manglende DGI/DIF-partnerskaber giver konkurrenter et institutionelt forspring</li>
-          <li>Umbraco Cloud-prisstigninger kan presse marginen på billige pakker</li>
+          <li>Wix og Squarespace investerer massivt i AI-assisteret site-opbygning</li>
+          <li>Holdsport udvider løbende sit hjemmesidetilbud med 2M+ brugere som base</li>
+          <li>Lokale webbureau-er med lav pris (5.000 kr.) er stærke hos håndværkere</li>
+          <li>Lave skifteomkostninger: kunder skifter let til billigste alternativ</li>
+          <li>Conventus er kommunalt forankret og svær at fortrænge i foreningssegmentet</li>
+          <li>Umbraco Cloud-prisstigninger kan presse marginen på lavpris-pakker</li>
+          <li>Manglende DGI/DIF-stempel giver institutionel modvind i idrætssegmentet</li>
         </ul>
       </div>
-
     </div>
   </section>
 
   <!-- ANBEFALINGER -->
   <section>
-    <div class="section-label">Strategiske anbefalinger</div>
-    <h2>6 Konkrete Næste Skridt</h2>
+    <div class="slabel">Strategiske anbefalinger</div>
+    <h2>7 Konkrete Næste Skridt</h2>
     <div class="rec-list">
 
       <div class="rec-item">
         <div class="rec-num">01</div>
         <div>
-          <h4>Gå efter forbund, ikke enkeltforeninger</h4>
-          <p>Et salg til et forbund med 30–100 underforeninger er 30–100 sites på samme infrastruktur. ROI pr. salgsindsats er markant højere end at sælge én forening ad gangen. Prioriter forbunds-segmentet hårdt.</p>
+          <h4>Lav synlig prisstruktur på basesite.dk — straks</h4>
+          <p>Sitet kommunikerer ingen priser. Det er den største konverteringsbarriere. Beslutningstagere i foreninger og SMV skal have et tal at gå til bestyrelsen med. Tre pakker (Basis, Plus, Forbund) med klare priser vil alene formentlig fordoble henvendelsesraten.</p>
         </div>
       </div>
 
       <div class="rec-item">
         <div class="rec-num">02</div>
         <div>
-          <h4>Positionér som komplementær til Conventus og Holdsport</h4>
-          <p>Stop med at konkurrere direkte. Basesite er hjemmesiden — Conventus/Holdsport er administrationen. "Professionel Umbraco-forside + Conventus-widgets" er et stærkere salgsbudskab end "alternativ til Conventus".</p>
+          <h4>Gå efter forbund frem for enkeltforeninger</h4>
+          <p>Et salg til et forbund med 40 underforeninger = 40 sites på samme infrastruktur, minimal mersalgsindsats. ROI pr. salgstimer er 10–40x vs. enkeltforeningssalg. Prioritér forbunds-segmentet hårdt i salgsindsatsen.</p>
         </div>
       </div>
 
       <div class="rec-item">
         <div class="rec-num">03</div>
         <div>
-          <h4>Lav en skarp prisstruktur synlig på basesite.dk</h4>
-          <p>Siden kommunikerer i dag ikke priser. Det er en reel barriere. Foreninger med frivillige beslutningstagere har brug for et tydeligt budget at gå til bestyrelsen med. Overvej tre pakker: Basis, Forbund, Enterprise.</p>
+          <h4>Byg branche-landingssider og lever demonstrerbare cases</h4>
+          <p>"Hjemmeside til tømrer", "hjemmeside til friskole", "hjemmeside til campingplads" — ingen konkurrenter ejer disse søgeord. Lav dedikerede landingssider med live demo-sites for 4–5 brancher. Konkret, klikbart materiale konverterer markant bedre end generisk brødtekst.</p>
         </div>
       </div>
 
       <div class="rec-item">
         <div class="rec-num">04</div>
         <div>
-          <h4>Byg 2–3 branche-showcases og publicér dem</h4>
-          <p>Vis hvad et sportsklub-site, et fagforbunds-site og et kulturforenings-site ser ud. Konkret, klikbart demo-materiale konverterer langt bedre end tekst om "branchetilpassede koncepter".</p>
+          <h4>Positionér som komplementær til Conventus og Holdsport — ikke alternativ</h4>
+          <p>"Professionel Umbraco-forside + Conventus-widgets" er et stærkere budskab end "alternativ til Conventus". Basesite er front-end kvalitet — Conventus/Holdsport er administration. Integrationsmuligheder er en styrke, ikke en svaghed.</p>
         </div>
       </div>
 
       <div class="rec-item">
         <div class="rec-num">05</div>
         <div>
-          <h4>Søg DGI- eller DIF-partnerskab aktivt</h4>
-          <p>GoMinisite har et 50%-rabat-stempel via DGI. Et tilsvarende partnerskab med ét stort paraplyorganisation ville give adgang til tusindvis af foreninger via en betroet afsender. Prioriter dette som en strategisk investering.</p>
+          <h4>Frem "hjælp til indhold og support" som et primært salgsargument</h4>
+          <p>Det er reelt den største differentiator mod DIY-platforme. Wix og WordPress giver ingen dansk hjælp. En forening eller håndværker der kæmper med en blank skærm vil betale for at slippe for det. Kommunikér dette eksplicit i al markedsføring.</p>
         </div>
       </div>
 
       <div class="rec-item">
         <div class="rec-num">06</div>
         <div>
-          <h4>Invester i SEO på long-tail søgeord</h4>
-          <p>"Hjemmeside til karateklub", "hjemmeside til fagforbund", "Umbraco til foreninger" — konkurrenterne kæmper ikke på disse termer. Indholdsmarkedsføring med branche-specifikke landingssider vil drive organisk trafik fra beslutningstagere med høj købsintention.</p>
+          <h4>Aktivt søg DGI, DIF eller en brancheorganisation-aftale</h4>
+          <p>GoMinisite har et 50%-rabat-stempel via DGI der giver adgang til tusindvis af foreninger via en betroet afsender. Et tilsvarende samarbejde med ét paraplyorganisation ville være den mest effektive distributionskanal. Strategisk investering, ikke bare et salg.</p>
+        </div>
+      </div>
+
+      <div class="rec-item">
+        <div class="rec-num">07</div>
+        <div>
+          <h4>Invester i SEO med branche-specifikt long-tail indhold</h4>
+          <p>"Hjemmeside til håndværker", "hjemmeside til karateklub", "Umbraco til foreninger" — ingen af de store konkurrenter kæmper seriøst på disse termer. Organisk trafik fra beslutningstagere med høj købsintention er den billigste og mest holdbare distributionskanal på sigt.</p>
         </div>
       </div>
 
@@ -572,7 +563,7 @@
 </div>
 
 <footer>
-  <div>Udarbejdet af <span>Diviso / Claude</span> · Maj 2026 · basesite.dk konkurrentanalyse</div>
+  <div>Udarbejdet af <span>Diviso / Claude</span> · Maj 2026 · basesite.dk konkurrentanalyse v2</div>
   <div>Internt strategidokument</div>
 </footer>
 
