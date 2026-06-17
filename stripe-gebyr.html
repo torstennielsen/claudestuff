@@ -122,7 +122,7 @@ function setMode(m){
   document.getElementById('t1').textContent=sub?'Netto pr. måned':'Netto pr. korttype';
   document.getElementById('d1').textContent=sub?'Md / kvt / år fakturering.':'Hvad du får ud af beløbet.';
   document.getElementById('t2').textContent=sub?'Tillæg/md for at dække gebyr':'Tillæg for at dække gebyr';
-  document.getElementById('d2').textContent=sub?'Omregnet til pr. måned, for at få beløbet netto.':'Hvad du skal lægge oveni for at få beløbet netto.';
+  document.getElementById('d2').textContent=sub?'Listepris/md + tillæg, for at få beløbet netto.':'Hvad du skal lægge oveni for at få beløbet netto.';
   calc();
 }
 
@@ -171,7 +171,8 @@ function calc(){
   h2.innerHTML='<tr><th>Kort</th><th>Md</th><th>Kvt</th><th>År</th></tr>';
   b2.innerHTML=CARDS.map(c=>{
     const p=pctFor(c);
-    const cells=ivs.map(m=>{const tc=tgt*m;const g=grossFor(tc,p,fixed);const add=(g-tc)/m;return `<td class="mv">+ ${kr(add)}</td>`;}).join('');
+    const cells=ivs.map(m=>{const tc=tgt*m;const g=grossFor(tc,p,fixed);const listMo=g/m;const add=(g-tc)/m;
+      return `<td><div class="val">${kr(listMo)}</div><div class="mv" style="font-size:11px">+ ${kr(add)}</div></td>`;}).join('');
     return `<tr class="${c.std?'std':''}"><td>${c.name}</td>${cells}</tr>`;
   }).join('');
 }
