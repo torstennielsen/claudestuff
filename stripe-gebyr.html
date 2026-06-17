@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stripe-gebyrberegner</title>
+<style>
+  :root{
+    --bg:#0f1115; --card:#181b22; --card2:#1f232c; --line:#2a2f3a;
+    --txt:#e6e9ef; --muted:#9aa3b2; --accent:#635bff; --accent2:#00d4b5;
+    --warn:#ffb020; --bad:#ff5c5c; --good:#3ddc97;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;padding:24px}
+  h1{font-size:22px;margin:0 0 4px}
+  .sub{color:var(--muted);margin:0 0 24px;font-size:14px}
+  .wrap{max-width:1080px;margin:0 auto}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  @media(max-width:860px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .card h2{font-size:16px;margin:0 0 16px;display:flex;align-items:center;gap:8px}
+  .tag{font-size:11px;font-weight:600;padding:2px 8px;border-radius:6px;background:var(--accent);color:#fff}
+  .tag.sub2{background:var(--accent2);color:#062}
+  label{display:block;font-size:13px;color:var(--muted);margin:12px 0 5px}
+  input,select{width:100%;background:var(--card2);border:1px solid var(--line);color:var(--txt);
+    border-radius:8px;padding:10px 12px;font-size:15px}
+  input:focus,select:focus{outline:none;border-color:var(--accent)}
+  .row{display:flex;gap:12px}
+  .row>div{flex:1}
+  .res{margin-top:18px;background:var(--card2);border-radius:10px;padding:16px}
+  .line{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed var(--line);font-size:14px}
+  .line:last-child{border-bottom:none}
+  .line .k{color:var(--muted)}
+  .line .v{font-weight:600;font-variant-numeric:tabular-nums}
+  .big{font-size:20px}
+  .v.good{color:var(--good)} .v.bad{color:var(--bad)} .v.warn{color:var(--warn)}
+  .pct{font-size:12px;color:var(--muted);margin-left:6px}
+  table{width:100%;border-collapse:collapse;margin-top:14px;font-size:13px}
+  th,td{text-align:right;padding:9px 8px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+  th:first-child,td:first-child{text-align:left}
+  th{color:var(--muted);font-weight:600;font-size:12px}
+  tr.hl td{background:rgba(99,91,255,.08)}
+  .note{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.45}
+  .toggle{display:flex;align-items:center;gap:8px;margin-top:14px;font-size:13px;color:var(--txt);cursor:pointer}
+  .toggle input{width:auto}
+  .badge{display:inline-block;font-size:11px;padding:2px 7px;border-radius:5px;background:var(--card2);border:1px solid var(--line);color:var(--muted);margin-left:6px}
+  .minbox{margin-top:14px;background:linear-gradient(135deg,rgba(99,91,255,.12),rgba(0,212,181,.08));border:1px solid var(--accent);border-radius:10px;padding:14px}
+  .minbox .t{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+  .minbox .mline{display:flex;justify-content:space-between;padding:4px 0;font-size:14px}
+  .minbox .mv{font-weight:700;color:var(--accent2);font-variant-numeric:tabular-nums}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Stripe-gebyrberegner</h1>
+  <p class="sub">Engangs- og abonnementsbetalinger · md / kvt / år · effektiv gebyrprocent · minimumstillæg for at dække gebyr</p>
+
+  <!-- Fælles indstillinger -->
+  <div class="card" style="margin-bottom:20px">
+    <h2>Indstillinger</h2>
+    <div class="row">
+      <div>
+        <label>Korttype</label>
+        <select id="cardtype">
+          <option value="eu">EU-kort (1,4 % + 1,80 kr.)</option>
+          <option value="noneu">Ikke-EU / internationalt (2,9 % + 1,80 kr.)</option>
+        </select>
+      </div>
+      <div>
+        <label>Fast gebyr (kr.)</label>
+        <input id="fixed" type="number" value="1.80" step="0.10">
+      </div>
+      <div>
+        <label>Valutaomregning (%)</label>
+        <input id="fx" type="number" value="0" step="0.5">
+      </div>
+    </div>
+    <label class="toggle"><input type="checkbox" id="billing"> Stripe Billing aktivt (+0,5 % på abonnementer)</label>
+    <p class="note">EU-kort = kort udstedt i EØS. Ikke-EU dækker fx UK, US, Amex. Sæt valutaomregning til 2 hvis kunden betaler i fremmed valuta. Det faste gebyr trækkes pr. <em>transaktion</em> — derfor bløder små beløb og hyppig fakturering mest.</p>
+  </div>
+
+  <div class="grid">
+    <!-- Engangs -->
+    <div class="card">
+      <h2>Engangsbetaling <span class="tag">engangs</span></h2>
+      <label>Beløb kunden betaler (kr.)</label>
+      <input id="oneAmt" type="number" value="29" step="1">
+
+      <div class="res">
+        <div class="line"><span class="k">Opkrævet</span><span class="v" id="o_gross">–</span></div>
+        <div class="line"><span class="k">Stripe-gebyr</span><span class="v bad" id="o_fee">–</span></div>
+        <div class="line"><span class="k big">Du får (netto)</span><span class="v big good" id="o_net">–</span></div>
+        <div class="line"><span class="k">Effektiv gebyr</span><span class="v warn" id="o_pct">–</span></div>
+      </div>
+
+      <div class="minbox">
+        <div class="t">Gross-up: hvad skal du opkræve for at få X netto?</div>
+        <label style="margin-top:0">Ønsket netto (kr.)</label>
+        <input id="oneTarget" type="number" value="29" step="1">
+        <div class="mline"><span>Skal opkræves</span><span class="mv" id="o_required">–</span></div>
+        <div class="mline"><span>Tillæg oveni</span><span class="mv" id="o_addon">–</span></div>
+      </div>
+    </div>
+
+    <!-- Abonnement -->
+    <div class="card">
+      <h2>Abonnement <span class="tag sub2">recurring</span></h2>
+      <label>Pris pr. måned (kr.)</label>
+      <input id="subAmt" type="number" value="29" step="1">
+      <p class="note" style="margin-top:8px">Beregnes for alle tre faktureringsintervaller, så du kan se hvordan det faste gebyr fortyndes ved sjældnere opkrævning.</p>
+
+      <table>
+        <thead>
+          <tr><th>Interval</th><th>Opkrævet</th><th>Gebyr</th><th>Netto</th><th>Eff. %</th><th>Netto/md</th></tr>
+        </thead>
+        <tbody id="subBody"></tbody>
+      </table>
+      <p class="note">Årlig fakturering giver klart mest netto pr. måned, fordi du kun betaler det faste gebyr 1 gang om året i stedet for 12.</p>
+    </div>
+  </div>
+
+  <!-- Minimumstillæg abonnement -->
+  <div class="card" style="margin-top:20px">
+    <h2>Minimumstillæg for at dække gebyret <span class="badge">abonnement</span></h2>
+    <p class="note" style="margin-top:0">Hvor meget skal du lægge oveni listeprisen, så Stripe-gebyret er fuldt dækket og du sidder tilbage med den ønskede netto? Vist pr. måned og pr. kvartal.</p>
+    <div class="row" style="margin-bottom:6px">
+      <div>
+        <label>Ønsket netto pr. måned (kr.)</label>
+        <input id="subTarget" type="number" value="29" step="1">
+      </div>
+    </div>
+    <table>
+      <thead>
+        <tr><th>Hvis du fakturerer</th><th>Listepris skal være</th><th>Tillæg vs. ønsket</th><th>Tillæg omregnet /md</th></tr>
+      </thead>
+      <tbody id="minBody"></tbody>
+    </table>
+    <p class="note">"Tillæg omregnet /md" gør tallene sammenlignelige: kvartals- og årstillæg divideret ned til måned. Lavest = billigst at dække for kunden.</p>
+  </div>
+
+  <p class="note" style="text-align:center;margin-top:24px">Satser er Stripes listepriser for Danmark (juni 2026) og kan forhandles ved volumen. Tjek altid stripe.com/en-dk/pricing for aktuelle tal.</p>
+</div>
+
+<script>
+const kr = n => n.toLocaleString('da-DK',{minimumFractionDigits:2,maximumFractionDigits:2}) + ' kr.';
+const pct = n => n.toLocaleString('da-DK',{minimumFractionDigits:1,maximumFractionDigits:1}) + ' %';
+
+function rate(){
+  const base = document.getElementById('cardtype').value === 'eu' ? 1.4 : 2.9;
+  const fx = parseFloat(document.getElementById('fx').value)||0;
+  const billing = document.getElementById('billing').checked ? 0.5 : 0;
+  return {pctTx:(base+fx)/100, pctSub:(base+fx+billing)/100,
+          fixed:parseFloat(document.getElementById('fixed').value)||0,
+          billing};
+}
+
+// fee for a single charge of `gross`, using percentage p
+const feeOf = (gross,p,fixed) => gross*p + fixed;
+// gross needed to net `target`: gross*(1-p) - fixed = target
+const grossFor = (target,p,fixed) => (target+fixed)/(1-p);
+
+function calc(){
+  const r = rate();
+
+  // --- Engangs ---
+  const oa = parseFloat(document.getElementById('oneAmt').value)||0;
+  const ofee = feeOf(oa, r.pctTx, r.fixed);
+  const onet = oa - ofee;
+  document.getElementById('o_gross').textContent = kr(oa);
+  document.getElementById('o_fee').textContent = '− ' + kr(ofee);
+  document.getElementById('o_net').textContent = kr(onet);
+  document.getElementById('o_pct').textContent = oa>0 ? pct(ofee/oa*100) : '–';
+
+  const ot = parseFloat(document.getElementById('oneTarget').value)||0;
+  const oreq = grossFor(ot, r.pctTx, r.fixed);
+  document.getElementById('o_required').textContent = kr(oreq);
+  document.getElementById('o_addon').textContent = '+ ' + kr(oreq-ot);
+
+  // --- Abonnement tabel ---
+  const sm = parseFloat(document.getElementById('subAmt').value)||0;
+  const intervals = [
+    {name:'Månedligt', months:1, charges:12},
+    {name:'Kvartalsvis', months:3, charges:4},
+    {name:'Årligt', months:12, charges:1}
+  ];
+  const body = document.getElementById('subBody');
+  body.innerHTML = '';
+  intervals.forEach(iv => {
+    const gross = sm*iv.months;          // opkrævet pr. faktura
+    const fee = feeOf(gross, r.pctSub, r.fixed);
+    const net = gross - fee;
+    const netMo = net/iv.months;
+    const eff = gross>0 ? fee/gross*100 : 0;
+    const hl = iv.name==='Årligt' ? ' class="hl"' : '';
+    body.innerHTML += `<tr${hl}><td>${iv.name}</td><td>${kr(gross)}</td>`+
+      `<td style="color:var(--bad)">${kr(fee)}</td><td>${kr(net)}</td>`+
+      `<td style="color:var(--warn)">${pct(eff)}</td><td style="color:var(--good)">${kr(netMo)}</td></tr>`;
+  });
+
+  // --- Minimumstillæg ---
+  const st = parseFloat(document.getElementById('subTarget').value)||0; // ønsket netto pr md
+  const mb = document.getElementById('minBody');
+  mb.innerHTML = '';
+  intervals.forEach(iv => {
+    const targetPerCharge = st*iv.months;             // ønsket netto pr. faktura
+    const grossNeeded = grossFor(targetPerCharge, r.pctSub, r.fixed);
+    const listMo = grossNeeded/iv.months;             // listepris omregnet til md
+    const addonTotal = grossNeeded - targetPerCharge; // tillæg pr. faktura
+    const addonMo = addonTotal/iv.months;
+    const hl = iv.name==='Årligt' ? ' class="hl"' : '';
+    mb.innerHTML += `<tr${hl}><td>${iv.name}</td>`+
+      `<td>${kr(listMo)}/md (${kr(grossNeeded)})</td>`+
+      `<td style="color:var(--warn)">+ ${kr(addonTotal)}</td>`+
+      `<td style="color:var(--accent2);font-weight:700">+ ${kr(addonMo)}</td></tr>`;
+  });
+}
+
+document.querySelectorAll('input,select').forEach(e=>e.addEventListener('input',calc));
+calc();
+</script>
+</body>
+</html>
