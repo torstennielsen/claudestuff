@@ -120,7 +120,7 @@ function setMode(m){
   document.getElementById('sbSep').style.display=sub?'inline':'none';
   document.getElementById('amtLbl').textContent=sub?'Pris/md':'Beløb';
   document.getElementById('t1').textContent=sub?'Netto pr. måned':'Netto pr. korttype';
-  document.getElementById('d1').textContent=sub?'Md / kvt / år fakturering.':'Hvad du får ud af beløbet.';
+  document.getElementById('d1').textContent=sub?'Netto pr. faktura (md/kvt/år) + pr. md.':'Hvad du får ud af beløbet.';
   document.getElementById('t2').textContent=sub?'Tillæg/md for at dække gebyr':'Tillæg for at dække gebyr';
   document.getElementById('d2').textContent=sub?'Listepris/md + tillæg, for at få beløbet netto.':'Hvad du skal lægge oveni for at få beløbet netto.';
   calc();
@@ -165,7 +165,8 @@ function calc(){
   h1.innerHTML='<tr><th>Kort</th><th>Sats</th><th>Md</th><th>Kvt</th><th>År</th></tr>';
   b1.innerHTML=CARDS.map(c=>{
     const p=pctFor(c);
-    const cells=ivs.map(m=>{const g=amt*m;const net=(g-feeOf(g,p,fixed))/m;return `<td class="good">${kr(net)}</td>`;}).join('');
+    const cells=ivs.map(m=>{const g=amt*m;const net=g-feeOf(g,p,fixed);const netMo=net/m;
+      return `<td><div class="good val">${kr(net)}</div><div class="rate">${kr(netMo)}/md</div></td>`;}).join('');
     return `<tr class="${c.std?'std':''}"><td>${c.name}</td><td class="rate">${rateLbl(c)}</td>${cells}</tr>`;
   }).join('');
   h2.innerHTML='<tr><th>Kort</th><th>Md</th><th>Kvt</th><th>År</th></tr>';
