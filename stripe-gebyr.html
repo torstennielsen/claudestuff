@@ -81,11 +81,7 @@
     <!-- højre: gross-up / minimumstillæg -->
     <div class="card">
       <h2 id="t2">Tillæg for at dække gebyr</h2>
-      <p class="d" id="d2">Hvad du skal lægge oveni.</p>
-      <div class="secondInput">
-        <label id="tgtLbl">Ønsket netto</label>
-        <input id="targetAmt" type="number" value="29" step="1">
-      </div>
+      <p class="d" id="d2">Hvad du skal lægge oveni for at få beløbet netto.</p>
       <table><thead id="h2"></thead><tbody id="b2"></tbody></table>
     </div>
   </div>
@@ -126,8 +122,7 @@ function setMode(m){
   document.getElementById('t1').textContent=sub?'Netto pr. måned':'Netto pr. korttype';
   document.getElementById('d1').textContent=sub?'Md / kvt / år fakturering.':'Hvad du får ud af beløbet.';
   document.getElementById('t2').textContent=sub?'Tillæg/md for at dække gebyr':'Tillæg for at dække gebyr';
-  document.getElementById('d2').textContent=sub?'Omregnet til pr. måned.':'Hvad du skal lægge oveni.';
-  document.getElementById('tgtLbl').textContent=sub?'Ønsket netto/md':'Ønsket netto';
+  document.getElementById('d2').textContent=sub?'Omregnet til pr. måned, for at få beløbet netto.':'Hvad du skal lægge oveni for at få beløbet netto.';
   calc();
 }
 
@@ -147,7 +142,7 @@ const grossFor=(t,p,f)=>(t+f)/(1-p);
 function calc(){
   const fixed=parseFloat(document.getElementById('fixed').value)||0;
   const amt=parseFloat(document.getElementById('mainAmt').value)||0;
-  const tgt=parseFloat(document.getElementById('targetAmt').value)||0;
+  const tgt=amt;
   const h1=document.getElementById('h1'),b1=document.getElementById('b1');
   const h2=document.getElementById('h2'),b2=document.getElementById('b2');
 
