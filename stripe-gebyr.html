@@ -61,8 +61,9 @@
       </div>
     </div>
     <label class="toggle"><input type="checkbox" id="fx"> Kunden betaler i fremmed valuta (+2 % på UK &amp; internationale kort)</label>
-    <label class="toggle" id="billingWrap"><input type="checkbox" id="billing"> Stripe Billing aktivt (+0,5 % på abonnementer)</label>
+    <label class="toggle" id="billingWrap"><input type="checkbox" id="selfbuilt"> Jeg bygger selv abonnementsmotoren uden Stripe Billing (sparer 0,7 %)</label>
     <p class="note">Satser er Stripes danske listepriser (juni 2026). EØS = kort udstedt i EU/EØS. Premium = rewards-/erhvervskort. Det faste gebyr trækkes pr. transaktion — derfor bløder små beløb og hyppig fakturering mest.</p>
+    <p class="note">Abonnementer antages at køre på <strong>Stripe Billing</strong> (Subscriptions API), som lægger 0,7 % oveni. Slår du fluebenet til, fjernes de 0,7 % — men så skal du selv bygge og vedligeholde opkrævningsplan, retry ved afviste kort, fakturaer og SCA/3DS off-session.</p>
   </div>
 
   <!-- ENGANGS -->
@@ -145,12 +146,12 @@ function setMode(m){
 
 function pctFor(card){
   const fx = document.getElementById('fx').checked && card.fx ? 2 : 0;
-  const billing = (mode==='sub' && document.getElementById('billing').checked) ? 0.5 : 0;
+  const billing = (mode==='sub' && !document.getElementById('selfbuilt').checked) ? 0.7 : 0;
   return (card.base + fx + billing)/100;
 }
 function rateLabel(card){
   const fx = document.getElementById('fx').checked && card.fx ? 2 : 0;
-  const billing = (mode==='sub' && document.getElementById('billing').checked) ? 0.5 : 0;
+  const billing = (mode==='sub' && !document.getElementById('selfbuilt').checked) ? 0.7 : 0;
   let s = (card.base + fx + billing).toLocaleString('da-DK',{maximumFractionDigits:2})+' %';
   return s;
 }
