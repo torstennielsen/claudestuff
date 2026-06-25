@@ -432,7 +432,7 @@
                 
                 <h3>1. Viborg Kampsport</h3>
                 <div class="step-box">
-                    <strong>💾 Persisten memory:</strong> JA – Claude husker medlemmer, instruktører, styrelsesmedlemmer, historiske emner, og patterns i spørgsmål<br>
+                    <strong>💾 Persistent memory:</strong> JA – Claude husker medlemmer, instruktører, styrelsesmedlemmer, historiske emner, og patterns i spørgsmål<br>
                     <strong>🔗 Connectors:</strong> Gmail (klub-mail videresendt), Google Drive, Google Calendar, Foreninglet API (medlemssystem)<br>
                     <strong>🎯 Primære opgaver:</strong>
                     <ul style="margin-top: 10px;">
@@ -446,27 +446,27 @@
 
                 <h3>2. Diviso</h3>
                 <div class="step-box">
-                    <strong>💾 Persisten memory:</strong> JA – Claude husker projekter, team-medlemmer, client-preferences, møde-sammenhænge<br>
+                    <strong>💾 Persistent memory:</strong> JA – Claude husker projekter, team-medlemmer, client-preferences, møde-sammenhænge<br>
                     <strong>🔗 Connectors:</strong> Outlook (mail), Teams (referater, transskribering), Slack (#development, #projectmanagement osv.), SharePoint, Tettra, Zendesk<br>
                     <strong>🎯 Primære opgaver:</strong>
                     <ul style="margin-top: 10px;">
                         <li>Mail-triage: Inbox-oversigt hver morgen, prioritering, drafts til indvendige/eksterne svar</li>
-                        <li>Møte-forberedelse: Læs Teams-referater fra MS Facilitator → opsummer → sæt overblik på næste møde</li>
+                        <li>Møde-forberedelse: Læs Teams-referater fra MS Facilitator → opsummer → sæt overblik på næste møde</li>
                         <li>Slack-monitoring: Scan #development for issues, #projectmanagement for blockers</li>
                         <li>Kalender-koordinering: Overlap af møder, finn ledig tid til meetings</li>
                         <li>Status-rapporter: Ugentlig/månedlig samling af projekt-status fra Loop, Teams og Zendesk</li>
-                        <li>Ticket-triage: Zendesk – hvem skal handle hvad, hvad ventter på kunde-feedback</li>
+                        <li>Ticket-triage: Zendesk – hvem skal handle hvad, hvad venter på kunde-feedback</li>
                     </ul>
                 </div>
 
                 <h3>3. Privat</h3>
                 <div class="step-box">
-                    <strong>💾 Persisten memory:</strong> JA – Claude husker dine planer, preferences, ønskede køb, links til senere<br>
+                    <strong>💾 Persistent memory:</strong> JA – Claude husker dine planer, preferences, ønskede køb, links til senere<br>
                     <strong>🔗 Connectors:</strong> Gmail, Google Drive, Google Calendar<br>
                     <strong>🎯 Primære opgaver:</strong>
                     <ul style="margin-top: 10px;">
-                        <li>Kalender-management: Leg ting i Google Calendar når du siger det</li>
-                        <li>Reminders: "Husk at booke sommerhus 3 måneder før ferie" – Claude husker og minded dig</li>
+                        <li>Kalender-management: Læg ting i Google Calendar når du siger det</li>
+                        <li>Reminders: "Husk at booke sommerhus 3 måneder før ferie" – Claude husker og minder dig</li>
                         <li>Research & links: "Find anbefalinger til barnevogn under 8000 kr" → drafter liste med priser, links, reviews</li>
                         <li>Planning: "Hvad skal vi gøre påske?" → forslag til aktiviteter, bookinger osv.</li>
                     </ul>
@@ -593,7 +593,7 @@ Din rolle:
 - Drafting svar: når folk spørger om booking, kontingent, instruktør-info osv., skal du lave svar-drafts der Torsten kan redigere før send
 - Dagsorden-automation: når Jørgen sender møde-punkter, læs dem, rens dem op, og sæt dem ind i standardskabelonen → opret en Google Drive-fil
 - Møde-forberedelse: hvis der kommer referat-noter, strukturer dem og forslå layout
-- Kalender-sync: mon du er ved booking-system eller møde-tider
+- Kalender-sync: hold øje med lokale-bookinger og møde-tider
 
 Tone og stil:
 - Ikke formel – afslappet, direkte dansk
@@ -606,7 +606,7 @@ Memory: Du husker alt indenfor klubben – hvem Lærke er, hvad alarmen handler 
 Output-stil:
 - Svar-drafts: "Her er et forslag til svar" + tekst
 - Dagsordener: Upload til Google Drive, del link
-- Møtereferater: Struktureret lista, klar til email
+- Mødereferater: Struktureret lista, klar til email
 - Medlems-info: Quick lookup, præcis og kort
 
 Vigtig grænse: Du læser mails og opretter filer, men du sender IKKE mails eller poster IKKE på Facebook uden eksplicite instruktioner hver gang.</div>
@@ -615,15 +615,15 @@ Vigtig grænse: Du læser mails og opretter filer, men du sender IKKE mails elle
                 <h3>Projekt 2: Diviso</h3>
                 <div class="prompt-box">
                     <p>Copy dette ind under "Instructions" når du opretter projektet:</p>
-                    <div class="copy-text">Du er CEO's assistent hos Diviso, et IT-udviklingsfirma med 15 ansatte specialiseret i Umbraco, C#/MSSQL, MAUI, Blazer, REST API'er og Azure/Windows Server.
+                    <div class="copy-text">Du er CEO's assistent hos Diviso, et IT-udviklingsfirma med 15 ansatte specialiseret i Umbraco, C#/MSSQL, MAUI, Blazor, REST API'er og Azure/Windows Server.
 
 Din rolle:
-- Mail-triage: gennemgå Outlook inbox hver morgen (eller når Torsten beder), prioriter mails, draft svar til indvendige og eksterne
+- Mail-triage: gennemgå Outlook inbox hver morgen (eller når Torsten beder), prioriter mails, draft svar til interne og eksterne
 - Møde-forberedelse: læs Teams-referater fra MS Facilitator → opsummer learnings → sæt overblik over hvad næste møde skal handle
 - Slack-monitoring: scan #development og #projectmanagement for blockers, issues, announcements der kræver Torsten's opmærksomhed
 - Status-rapporter: ugentlig/månedlig tværsnit af projekt-status, baseret på Loop, Teams, Slack og Zendesk
 - Kalender-koordinering: find overlaps, identificer møde-konflikter, foreslå ledig tid
-- Ticket-triage: hvem skal handle hvad i Zendesk, hvad ventter på kunde-feedback
+- Ticket-triage: hvem skal handle hvad i Zendesk, hvad venter på kunde-feedback
 
 Tone og stil:
 - Intern: casual, direkte dansk, kan være kølig ("Det blev ikke gjort, her er status")
@@ -636,7 +636,7 @@ Memory: Du husker alt indenfor Diviso – projekt-status, hvem der kører hvad, 
 
 Output-stil:
 - Mail-svar: "Her er et forslag til svar" + tekst (ikke send direkte)
-- Møte-opsummeringer: Markdown-format, hovedpunkter først
+- Møde-opsummeringer: Markdown-format, hovedpunkter først
 - Slack-scan: "3 ting at være opmærksom på denne uge"
 - Status-rapporter: kort, præcis, action-items tydeligt
 - Kalender: "Overlapping møder til tider X, Y, Z"
@@ -650,7 +650,7 @@ Vigtig grænse: Du læser og drafter, men du sender IKKE mails eller poster IKKE
                     <div class="copy-text">Du er Torsten's personlige assistent for privatliv – kalender, planning, reminders, research.
 
 Din rolle:
-- Kalender-management: når Torsten siger "leg X i kalenderen", opretter du event i Google Calendar
+- Kalender-management: når Torsten siger "læg X i kalenderen", opretter du event i Google Calendar
 - Reminders: når han siger "mind mig om at booke X inden [dato]", sætter du reminder op
 - Research & links: "find anbefalinger til [ting] under [budget]" → samler links, priser, reviews
 - Event-planning: "hvad kan vi lave påske?" → forslag, bookinger osv.
@@ -669,7 +669,7 @@ Output-stil:
 - Priser klare
 - Deadlines tydelige
 
-Vigtig grænse: Du læser og planplanlægger, men du køber IKKE, booker IKKE og skriver IKKE mails uden eksplicite instruktioner hver gang.</div>
+Vigtig grænse: Du læser og planlægger, men du køber IKKE, booker IKKE og skriver IKKE mails uden eksplicite instruktioner hver gang.</div>
                 </div>
             </section>
 
@@ -686,7 +686,7 @@ Vigtig grænse: Du læser og planplanlægger, men du køber IKKE, booker IKKE og
                         Scan Gmail for klubben siden fredag → gør en liste over "ting der skal håndteres denne uge" (møder, medlemsspørgsmål, bookinger osv.)
                     </div>
                     <div class="timeline-item">
-                        <strong>Dag efter Jørgen sendt møde-punkter – Dagsorden auto-generator</strong><br>
+                        <strong>Dagen efter Jørgen sender møde-punkter – Dagsorden auto-generator</strong><br>
                         Læs hans mail → rens punkterne op → sæt ind i standardskabelon → opret Google Drive-fil → send link til Torsten
                     </div>
                     <div class="timeline-item">
@@ -703,7 +703,7 @@ Vigtig grænse: Du læser og planplanlægger, men du køber IKKE, booker IKKE og
                     </div>
                     <div class="timeline-item">
                         <strong>Efter hvert Teams-møde – Referat-opsummering</strong><br>
-                        Læs MS Facilitator-referat automatisk (eller når du triggererer manuelt) → opsummer → hvad skal der gøres? Hvem gør det?
+                        Læs MS Facilitator-referat automatisk (eller når du triggerer manuelt) → opsummer → hvad skal der gøres? Hvem gør det?
                     </div>
                     <div class="timeline-item">
                         <strong>Mandag 08:00 – Slack-scan (#development, #projectmanagement)</strong><br>
@@ -715,7 +715,7 @@ Vigtig grænse: Du læser og planplanlægger, men du køber IKKE, booker IKKE og
                     </div>
                     <div class="timeline-item">
                         <strong>Fredag 14:00 – Zendesk-triage</strong><br>
-                        Hvad ventter på feedback? Hvad skal prioriteres næste uge? Hvem kan handle hvad?
+                        Hvad venter på feedback? Hvad skal prioriteres næste uge? Hvem kan handle hvad?
                     </div>
                 </div>
 
@@ -728,7 +728,7 @@ Vigtig grænse: Du læser og planplanlægger, men du køber IKKE, booker IKKE og
                 </div>
 
                 <div class="warning">
-                    <strong>⚠️ Human on the loop:</strong> Disse automationer er <strong>ikke</strong> helt autonome. Claude foreslår, drafting og venter på din godkendelse for vigtige ting. Fx kan Claude <strong>ikke</strong> sende mails af sig selv – kun drafting dem. Du skal altid godkende før det sker.
+                    <strong>⚠️ Human on the loop:</strong> Disse automationer er <strong>ikke</strong> helt autonome. Claude foreslår, laver udkast og venter på din godkendelse for vigtige ting. Fx kan Claude <strong>ikke</strong> sende mails af sig selv – kun drafting dem. Du skal altid godkende før det sker.
                 </div>
             </section>
 
@@ -825,7 +825,7 @@ Vigtig grænse: Du læser og planplanlægger, men du køber IKKE, booker IKKE og
                         <li>Copy-paste hele indholdet (struktur, headers, bullets osv.) til Claude</li>
                         <li>Sige "Her er min dagsorden-skabelon – sæt den op"</li>
                     </ol>
-                    Så lærer Claude strukturen og kan bruges den automatisk når Jørgen skriver.
+                    Så lærer Claude strukturen og kan bruge den automatisk når Jørgen skriver.
                 </div>
 
                 <h3>Eksempel-flow</h3>
@@ -870,13 +870,13 @@ Du kan da redigere, tilføje tids-estimater osv.
                 <h3>Q: Hvis Claude glemmer noget indenfor et projekt?</h3>
                 <p><strong>A:</strong> Memory er persistent, men hvis kontekst bliver meget lang (lange samtaler), kan der være "context window compaction". Hvis Claude glemmer vigtige facts (fx medlemmer, tidligere møder), kan du:
                 <ol>
-                    <li>Bare minde Claude: "Vi har talt om X tidligere – kan du husker?"</li>
+                    <li>Bare minde Claude: "Vi har talt om X tidligere – kan du huske?"</li>
                     <li>Eller: Sæt vigtige facts i projekt-instruktionerne (under "Instructions")</li>
                 </ol>
                 </p>
 
                 <h3>Q: Kan Claude sende mails af sig selv?</h3>
-                <p><strong>A:</strong> Nej, ikke i denne setup. Claude kan <strong>drafting</strong> mails, men du skal altid godkende og sende selv. Det er med vilje – det holder dig i kontrol og er mere sikkert.</p>
+                <p><strong>A:</strong> Nej, ikke i denne setup. Claude kan <strong>lave udkast til</strong> mails, men du skal altid godkende og sende selv. Det er med vilje – det holder dig i kontrol og er mere sikkert.</p>
 
                 <h3>Q: Hvad hvis en connector ikke virker?</h3>
                 <p><strong>A:</strong> De vigtigste ting at tjekke:
