@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diviso – CEO Operating Model</title>
+<style>
+  :root{
+    --ink:#1a1d23;
+    --sub:#5a6270;
+    --line:#e4e7ec;
+    --bg:#fbfbfa;
+    --card:#ffffff;
+    --accent:#a8442f;
+    --accent-soft:#f4e6e0;
+    --green:#3a6b52;
+    --green-soft:#e7f0ea;
+    --amber:#96631a;
+    --amber-soft:#f6ecd9;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.55;
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:0 24px 100px;}
+  header.hero{
+    padding:64px 24px 40px;
+    border-bottom:1px solid var(--line);
+    margin-bottom:40px;
+  }
+  header.hero .wrap{padding:0;max-width:880px;margin:0 auto;}
+  .eyebrow{
+    text-transform:uppercase;
+    letter-spacing:.12em;
+    font-size:12px;
+    color:var(--accent);
+    font-weight:600;
+    margin-bottom:10px;
+  }
+  h1{
+    font-size:2.1rem;
+    margin:0 0 8px;
+    letter-spacing:-.02em;
+  }
+  .subtitle{color:var(--sub);font-size:1.05rem;max-width:640px;}
+  .meta{font-size:13px;color:var(--sub);margin-top:18px;}
+
+  h2{
+    font-size:1.35rem;
+    margin:56px 0 6px;
+    letter-spacing:-.01em;
+    scroll-margin-top:20px;
+  }
+  h2 .num{color:var(--accent);font-variant-numeric:tabular-nums;margin-right:8px;}
+  .section-intro{color:var(--sub);margin:0 0 24px;font-size:.97rem;}
+  h3{font-size:1.05rem;margin:28px 0 4px;}
+  h4{font-size:.92rem;margin:18px 0 4px;color:var(--sub);text-transform:uppercase;letter-spacing:.06em;}
+
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:22px 24px;
+    margin:14px 0;
+  }
+  .card.role{border-left:4px solid var(--accent);}
+  .role-title{font-size:1.1rem;font-weight:700;margin:0 0 2px;}
+  .role-name{color:var(--accent);font-weight:600;}
+
+  .tag-yes{color:var(--green);font-weight:600;}
+  .tag-no{color:#9a3b3b;font-weight:600;}
+
+  ul{padding-left:20px;margin:6px 0 0;}
+  li{margin-bottom:4px;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media (max-width:640px){.grid2{grid-template-columns:1fr;}}
+
+  .flow{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:24px;
+    text-align:center;
+    font-size:.95rem;
+    margin:18px 0;
+  }
+  .flow .step{
+    display:inline-block;
+    background:var(--accent-soft);
+    color:var(--accent);
+    padding:6px 14px;
+    border-radius:8px;
+    font-weight:600;
+    margin:4px 0;
+  }
+  .flow .arrow{color:var(--sub);margin:2px 0;font-size:1.1rem;}
+  .flow .branch{color:var(--sub);font-size:.82rem;margin-top:4px;}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.92rem;}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top;}
+  th{color:var(--sub);font-weight:600;font-size:.8rem;text-transform:uppercase;letter-spacing:.04em;}
+  tr:last-child td{border-bottom:none;}
+
+  .pill{
+    display:inline-block;
+    padding:2px 10px;
+    border-radius:999px;
+    font-size:.75rem;
+    font-weight:700;
+    letter-spacing:.02em;
+  }
+  .pill-blocker{background:#f6dede;color:#9a3b3b;}
+  .pill-high{background:var(--amber-soft);color:var(--amber);}
+  .pill-medium{background:#e6ecf6;color:#2c4f8c;}
+  .pill-low{background:var(--green-soft);color:var(--green);}
+
+  .kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  @media (max-width:640px){.kpi-grid{grid-template-columns:1fr;}}
+  .kpi-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;}
+  .kpi-card h4{margin-top:0;}
+
+  .timeline{border-left:2px solid var(--accent-soft);margin:18px 0 0 6px;padding-left:24px;}
+  .timeline .week{margin-bottom:22px;position:relative;}
+  .timeline .week::before{
+    content:"";
+    position:absolute;
+    left:-30px;
+    top:4px;
+    width:10px;height:10px;
+    border-radius:50%;
+    background:var(--accent);
+  }
+  .timeline .week-label{font-weight:700;color:var(--accent);font-size:.85rem;text-transform:uppercase;letter-spacing:.04em;}
+
+  .highlight-box{
+    background:var(--accent-soft);
+    border-radius:12px;
+    padding:20px 24px;
+    margin:20px 0;
+    font-size:.95rem;
+  }
+  .highlight-box strong{color:var(--accent);}
+
+  .new-tag{
+    display:inline-block;
+    background:var(--green-soft);
+    color:var(--green);
+    font-size:.7rem;
+    font-weight:700;
+    padding:2px 8px;
+    border-radius:6px;
+    letter-spacing:.04em;
+    margin-left:8px;
+    vertical-align:middle;
+    text-transform:uppercase;
+  }
+
+  footer{
+    margin-top:70px;
+    padding-top:24px;
+    border-top:1px solid var(--line);
+    color:var(--sub);
+    font-size:.82rem;
+  }
+
+  .toc{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:20px 24px;
+    margin-top:28px;
+    font-size:.9rem;
+  }
+  .toc-title{font-weight:700;margin-bottom:8px;font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;color:var(--sub);}
+  .toc ol{margin:0;padding-left:18px;columns:2;}
+  @media (max-width:640px){.toc ol{columns:1;}}
+  .toc a{color:var(--ink);text-decoration:none;}
+  .toc a:hover{color:var(--accent);}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Internt arbejdsdokument · v1</div>
+    <h1>Diviso – CEO Operating Model</h1>
+    <p class="subtitle">Formålet er at flytte CEO-rollen fra drift til ledelse. Torsten skal ikke løse problemer — han skal sætte retning, prioritere og træffe de få beslutninger, som ingen andre kan træffe. Kan en opgave løses af en anden, skal den løses af en anden.</p>
+    <div class="meta">Udarbejdet til ledermøde · Diviso, Viborg</div>
+  </div>
+
+  <div class="toc">
+    <div class="toc-title">Indhold</div>
+    <ol>
+      <li><a href="#organisation">Organisation & roller</a></li>
+      <li><a href="#produktforretning">Produktforretning & vækstroller</a></li>
+      <li><a href="#arbejdsflow">Arbejdsflow</a></li>
+      <li><a href="#eskalering">Eskaleringsregler</a></li>
+      <li><a href="#zendesk">Zendesk & SLA</a></li>
+      <li><a href="#dod">Definition of Done</a></li>
+      <li><a href="#kpi">KPI-dashboard</a></li>
+      <li><a href="#plan">Implementeringsplan</a></li>
+      <li><a href="#succes">Succeskriterier</a></li>
+    </ol>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <h2 id="organisation"><span class="num">01</span>Organisation & roller</h2>
+  <p class="section-intro">Fem roller dækker i dag drift, salg og udvikling. Hver rolle har et klart mandat — og lige så vigtigt, en klar liste over hvad rollen <em>ikke</em> skal tage sig af.</p>
+
+  <div class="card role">
+    <div class="role-title"><span class="role-name">Torsten</span> — CEO</div>
+    <div class="grid2">
+      <div>
+        <h4>Ansvar</h4>
+        <ul>
+          <li>Virksomhedens strategi</li>
+          <li>Budget og økonomisk retning</li>
+          <li>Store kunder og partnerskaber</li>
+          <li>Ansættelse af nøglepersoner</li>
+          <li>Prioritering mellem større initiativer</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Skal ikke</h4>
+        <ul>
+          <li>Projektstyring</li>
+          <li>Support</li>
+          <li>Daglige kundehenvendelser</li>
+          <li>Sprintplanlægning</li>
+          <li>Tekniske beslutninger</li>
+          <li>Prioritering af enkelte opgaver</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card role">
+    <div class="role-title"><span class="role-name">Kristian</span> — Commercial Lead</div>
+    <div class="grid2">
+      <div>
+        <h4>Ansvar</h4>
+        <ul>
+          <li>Salg, tilbud, scope</li>
+          <li>Kundeansvar & forventningsafstemning</li>
+          <li>Ændringer i kontrakter</li>
+        </ul>
+        <h4>Eksempler</h4>
+        <ul>
+          <li>Lukke nye kunder</li>
+          <li>Lave tilbud</li>
+          <li>Vurdere om ekstra ønsker skal koste ekstra</li>
+          <li>Håndtere utilfredse kunder</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Skal ikke</h4>
+        <ul>
+          <li>Styre projekter</li>
+          <li>Prioritere udviklernes arbejde</li>
+          <li>Flytte opgaver mellem projekter</li>
+          <li>Mikrostyre leverancer</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card role">
+    <div class="role-title"><span class="role-name">Mikkel</span> — Support & Junior Project Manager</div>
+    <div class="grid2">
+      <div>
+        <h4>Ansvar</h4>
+        <ul>
+          <li>Første kontakt på support</li>
+          <li>Triagering af alle tickets</li>
+          <li>Koordinering mellem kunde og udvikling</li>
+          <li>Oprette og kvalitetssikre opgaver</li>
+          <li>Følge op på status</li>
+        </ul>
+        <h4>Eksempler</h4>
+        <ul>
+          <li>Modtage Zendesk-ticket, genskabe fejlen</li>
+          <li>Indsamle logs og screenshots</li>
+          <li>Klassificere ticket, oprette Jira-opgave</li>
+          <li>Følge op på kunden, lukke sagen når verificeret</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Skal ikke</h4>
+        <ul>
+          <li>Love deadlines</li>
+          <li>Ændre scope</li>
+          <li>Prioritere udviklernes arbejde</li>
+          <li>Tage arkitekturbeslutninger</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card role">
+    <div class="role-title"><span class="role-name">Ulla</span> — Head of Projects</div>
+    <div class="grid2">
+      <div>
+        <h4>Ansvar</h4>
+        <ul>
+          <li>Projektstyring & ressourceplanlægning</li>
+          <li>Kapacitetsstyring & risikooverblik</li>
+          <li>Prioritering af leverancer</li>
+          <li>Eskalationer</li>
+        </ul>
+        <h4>Eksempler</h4>
+        <ul>
+          <li>Flytte ressourcer mellem projekter</li>
+          <li>Opdage forsinkelser tidligt</li>
+          <li>Beslutte sprintprioriteringer</li>
+          <li>Eskalere problemer</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Skal ikke</h4>
+        <ul>
+          <li>Sælge</li>
+          <li>Ændre kontrakter</li>
+          <li>Forhandle priser</li>
+          <li>Ændre scope uden Kristian</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card role">
+    <div class="role-title">Development Team</div>
+    <div class="grid2">
+      <div>
+        <h4>Ansvar</h4>
+        <ul>
+          <li>Bygge løsninger</li>
+          <li>Estimere opgaver</li>
+          <li>Melde risici tidligt</li>
+          <li>Levere kvalitet</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Skal ikke</h4>
+        <ul>
+          <li>Forhandle med kunder</li>
+          <li>Ændre scope</li>
+          <li>Kontakte CEO om drift</li>
+          <li>Prioritere mellem kunder</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== NY SEKTION: PRODUKTFORRETNING ===================== -->
+  <h2 id="produktforretning"><span class="num">02</span>Produktforretning & vækstroller <span class="new-tag">Nyt</span></h2>
+  <p class="section-intro">
+    Modellen ovenfor er bygget til konsulent- og udviklingsforretningen. Men Diviso har allerede tre selvstændige produkter — <strong>OmniShare</strong>, <strong>Basesite</strong> og <strong>GroupSpace</strong> — der i dag drives som et biprodukt af den samme organisation, uden nogen der ejer salg, marketing eller vækst på dem. Det er en gratis mulighed, der lige nu efterlades på bordet.
+  </p>
+
+  <div class="highlight-box">
+    <strong>Problemet i dag:</strong> Support, drift og videreudvikling af OmniShare, Basesite og GroupSpace går ind i den samme kø som kundeprojekter — men <em>ingen</em> har mandat eller tid til aktivt at sælge, markedsføre eller vækste dem. De lever af tilfældige leads og eksisterende relationer.
+  </div>
+
+  <h3>Produktoverblik — nuværende status</h3>
+  <table>
+    <tr><th>Produkt</th><th>Hvad det er</th><th>Sælges i dag af</th><th>Marketing i dag</th></tr>
+    <tr>
+      <td><strong>OmniShare</strong></td>
+      <td>SaaS-produkt under Diviso-paraplyen</td>
+      <td>Ad hoc / Torsten</td>
+      <td>Ingen dedikeret</td>
+    </tr>
+    <tr>
+      <td><strong>Basesite</strong></td>
+      <td>Umbraco multisite-produkt til foreninger, idrætsklubber, håndværkere og SMV'er</td>
+      <td>Ad hoc / Torsten</td>
+      <td>Ingen dedikeret</td>
+    </tr>
+    <tr>
+      <td><strong>GroupSpace</strong></td>
+      <td>Fællesskabs-/community-platform</td>
+      <td>Ad hoc / Torsten</td>
+      <td>Ingen dedikeret</td>
+    </tr>
+  </table>
+
+  <h3>Tre veje til at løse det</h3>
+
+  <div class="card role">
+    <div class="role-title">Option A — Udvid Kristians rolle <span class="pill pill-low">Lavest risiko</span></div>
+    <p style="margin-top:6px;color:var(--sub);font-size:.92rem;">Tilføj produktporteføljen som et fjerde ansvarsområde til Commercial Lead-rollen, med en klar tidsallokering (fx 20–30% af ugen).</p>
+    <div class="grid2">
+      <div>
+        <h4>Fordele</h4>
+        <ul>
+          <li>Ingen ny ansættelse — hurtig at iværksætte</li>
+          <li>Kristian kender allerede salgsprocessen</li>
+          <li>Kan testes uden langsigtet forpligtelse</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Risici</h4>
+        <ul>
+          <li>Konsulentsalg vil typisk vinde over produktsalg i en presset kalender</li>
+          <li>Produkter kræver en anden salgsmodel (volumen, self-service, lavere ACV) end konsulentsalg</li>
+          <li>Marketing (content, kampagner, SEO) kræver kompetencer Kristian ikke nødvendigvis har</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card role">
+    <div class="role-title">Option B — Ny rolle: Product Growth & Marketing Lead <span class="pill pill-high">Anbefalet ved vækstambition</span></div>
+    <p style="margin-top:6px;color:var(--sub);font-size:.92rem;">En dedikeret person (fuld tid eller 15–20 timer/uge som opstart) med ansvar for at gøre OmniShare, Basesite og GroupSpace til reelle produktforretninger — adskilt fra konsulentindtægten.</p>
+    <div class="grid2">
+      <div>
+        <h4>Ansvar</h4>
+        <ul>
+          <li>Markedsføring & content for alle tre produkter</li>
+          <li>Inbound leads, kampagner, SEO</li>
+          <li>Pricing & pakketering pr. produkt</li>
+          <li>Onboarding af nye produktkunder</li>
+          <li>Produktspecifik KPI-rapportering til CEO</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Skal ikke</h4>
+        <ul>
+          <li>Sælge konsulentydelser</li>
+          <li>Deltage i kundeprojekt-prioritering</li>
+          <li>Tage tekniske arkitekturbeslutninger</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card role">
+    <div class="role-title">Option C — Del supporten fra produktet <span class="pill pill-medium">Struktur først</span></div>
+    <p style="margin-top:6px;color:var(--sub);font-size:.92rem;">Inden en ny rolle oprettes: Adskil produktsupport (OmniShare/Basesite/GroupSpace) fra kundeprojekt-support i Zendesk med egne tickettyper og SLA'er. Det giver synlighed i KPI-dashboardet over, hvor meget tid produkterne reelt koster — og et fakta-baseret grundlag for at retfærdiggøre en ny ansættelse.</p>
+  </div>
+
+  <h3>Anbefalet rækkefølge</h3>
+  <div class="timeline">
+    <div class="week">
+      <div class="week-label">Trin 1 — Måling</div>
+      Adskil produkt-support fra konsulent-support i Zendesk (Option C). Kør 1–2 måneder for at få reelle tal på tidsforbrug og potentiale.
+    </div>
+    <div class="week">
+      <div class="week-label">Trin 2 — Test</div>
+      Giv Kristian et defineret produktansvar i 1 kvartal med et konkret salgsmål pr. produkt (Option A). Brug det til at validere om produktsalg overhovedet fænger i den nuværende organisation.
+    </div>
+    <div class="week">
+      <div class="week-label">Trin 3 — Skaler</div>
+      Hvis data fra trin 1–2 viser potentiale, slå en dedikeret Product Growth & Marketing-rolle op (Option B) — evt. deltid eller freelance marketing-ressource til at starte, fastansættelse når produktomsætningen kan bære det.
+    </div>
+  </div>
+
+  <h2 id="arbejdsflow"><span class="num">03</span>Arbejdsflow</h2>
+  <div class="flow">
+    <div class="step">Kunde</div><div class="arrow">↓</div>
+    <div class="step">Zendesk</div><div class="arrow">↓</div>
+    <div class="step">Mikkel (Triage)</div><div class="arrow">↓</div>
+    <div class="step">Ulla (Prioritering og plan)</div><div class="arrow">↓</div>
+    <div class="step">Udvikling</div><div class="arrow">↓</div>
+    <div class="step">Mikkel (Verificering)</div><div class="arrow">↓</div>
+    <div class="step">Kunde</div>
+    <div class="branch">Hvis kunden ønsker mere end aftalt: Mikkel → Kristian → Nyt tilbud / nyt scope</div>
+  </div>
+  <p class="section-intro" style="margin-top:8px;"><strong>CEO indgår ikke i dette flow.</strong></p>
+
+  <h2 id="eskalering"><span class="num">04</span>Eskaleringsregler</h2>
+  <table>
+    <tr><th>Til</th><th>Hvornår</th></tr>
+    <tr><td><strong>Mikkel</strong></td><td>Alle nye supporthenvendelser</td></tr>
+    <tr><td><strong>Ulla</strong></td><td>Ressourceproblemer, forsinkelser, blokeringer, prioriteringskonflikter</td></tr>
+    <tr><td><strong>Kristian</strong></td><td>Scopeændringer, nye ønsker, tilbud, kundeøkonomi</td></tr>
+    <tr><td><strong>CEO</strong></td><td>Kun hvis: strategisk kunde er i risiko · strategisk beslutning skal træffes · nøgleansættelser · betydelige økonomiske konsekvenser · Kristian og Ulla er uenige</td></tr>
+  </table>
+
+  <h3>Eskalationsformat</h3>
+  <p class="section-intro" style="margin-bottom:6px;">Ingen må eskalere et problem uden en anbefaling. Alle eskalationer skal indeholde: <strong>1)</strong> Situation <strong>2)</strong> Konsekvens <strong>3)</strong> Mulige løsninger <strong>4)</strong> Anbefaling.</p>
+  <div class="card">
+    <strong>Situation:</strong> Login virker ikke for kunde X.<br>
+    <strong>Konsekvens:</strong> Produktionen er stoppet.<br>
+    <strong>Muligheder:</strong> Hurtigt workaround · Permanent rettelse · Midlertidig rollback<br>
+    <strong>Anbefaling:</strong> Implementér workaround nu og permanent rettelse i næste release.
+  </div>
+
+  <h2 id="zendesk"><span class="num">05</span>Zendesk & SLA</h2>
+  <p class="section-intro">Kunden sender fortsat mail til support — ingen formular. Zendesk opretter automatisk ticket. Mikkel klassificerer, tilføjer impact og type, opretter udviklingsopgave og følger sagen til den er lukket.</p>
+
+  <h3>Tickettyper</h3>
+  <p>Bug · Support · Feature Request · Access Issue</p>
+
+  <h3>Prioritet & SLA</h3>
+  <table>
+    <tr><th>Prioritet</th><th>Eksempel</th><th>Respons</th><th>Løsning</th></tr>
+    <tr>
+      <td><span class="pill pill-blocker">Blocker</span></td>
+      <td>System nede</td>
+      <td>1 time (handling inden 4 timer)</td>
+      <td>1 arbejdsdag</td>
+    </tr>
+    <tr>
+      <td><span class="pill pill-high">High</span></td>
+      <td>Central funktion virker ikke</td>
+      <td>4 timer (handling samme dag)</td>
+      <td>2–3 arbejdsdage</td>
+    </tr>
+    <tr>
+      <td><span class="pill pill-medium">Medium</span></td>
+      <td>Mindre fejl</td>
+      <td>1 arbejdsdag</td>
+      <td>3–7 arbejdsdage</td>
+    </tr>
+    <tr>
+      <td><span class="pill pill-low">Low</span></td>
+      <td>Feature request</td>
+      <td>2–3 arbejdsdage</td>
+      <td>Planlægges i backlog</td>
+    </tr>
+  </table>
+
+  <h2 id="dod"><span class="num">06</span>Definition of Done</h2>
+  <div class="grid2">
+    <div class="card">
+      <h4>Support (ticket)</h4>
+      <ul>
+        <li>Kunde</li>
+        <li>Problem</li>
+        <li>Reproducerbarhed</li>
+        <li>Impact</li>
+        <li>Screenshots hvis muligt</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Mikkel — må først sende videre når</h4>
+      <ul>
+        <li>Ticket er klassificeret</li>
+        <li>Prioritet er sat</li>
+        <li>Opgave er skrevet</li>
+        <li>Acceptance criteria findes</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Ulla — må først planlægge når</h4>
+      <ul>
+        <li>Scope er klart</li>
+        <li>Kapacitet er vurderet</li>
+        <li>Ansvarlig er valgt</li>
+        <li>Deadline er fastlagt</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Udvikling — opgaven er først færdig når</h4>
+      <ul>
+        <li>Udviklet</li>
+        <li>Testet</li>
+        <li>Acceptance criteria er opfyldt</li>
+        <li>Dokumenteret</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card" style="margin-top:14px;">
+    <h4>Lukning — Mikkel lukker først sagen når</h4>
+    <ul>
+      <li>Kunden er bekræftet hjulpet</li>
+      <li>Ingen åbne afhængigheder findes</li>
+      <li>Ticket er opdateret</li>
+    </ul>
+  </div>
+
+  <h2 id="kpi"><span class="num">07</span>KPI-dashboard (ugentlig)</h2>
+  <p class="section-intro">CEO skal kun modtage én side.</p>
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <h4>Salg</h4>
+      <ul><li>Pipeline</li><li>Vundne/tabte tilbud</li></ul>
+    </div>
+    <div class="kpi-card">
+      <h4>Delivery</h4>
+      <ul><li>Røde projekter</li><li>Kapacitetsudnyttelse</li><li>Leveringssikkerhed</li></ul>
+    </div>
+    <div class="kpi-card">
+      <h4>Support</h4>
+      <ul><li>Nye tickets</li><li>Åbne blockers</li><li>SLA-overholdelse</li><li>Gennemsnitlig svartid</li></ul>
+    </div>
+    <div class="kpi-card">
+      <h4>Økonomi</h4>
+      <ul><li>Omsætning</li><li>Forecast</li><li>Risici</li></ul>
+    </div>
+  </div>
+
+  <h2 id="plan"><span class="num">08</span>Implementeringsplan (30 dage)</h2>
+  <div class="timeline">
+    <div class="week">
+      <div class="week-label">Uge 1</div>
+      Stop direkte projektspørgsmål til CEO. Alt support går via Zendesk og Mikkel.
+    </div>
+    <div class="week">
+      <div class="week-label">Uge 2</div>
+      Indfør roller og eskalationsregler. Etabler ugentligt KPI-dashboard.
+    </div>
+    <div class="week">
+      <div class="week-label">Uge 3</div>
+      Ulla overtager al prioritering af leverancer. Kristian overtager alt scope og kundeforventning.
+    </div>
+    <div class="week">
+      <div class="week-label">Uge 4</div>
+      CEO arbejder primært med strategi, salg, økonomi og organisation.
+    </div>
+  </div>
+
+  <h2 id="succes"><span class="num">09</span>Succeskriterier</h2>
+  <p class="section-intro">Efter 2–3 måneder bør følgende være opnået:</p>
+  <div class="card">
+    <ul>
+      <li>CEO bruger under 20% af tiden på drift</li>
+      <li>Ingen udviklere går direkte til CEO med daglige spørgsmål</li>
+      <li>Mikkel filtrerer al support og koordination</li>
+      <li>Ulla styrer leverancer og kapacitet</li>
+      <li>Kristian ejer kunden og det kommercielle</li>
+      <li>Ledelsen arbejder ud fra fakta og KPI'er frem for ad hoc-status</li>
+    </ul>
+  </div>
+
+  <div class="highlight-box" style="margin-top:32px;">
+    <strong>Vurdering:</strong> Modellen passer godt til en virksomhed af jeres størrelse og kræver ikke flere ledelseslag — men den kræver, at rollerne respekteres konsekvent. Lykkes det, vil kalenderen ændre sig markant over 3–6 måneder, fra drift og brandslukning til strategi, salg og udvikling af virksomheden. Ved vækst til ca. 15–20 medarbejdere bør modellen genbesøges, med fokus på om der er behov for en dedikeret Delivery Manager, en stærkere mellemlederstruktur — og en ejer af produktforretningen.
+  </div>
+
+  <footer>
+    Diviso · CEO Operating Model v1 · Internt dokument
+  </footer>
+
+</div>
+</body>
+</html>
