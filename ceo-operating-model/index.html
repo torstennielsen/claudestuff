@@ -279,6 +279,28 @@
   }
   .highlight-box strong{color:var(--accent);}
 
+  .decision-box{
+    background:var(--green-soft);
+    border-left:4px solid var(--green);
+    border-radius:12px;
+    padding:20px 24px;
+    margin:20px 0;
+    font-size:.95rem;
+  }
+  .decision-box strong{color:var(--green);}
+  .decision-box .decision-label{
+    display:inline-block;
+    font-size:.7rem;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    font-weight:700;
+    color:var(--green);
+    background:#fff;
+    padding:2px 10px;
+    border-radius:6px;
+    margin-bottom:10px;
+  }
+
   .new-tag{
     display:inline-block;
     background:var(--green-soft);
@@ -604,19 +626,27 @@
 
   <h3>Torstens rolle i projektsalg & workshops</h3>
   <div class="card role">
-    <p style="margin-top:0;color:var(--sub);font-size:.92rem;">Torsten fungerer i dag som rådgiver, når Diviso skal sælge større projekter ind — typisk i salgsmøder med potentielle kunder, hvor hans erfaring og faglige tyngde er med til at skabe tillid. Det samme gør sig gældende ved workshops, hvor kunder skal hjælpes med at afklare behov og scope, før et projekt sættes i gang.</p>
-    <p style="margin:0;color:var(--sub);font-size:.92rem;">Det giver stadig god mening i dag: for større eller mere komplekse B2B-aftaler er 20+ års erfaring og en grundlæggers tilstedeværelse ofte det, der lukker aftalen — og i workshops er hans tekniske og forretningsmæssige indsigt svær at erstatte 1:1.</p>
+    <p style="margin-top:0;color:var(--sub);font-size:.92rem;">I dag deltager Torsten i <strong>stort set alle</strong> salgsmøder og workshops — cirka 2-5 timer om ugen. Det gælder også de tilfælde hvor Kristian allerede har kvalificeret kunden på forhånd (ca. halvdelen af møderne). Hovedbegrundelsen er erfaring, ikke et konkret behov i den enkelte sag.</p>
+    <p style="margin:0;color:var(--sub);font-size:.92rem;">Erik (senior-udvikler) er overvejet som erstatning ved teknisk tunge møder, men vurderes ikke egnet — han er ikke en sælger-/people-profil. Ulla derimod kan dække nogle af de teknisk komplicerede møder og workshops, og Kristian har efterhånden opbygget nok viden til at håndtere de fleste salgsmøder selvstændigt.</p>
+  </div>
+
+  <div class="decision-box">
+    <span class="decision-label">Besluttet — gælder fra nu</span>
+    <p style="margin:0 0 10px;"><strong>Torsten deltager fremover kun i salgsmøder og workshops, når begge betingelser er opfyldt:</strong></p>
+    <ul style="margin:0;">
+      <li>Der er reel teknisk kompleksitet eller usikkerhed i løsningen — <em>ikke</em> aftalens størrelse eller kundens status alene</li>
+      <li>Kristian og/eller Ulla vurderer selv, at de ikke er komfortable med at håndtere mødet uden ham</li>
+    </ul>
+    <p style="margin:10px 0 0;">Standardsalgsmøder og almindelige workshops — inklusive dem hvor Kristian allerede har kvalificeret kunden — kører Kristian og Ulla selvstændigt. Fordelingen: Kristian tager salgsmøderne, Ulla tager de teknisk tunge workshops/scopingsmøder hvor det er relevant.</p>
   </div>
 
   <div class="highlight-box">
-    <strong>Til overvejelse:</strong> Hele pointen med denne operating model er at flytte Torsten væk fra driften og over i ledelse — men salgsmøder og workshops er i praksis også drift, bare med et kommercielt afsæt. Et par spørgsmål værd at tage stilling til:
+    <strong>Værd at følge op på:</strong>
     <ul style="margin-top:10px;">
-      <li>Er Torstens tilstedeværelse nødvendig for <em>alle</em> projektsalg, eller kun for de største/mest strategiske aftaler? Hvis det sidste, bør der sættes en konkret tærskel (fx kontraktstørrelse eller kundetype) for hvornår han kobles på.</li>
-      <li>Kristian er nu CSO og deler ledelsesansvaret med Torsten — giver det mening at lade Kristian (eller New Business Manager, når den rolle er besat) gradvist overtage flere salgsmøder og workshops selvstændigt, med Torsten som backup snarere end fast deltager?</li>
-      <li>Er det en bevidst prioritering, at Torstens tid går hertil frem for fx produktforretningen (OmniShare/Basesite/GroupSpace), eller er det mest fordi det er sådan, det plejer at foregå?</li>
-      <li>Hvis Torstens deltagelse reelt er en tillidsskabende "brand"-faktor snarere end en nødvendig kompetence, kan den samme tillid opbygges på andre måder — fx cases, referencer eller video — så det ikke kræver hans kalendertid ved hvert enkelt salg.</li>
+      <li>Da reglen er ny, vil det kræve en vis disciplin fra alle tre at holde fast i den — særligt i pressede salgssituationer, hvor "bare lige at spørge Torsten" er den nemme vej</li>
+      <li>Overvej at tilføje "Torstens deltagelse i salgsmøder/workshops" som et kort punkt i det ugentlige KPI-dashboard de første måneder, så det er synligt om reglen reelt bliver overholdt</li>
+      <li>Når New Business Manager er på plads, bør vedkommende indgå i samme fordeling som Kristian for standardmøder</li>
     </ul>
-    <p style="margin:10px 0 0;">Der er ikke noget forkert svar her — men givet at resten af modellen handler om at frigøre Torstens tid, er det værd at være eksplicit om, hvorfor denne del af drift-tiden er en undtagelse, og om undtagelsen skal være permanent eller midlertidig, mens Kristian og New Business Manager bygger erfaring op.</p>
   </div>
 
   <div class="card role">
@@ -1092,7 +1122,7 @@
   <div class="kpi-grid">
     <div class="kpi-card">
       <h4>Salg</h4>
-      <ul><li>Pipeline</li><li>Vundne/tabte tilbud</li><li>Pipeline-værdi pr. produkt (OmniShare / Basesite / GroupSpace)</li></ul>
+      <ul><li>Pipeline</li><li>Vundne/tabte tilbud</li><li>Pipeline-værdi pr. produkt (OmniShare / Basesite / GroupSpace)</li><li>Torstens deltagelse i salgsmøder/workshops (antal + begrundelse)</li></ul>
     </div>
     <div class="kpi-card">
       <h4>Delivery</h4>
@@ -1137,6 +1167,7 @@
       <li>Mikkel filtrerer al support og koordination</li>
       <li>Ulla styrer leverancer og kapacitet</li>
       <li>Kristian ejer kunden og det kommercielle</li>
+      <li>Torsten deltager kun i salgsmøder/workshops ved reel teknisk kompleksitet — Kristian og Ulla håndterer standardmøderne selvstændigt</li>
       <li>Ledelsen arbejder ud fra fakta og KPI'er frem for ad hoc-status</li>
     </ul>
   </div>
