@@ -125,6 +125,42 @@
   .orgchart li .node.ai-node{border-style:dashed;border-color:#2a9d8f;background:#e8f6f4;}
   .orgchart li .node.ai-node .oc-name{color:#1f7a6e;}
 
+  .orgchart li .node.joint-lead{
+    background:var(--accent-dark);
+    border-color:var(--accent-dark);
+    padding:16px 22px;
+    min-width:260px;
+  }
+  .joint-people{display:flex;align-items:center;gap:14px;}
+  .joint-person{display:flex;flex-direction:column;align-items:center;gap:4px;}
+  .joint-person .oc-name{color:#fff;}
+  .joint-person .oc-title{color:#cfe0ff;}
+  .joint-plus{color:#cfe0ff;font-size:1.1rem;font-weight:700;}
+  .joint-caption{
+    margin-top:8px;
+    font-size:.7rem;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    color:#cfe0ff;
+    text-align:center;
+  }
+
+  .orgchart li .node.branch-label{
+    padding:8px 18px;
+    min-width:auto;
+  }
+  .orgchart li .node.branch-label .oc-name{
+    font-size:.78rem;
+    text-transform:uppercase;
+    letter-spacing:.05em;
+  }
+  .orgchart li .node.branch-sales{border-color:var(--accent);background:var(--accent-soft);}
+  .orgchart li .node.branch-sales .oc-name{color:var(--accent);}
+  .orgchart li .node.branch-dev{border-color:#96631a;background:var(--amber-soft);}
+  .orgchart li .node.branch-dev .oc-name{color:#96631a;}
+  .orgchart li .node.branch-ai{border-color:#2a9d8f;background:#e8f6f4;border-style:dashed;}
+  .orgchart li .node.branch-ai .oc-name{color:#1f7a6e;}
+
   .ai-card{border-left:4px solid #2a9d8f;background:linear-gradient(180deg,#e8f6f4 0%,#ffffff 40%);}
   .ai-card .role-header .avatar{border-color:#bfe6e0;}
 
@@ -382,7 +418,7 @@
 <div class="page-layout">
   <nav class="sidebar" id="sidebar" aria-label="Indholdsfortegnelse">
     <div class="sidebar-title">Indhold</div>
-    <ul>
+    <ul id="sidebarNav">
       <li><a href="#orgdiagram">00 Organisationsdiagram</a></li>
       <li><a href="#organisation">01 Organisation & roller</a></li>
       <li><a href="#produktforretning">02 Produktforretning & vækstroller</a></li>
@@ -403,22 +439,32 @@
 
 <div class="wrap" id="top">
   <h2 style="margin-top:0;" id="orgdiagram"><span class="num">00</span>Organisationsdiagram</h2>
-  <p class="section-intro">Overblik over rapporteringslinjer. Kristian og Ulla udgør de to primære spor — kommercielt og delivery. Per og New Business Manager understøtter det kommercielle spor; Basesite-partnerskabet med Jesper Overgaard ligger uden for kernorganisationen. AI (Claude, GitHub Copilot, M365 Copilot og ChatGPT) er markeret som en særskilt, ikke-menneskelig ressource, der understøtter flere dele af organisationen på tværs.</p>
+  <p class="section-intro">Torsten og Kristian deler det overordnede ledelsesansvar — Kristian er derudover CSO <em>og</em> HR-ansvarlig. Organisationen er delt i to spor: <strong>Salg & Marketing</strong> (kommercielt, Kristian) og <strong>Udvikling</strong> (delivery, Ulla). AI (Claude, GitHub Copilot, M365 Copilot og ChatGPT) er markeret som en tværgående, ikke-menneskelig ressource.</p>
 
   <div class="orgchart">
     <ul>
       <li>
-        <div class="node root">
-          <img class="avatar" src="team/torsten.jpg" alt="Torsten">
-          <div class="oc-name">Torsten</div>
-          <div class="oc-title">Ejer</div>
+        <div class="node root joint-lead">
+          <div class="joint-people">
+            <div class="joint-person">
+              <img class="avatar-sm" src="team/torsten.jpg" alt="Torsten">
+              <div class="oc-name">Torsten</div>
+              <div class="oc-title">Ejer</div>
+            </div>
+            <div class="joint-plus">+</div>
+            <div class="joint-person">
+              <img class="avatar-sm" src="team/kristian.png" alt="Kristian">
+              <div class="oc-name">Kristian</div>
+              <div class="oc-title">CSO & HR</div>
+            </div>
+          </div>
+          <div class="joint-caption">Fælles ledelsesansvar</div>
         </div>
         <ul>
           <li>
-            <div class="node">
-              <img class="avatar-sm" src="team/kristian.png" alt="Kristian">
-              <div class="oc-name">Kristian</div>
-              <div class="oc-title">CSO</div>
+            <div class="node branch-label branch-sales">
+              <div class="oc-name">Salg & Marketing</div>
+              <div class="oc-title">Kommercielt spor · Kristian</div>
             </div>
             <ul>
               <li>
@@ -435,71 +481,87 @@
                   <div class="oc-title">Ny rolle</div>
                 </div>
               </li>
+              <li>
+                <div class="node">
+                  <img class="avatar-sm" src="team/per.png" alt="Per">
+                  <div class="oc-name">Per</div>
+                  <div class="oc-title">Google SEO & Ads</div>
+                </div>
+              </li>
+              <li>
+                <div class="node external">
+                  <div class="oc-name">Jesper Overgaard</div>
+                  <div class="oc-title">Ekstern partner · Basesite</div>
+                </div>
+              </li>
             </ul>
           </li>
           <li>
-            <div class="node">
-              <img class="avatar-sm" src="team/ulla.png" alt="Ulla">
-              <div class="oc-name">Ulla</div>
-              <div class="oc-title">Head of Projects</div>
+            <div class="node branch-label branch-dev">
+              <div class="oc-name">Udvikling</div>
+              <div class="oc-title">Delivery-spor</div>
             </div>
             <ul>
               <li>
                 <div class="node">
-                  <img class="avatar-sm" src="team/erik.png" alt="Erik">
-                  <div class="oc-name">Erik</div>
-                  <div class="oc-title">Senior-udvikler</div>
+                  <img class="avatar-sm" src="team/ulla.png" alt="Ulla">
+                  <div class="oc-name">Ulla</div>
+                  <div class="oc-title">Head of Projects</div>
                 </div>
-              </li>
-              <li>
-                <div class="node">
-                  <img class="avatar-sm" src="team/mads.png" alt="Mads">
-                  <div class="oc-name">Mads</div>
-                  <div class="oc-title">Udvikler, backend</div>
-                </div>
-              </li>
-              <li>
-                <div class="node">
-                  <img class="avatar-sm" src="team/julie.png" alt="Julie">
-                  <div class="oc-name">Julie</div>
-                  <div class="oc-title">Udvikler, frontend</div>
-                </div>
-              </li>
-              <li>
-                <div class="node">
-                  <img class="avatar-sm" src="team/sofie.png" alt="Sofie">
-                  <div class="oc-name">Sofie</div>
-                  <div class="oc-title">Frontendudvikler</div>
-                </div>
-              </li>
-              <li>
-                <div class="node">
-                  <img class="avatar-sm" src="team/praktikant.png" alt="Udvikler-praktikant">
-                  <div class="oc-name">Praktikant</div>
-                  <div class="oc-title">Udvikler-praktikant</div>
-                </div>
+                <ul>
+                  <li>
+                    <div class="node">
+                      <img class="avatar-sm" src="team/erik.png" alt="Erik">
+                      <div class="oc-name">Erik</div>
+                      <div class="oc-title">Senior-udvikler</div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="node">
+                      <img class="avatar-sm" src="team/mads.png" alt="Mads">
+                      <div class="oc-name">Mads</div>
+                      <div class="oc-title">Udvikler, backend</div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="node">
+                      <img class="avatar-sm" src="team/julie.png" alt="Julie">
+                      <div class="oc-name">Julie</div>
+                      <div class="oc-title">Udvikler, frontend</div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="node">
+                      <img class="avatar-sm" src="team/sofie.png" alt="Sofie">
+                      <div class="oc-name">Sofie</div>
+                      <div class="oc-title">Frontendudvikler</div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="node">
+                      <img class="avatar-sm" src="team/praktikant.png" alt="Udvikler-praktikant">
+                      <div class="oc-name">Praktikant</div>
+                      <div class="oc-title">Udvikler-praktikant</div>
+                    </div>
+                  </li>
+                </ul>
               </li>
             </ul>
           </li>
           <li>
-            <div class="node">
-              <img class="avatar-sm" src="team/per.png" alt="Per">
-              <div class="oc-name">Per</div>
-              <div class="oc-title">Google SEO & Ads</div>
-            </div>
-          </li>
-          <li>
-            <div class="node external">
-              <div class="oc-name">Jesper Overgaard</div>
-              <div class="oc-title">Ekstern partner · Basesite</div>
-            </div>
-          </li>
-          <li>
-            <div class="node ai-node">
-              <img class="avatar-sm" src="team/ai.png" alt="AI">
+            <div class="node branch-label branch-ai">
               <div class="oc-name">AI</div>
-              <div class="oc-title">Claude · Copilot · ChatGPT</div>
+              <div class="oc-title">Tværgående ressource</div>
             </div>
+            <ul>
+              <li>
+                <div class="node ai-node">
+                  <img class="avatar-sm" src="team/ai.png" alt="AI">
+                  <div class="oc-name">AI-værktøjer</div>
+                  <div class="oc-title">Claude · Copilot · ChatGPT</div>
+                </div>
+              </li>
+            </ul>
           </li>
         </ul>
       </li>
@@ -517,14 +579,15 @@
       <img class="avatar" src="team/torsten.jpg" alt="Torsten">
       <div class="names"><div class="role-title" style="margin:0;">Torsten</div></div>
     </div>
+    <p style="margin:6px 0 0;color:var(--sub);font-size:.92rem;">Deler det overordnede ledelsesansvar med <strong>Kristian</strong> — strategiske beslutninger, større ansættelser og virksomhedens retning drøftes og besluttes typisk i fællesskab mellem de to.</p>
     <div class="grid2">
       <div>
         <h4>Ansvar</h4>
         <ul>
-          <li>Virksomhedens strategi</li>
+          <li>Virksomhedens strategi (fælles med Kristian)</li>
           <li>Budget og økonomisk retning</li>
           <li>Store kunder og partnerskaber</li>
-          <li>Ansættelse af nøglepersoner</li>
+          <li>Nøgleansættelser og organisationsudvikling (fælles med Kristian)</li>
           <li>Prioritering mellem større initiativer</li>
         </ul>
       </div>
@@ -545,8 +608,9 @@
   <div class="card role">
     <div class="role-header">
       <img class="avatar" src="team/kristian.png" alt="Kristian">
-      <div class="names"><div class="role-title" style="margin:0;"><span class="role-name">Kristian</span> — CSO</div></div>
+      <div class="names"><div class="role-title" style="margin:0;"><span class="role-name">Kristian</span> — CSO & HR</div></div>
     </div>
+    <p style="margin:6px 0 0;color:var(--sub);font-size:.92rem;">Deler det overordnede ledelsesansvar med <strong>Torsten</strong> — er derudover virksomhedens HR-ansvarlige.</p>
     <div class="grid2">
       <div>
         <h4>Ansvar</h4>
@@ -554,6 +618,8 @@
           <li>Salg, tilbud, scope</li>
           <li>Kundeansvar & forventningsafstemning</li>
           <li>Ændringer i kontrakter</li>
+          <li>HR — ansættelser, personaleforhold og trivsel</li>
+          <li>Virksomhedens strategi og nøgleansættelser (fælles med Torsten)</li>
         </ul>
         <h4>Eksempler</h4>
         <ul>
@@ -561,6 +627,7 @@
           <li>Lave tilbud</li>
           <li>Vurdere om ekstra ønsker skal koste ekstra</li>
           <li>Håndtere utilfredse kunder</li>
+          <li>Ansættelsessamtaler og medarbejdersamtaler</li>
         </ul>
       </div>
       <div>
@@ -790,7 +857,7 @@
       <img class="avatar" src="team/new-business-manager.png" alt="New Business Manager">
       <div class="names"><div class="role-title" style="margin:0;"><span class="role-name">New Business Manager</span> — ny rolle <span class="new-tag">Ny ansættelse</span></div></div>
     </div>
-    <p style="margin-top:6px;color:var(--sub);font-size:.92rem;">Fuldtidsstilling. Refererer til Kristian (CSO) som en del af det kommercielle spor. Tidsfordeling: <strong>50% opsøgende salg af Diviso-konsulentprojekter, 50% OmniShare</strong>.</p>
+    <p style="margin-top:6px;color:var(--sub);font-size:.92rem;">Fuldtidsstilling. Refererer til Kristian (CSO & HR) som en del af det kommercielle spor. Tidsfordeling: <strong>50% opsøgende salg af Diviso-konsulentprojekter, 50% OmniShare</strong>.</p>
     <div class="grid2">
       <div>
         <h4>Ansvar</h4>
@@ -1086,7 +1153,7 @@
     window.addEventListener('resize', updateProgress);
     updateProgress();
 
-    var links = Array.prototype.slice.call(document.querySelectorAll('.sidebar nav a[href^="#"]'));
+    var links = Array.prototype.slice.call(document.querySelectorAll('#sidebarNav a[href^="#"]'));
     var sections = links
       .map(function(link){ return document.getElementById(link.getAttribute('href').slice(1)); })
       .filter(Boolean);
