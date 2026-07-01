@@ -3,16 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diviso – CEO Operating Model</title>
+<title>Diviso – Torsten Operating Model</title>
 <style>
   :root{
-    --ink:#1a1d23;
-    --sub:#5a6270;
-    --line:#e4e7ec;
-    --bg:#fbfbfa;
+    --ink:#12203a;
+    --sub:#5b6b85;
+    --line:#dde3ee;
+    --bg:#f7f9fc;
     --card:#ffffff;
-    --accent:#a8442f;
-    --accent-soft:#f4e6e0;
+    --accent:#1b3d8f;
+    --accent-soft:#e4eaf9;
+    --accent-dark:#0f2a66;
     --green:#3a6b52;
     --green-soft:#e7f0ea;
     --amber:#96631a;
@@ -49,7 +50,78 @@
   .subtitle{color:var(--sub);font-size:1.05rem;max-width:640px;}
   .meta{font-size:13px;color:var(--sub);margin-top:18px;}
 
-  h2{
+  .topbar{
+    background:var(--accent-dark);
+    color:#fff;
+    padding:12px 24px;
+    font-size:13px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    font-weight:700;
+  }
+  .topbar .wrap{padding:0;max-width:880px;margin:0 auto;display:flex;align-items:center;gap:10px;}
+  .topbar .dot{width:8px;height:8px;border-radius:50%;background:#fff;display:inline-block;}
+
+  .avatar{
+    width:56px;height:56px;
+    border-radius:50%;
+    object-fit:cover;
+    border:2px solid var(--accent-soft);
+    vertical-align:middle;
+    flex-shrink:0;
+  }
+  .avatar-sm{
+    width:40px;height:40px;
+    border-radius:50%;
+    object-fit:cover;
+    border:2px solid var(--accent-soft);
+    vertical-align:middle;
+    flex-shrink:0;
+  }
+  .role-header{display:flex;align-items:center;gap:14px;margin-bottom:4px;}
+  .role-header .names{display:flex;flex-direction:column;}
+
+  /* Org chart */
+  .orgchart{width:100%;overflow-x:auto;padding:20px 0 10px;}
+  .orgchart ul{padding-top:24px;position:relative;transition:.3s;display:flex;justify-content:center;margin:0;}
+  .orgchart li{
+    display:flex;flex-direction:column;align-items:center;
+    list-style-type:none;
+    position:relative;
+    padding:24px 10px 0 10px;
+    transition:.3s;
+  }
+  .orgchart li::before, .orgchart li::after{
+    content:'';position:absolute;top:0;right:50%;
+    border-top:2px solid var(--line);width:50%;height:24px;
+  }
+  .orgchart li::after{right:auto;left:50%;border-left:2px solid var(--line);}
+  .orgchart li:only-child::after, .orgchart li:only-child::before{display:none;}
+  .orgchart li:only-child{padding-top:0;}
+  .orgchart li:first-child::before{border:0 none;}
+  .orgchart li:last-child::after{border:0 none;}
+  .orgchart li:last-child::before{border-right:2px solid var(--line);border-radius:0 6px 0 0;}
+  .orgchart li:first-child::after{border-radius:6px 0 0 0;}
+  .orgchart ul ul::before{
+    content:'';position:absolute;top:0;left:50%;
+    border-left:2px solid var(--line);width:0;height:24px;
+  }
+  .orgchart li .node{
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:12px 16px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:6px;
+    background:var(--card);
+    min-width:120px;
+    box-shadow:0 1px 2px rgba(18,32,58,.04);
+  }
+  .orgchart li .node.root{border-color:var(--accent);background:var(--accent-soft);}
+  .orgchart li .node .oc-name{font-weight:700;font-size:.85rem;color:var(--ink);text-align:center;}
+  .orgchart li .node .oc-title{font-size:.72rem;color:var(--sub);text-align:center;}
+  .orgchart li .node.external{border-style:dashed;background:#fbfbfa;}
     font-size:1.35rem;
     margin:56px 0 6px;
     letter-spacing:-.01em;
@@ -185,17 +257,20 @@
 </head>
 <body>
 
+<div class="topbar"><div class="wrap"><span class="dot"></span>DIVISO · DIGITAL VISUAL SOLUTIONS</div></div>
+
 <header class="hero">
   <div class="wrap">
     <div class="eyebrow">Internt arbejdsdokument · v1</div>
-    <h1>Diviso – CEO Operating Model</h1>
-    <p class="subtitle">Formålet er at flytte CEO-rollen fra drift til ledelse. Torsten skal ikke løse problemer — han skal sætte retning, prioritere og træffe de få beslutninger, som ingen andre kan træffe. Kan en opgave løses af en anden, skal den løses af en anden.</p>
+    <h1>Diviso – Torsten Operating Model</h1>
+    <p class="subtitle">Formålet er at flytte Torstens rolle fra drift til ledelse. Torsten skal ikke løse problemer — han skal sætte retning, prioritere og træffe de få beslutninger, som ingen andre kan træffe. Kan en opgave løses af en anden, skal den løses af en anden.</p>
     <div class="meta">Udarbejdet til ledermøde · Diviso, Viborg</div>
   </div>
 
   <div class="toc">
     <div class="toc-title">Indhold</div>
     <ol>
+      <li><a href="#orgdiagram">Organisationsdiagram</a></li>
       <li><a href="#organisation">Organisation & roller</a></li>
       <li><a href="#produktforretning">Produktforretning & vækstroller</a></li>
       <li><a href="#arbejdsflow">Arbejdsflow</a></li>
@@ -210,12 +285,106 @@
 </header>
 
 <div class="wrap">
+  <h2 style="margin-top:0;" id="orgdiagram"><span class="num">00</span>Organisationsdiagram</h2>
+  <p class="section-intro">Overblik over rapporteringslinjer. Kristian og Ulla udgør de to primære spor — kommercielt og delivery. Per og New Business Manager understøtter det kommercielle spor; Basesite-partnerskabet med Jesper Overgaard ligger uden for kernorganisationen.</p>
+
+  <div class="orgchart">
+    <ul>
+      <li>
+        <div class="node root">
+          <img class="avatar" src="team/torsten.jpg" alt="Torsten">
+          <div class="oc-name">Torsten</div>
+          <div class="oc-title">Ejer</div>
+        </div>
+        <ul>
+          <li>
+            <div class="node">
+              <img class="avatar-sm" src="team/kristian.png" alt="Kristian">
+              <div class="oc-name">Kristian</div>
+              <div class="oc-title">CSO</div>
+            </div>
+            <ul>
+              <li>
+                <div class="node">
+                  <img class="avatar-sm" src="team/mikkel.png" alt="Mikkel">
+                  <div class="oc-name">Mikkel</div>
+                  <div class="oc-title">Support, PM & Marketing</div>
+                </div>
+              </li>
+              <li>
+                <div class="node">
+                  <div class="oc-name">New Business Manager</div>
+                  <div class="oc-title">Ny rolle</div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <div class="node">
+              <img class="avatar-sm" src="team/ulla.png" alt="Ulla">
+              <div class="oc-name">Ulla</div>
+              <div class="oc-title">Head of Projects</div>
+            </div>
+            <ul>
+              <li>
+                <div class="node">
+                  <img class="avatar-sm" src="team/erik.png" alt="Erik">
+                  <div class="oc-name">Erik</div>
+                  <div class="oc-title">Senior-udvikler</div>
+                </div>
+              </li>
+              <li>
+                <div class="node">
+                  <img class="avatar-sm" src="team/mads.png" alt="Mads">
+                  <div class="oc-name">Mads</div>
+                  <div class="oc-title">Udvikler, backend</div>
+                </div>
+              </li>
+              <li>
+                <div class="node">
+                  <img class="avatar-sm" src="team/julie.png" alt="Julie">
+                  <div class="oc-name">Julie</div>
+                  <div class="oc-title">Udvikler, frontend</div>
+                </div>
+              </li>
+              <li>
+                <div class="node">
+                  <img class="avatar-sm" src="team/sofie.png" alt="Sofie">
+                  <div class="oc-name">Sofie</div>
+                  <div class="oc-title">Frontendudvikler</div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <div class="node">
+              <img class="avatar-sm" src="team/per.png" alt="Per">
+              <div class="oc-name">Per</div>
+              <div class="oc-title">Google SEO & Ads</div>
+            </div>
+          </li>
+          <li>
+            <div class="node external">
+              <div class="oc-name">Jesper Overgaard</div>
+              <div class="oc-title">Ekstern partner · Basesite</div>
+            </div>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="wrap">
 
   <h2 id="organisation"><span class="num">01</span>Organisation & roller</h2>
   <p class="section-intro">Fem roller dækker i dag drift, salg og udvikling. Hver rolle har et klart mandat — og lige så vigtigt, en klar liste over hvad rollen <em>ikke</em> skal tage sig af.</p>
 
   <div class="card role">
-    <div class="role-title"><span class="role-name">Torsten</span> — CEO</div>
+    <div class="role-header">
+      <img class="avatar" src="team/torsten.jpg" alt="Torsten">
+      <div class="names"><div class="role-title" style="margin:0;">Torsten</div></div>
+    </div>
     <div class="grid2">
       <div>
         <h4>Ansvar</h4>
@@ -242,7 +411,10 @@
   </div>
 
   <div class="card role">
-    <div class="role-title"><span class="role-name">Kristian</span> — Commercial Lead</div>
+    <div class="role-header">
+      <img class="avatar" src="team/kristian.png" alt="Kristian">
+      <div class="names"><div class="role-title" style="margin:0;"><span class="role-name">Kristian</span> — CSO</div></div>
+    </div>
     <div class="grid2">
       <div>
         <h4>Ansvar</h4>
@@ -272,7 +444,10 @@
   </div>
 
   <div class="card role">
-    <div class="role-title"><span class="role-name">Mikkel</span> — Support & Junior Project Manager</div>
+    <div class="role-header">
+      <img class="avatar" src="team/mikkel.png" alt="Mikkel">
+      <div class="names"><div class="role-title" style="margin:0;"><span class="role-name">Mikkel</span> — Support, Junior Project Manager & Marketing</div></div>
+    </div>
     <div class="grid2">
       <div>
         <h4>Ansvar</h4>
@@ -282,6 +457,7 @@
           <li>Koordinering mellem kunde og udvikling</li>
           <li>Oprette og kvalitetssikre opgaver</li>
           <li>Følge op på status</li>
+          <li>Marketingansvar — producerer annoncer/ads-materiale og understøtter markedsføring, herunder onboarding af nye GroupSpace-kunder</li>
         </ul>
         <h4>Eksempler</h4>
         <ul>
@@ -304,7 +480,10 @@
   </div>
 
   <div class="card role">
-    <div class="role-title"><span class="role-name">Ulla</span> — Head of Projects</div>
+    <div class="role-header">
+      <img class="avatar" src="team/ulla.png" alt="Ulla">
+      <div class="names"><div class="role-title" style="margin:0;"><span class="role-name">Ulla</span> — Head of Projects</div></div>
+    </div>
     <div class="grid2">
       <div>
         <h4>Ansvar</h4>
@@ -335,7 +514,7 @@
   </div>
 
   <div class="card role">
-    <div class="role-title">Development Team</div>
+    <div class="role-title" style="margin-bottom:14px;">Development Team — fælles ansvar & grænser</div>
     <div class="grid2">
       <div>
         <h4>Ansvar</h4>
@@ -351,8 +530,60 @@
         <ul>
           <li>Forhandle med kunder</li>
           <li>Ændre scope</li>
-          <li>Kontakte CEO om drift</li>
+          <li>Kontakte Torsten om drift</li>
           <li>Prioritere mellem kunder</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card role" style="margin:0;">
+      <div class="role-header">
+        <img class="avatar" src="team/erik.png" alt="Erik">
+        <div class="names"><div class="role-title" style="margin:0;font-size:1rem;"><span class="role-name">Erik</span> — Senior-udvikler</div></div>
+      </div>
+    </div>
+    <div class="card role" style="margin:0;">
+      <div class="role-header">
+        <img class="avatar" src="team/mads.png" alt="Mads">
+        <div class="names"><div class="role-title" style="margin:0;font-size:1rem;"><span class="role-name">Mads</span> — Udvikler, backend</div></div>
+      </div>
+    </div>
+    <div class="card role" style="margin:0;">
+      <div class="role-header">
+        <img class="avatar" src="team/julie.png" alt="Julie">
+        <div class="names"><div class="role-title" style="margin:0;font-size:1rem;"><span class="role-name">Julie</span> — Udvikler, frontend</div></div>
+      </div>
+      <p style="margin:8px 0 0;color:var(--sub);font-size:.88rem;">Fokus på frontend i dag — udvikler sig på sigt ind i rollen som <strong>Umbraco Lead</strong>.</p>
+    </div>
+    <div class="card role" style="margin:0;">
+      <div class="role-header">
+        <img class="avatar" src="team/sofie.png" alt="Sofie">
+        <div class="names"><div class="role-title" style="margin:0;font-size:1rem;"><span class="role-name">Sofie</span> — Frontendudvikler</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card role">
+    <div class="role-header">
+      <img class="avatar" src="team/per.png" alt="Per">
+      <div class="names"><div class="role-title" style="margin:0;"><span class="role-name">Per</span> — Google SEO & Ads</div></div>
+    </div>
+    <div class="grid2">
+      <div>
+        <h4>Ansvar</h4>
+        <ul>
+          <li>Søgemaskineoptimering (SEO) for Diviso</li>
+          <li>Drift af Google Ads-kampagner</li>
+          <li>Genererer leads til web- og appopgaver</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Skal ikke</h4>
+        <ul>
+          <li>Sælge eller lukke aftaler direkte</li>
+          <li>Tage produktspecifikke marketingbeslutninger uden aftale med Kristian</li>
         </ul>
       </div>
     </div>
@@ -360,7 +591,7 @@
 
   <div class="card role">
     <div class="role-title"><span class="role-name">New Business Manager</span> — ny rolle <span class="new-tag">Ny ansættelse</span></div>
-    <p style="margin-top:6px;color:var(--sub);font-size:.92rem;">Fuldtidsstilling. Refererer til Kristian (Commercial Lead) som en del af det kommercielle spor. Tidsfordeling: <strong>50% opsøgende salg af Diviso-konsulentprojekter, 50% OmniShare</strong>.</p>
+    <p style="margin-top:6px;color:var(--sub);font-size:.92rem;">Fuldtidsstilling. Refererer til Kristian (CSO) som en del af det kommercielle spor. Tidsfordeling: <strong>50% opsøgende salg af Diviso-konsulentprojekter, 50% OmniShare</strong>.</p>
     <div class="grid2">
       <div>
         <h4>Ansvar</h4>
@@ -472,7 +703,7 @@
     <div class="step">Kunde</div>
     <div class="branch">Hvis kunden ønsker mere end aftalt: Mikkel → Kristian → Nyt tilbud / nyt scope</div>
   </div>
-  <p class="section-intro" style="margin-top:8px;"><strong>CEO indgår ikke i dette flow.</strong></p>
+  <p class="section-intro" style="margin-top:8px;"><strong>Torsten indgår ikke i dette flow.</strong></p>
 
   <h2 id="eskalering"><span class="num">04</span>Eskaleringsregler</h2>
   <table>
@@ -480,7 +711,7 @@
     <tr><td><strong>Mikkel</strong></td><td>Alle nye supporthenvendelser</td></tr>
     <tr><td><strong>Ulla</strong></td><td>Ressourceproblemer, forsinkelser, blokeringer, prioriteringskonflikter</td></tr>
     <tr><td><strong>Kristian</strong></td><td>Scopeændringer, nye ønsker, tilbud, kundeøkonomi</td></tr>
-    <tr><td><strong>CEO</strong></td><td>Kun hvis: strategisk kunde er i risiko · strategisk beslutning skal træffes · nøgleansættelser · betydelige økonomiske konsekvenser · Kristian og Ulla er uenige</td></tr>
+    <tr><td><strong>Torsten</strong></td><td>Kun hvis: strategisk kunde er i risiko · strategisk beslutning skal træffes · nøgleansættelser · betydelige økonomiske konsekvenser · Kristian og Ulla er uenige</td></tr>
   </table>
 
   <h3>Eskalationsformat</h3>
@@ -577,7 +808,7 @@
   </div>
 
   <h2 id="kpi"><span class="num">07</span>KPI-dashboard (ugentlig)</h2>
-  <p class="section-intro">CEO skal kun modtage én side.</p>
+  <p class="section-intro">Torsten skal kun modtage én side.</p>
   <div class="kpi-grid">
     <div class="kpi-card">
       <h4>Salg</h4>
@@ -601,7 +832,7 @@
   <div class="timeline">
     <div class="week">
       <div class="week-label">Uge 1</div>
-      Stop direkte projektspørgsmål til CEO. Alt support går via Zendesk og Mikkel.
+      Stop direkte projektspørgsmål til Torsten. Alt support går via Zendesk og Mikkel.
     </div>
     <div class="week">
       <div class="week-label">Uge 2</div>
@@ -613,7 +844,7 @@
     </div>
     <div class="week">
       <div class="week-label">Uge 4</div>
-      CEO arbejder primært med strategi, salg, økonomi og organisation.
+      Torsten arbejder primært med strategi, salg, økonomi og organisation.
     </div>
   </div>
 
@@ -621,8 +852,8 @@
   <p class="section-intro">Efter 2–3 måneder bør følgende være opnået:</p>
   <div class="card">
     <ul>
-      <li>CEO bruger under 20% af tiden på drift</li>
-      <li>Ingen udviklere går direkte til CEO med daglige spørgsmål</li>
+      <li>Torsten bruger under 20% af tiden på drift</li>
+      <li>Ingen udviklere går direkte til Torsten med daglige spørgsmål</li>
       <li>Mikkel filtrerer al support og koordination</li>
       <li>Ulla styrer leverancer og kapacitet</li>
       <li>Kristian ejer kunden og det kommercielle</li>
@@ -635,7 +866,7 @@
   </div>
 
   <footer>
-    Diviso · CEO Operating Model v1 · Internt dokument
+    Diviso · Torsten Operating Model v1 · Internt dokument
   </footer>
 
 </div>
