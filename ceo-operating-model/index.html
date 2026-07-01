@@ -122,6 +122,11 @@
   .orgchart li .node .oc-name{font-weight:700;font-size:.85rem;color:var(--ink);text-align:center;}
   .orgchart li .node .oc-title{font-size:.72rem;color:var(--sub);text-align:center;}
   .orgchart li .node.external{border-style:dashed;background:#fbfbfa;}
+  .orgchart li .node.ai-node{border-style:dashed;border-color:#2a9d8f;background:#e8f6f4;}
+  .orgchart li .node.ai-node .oc-name{color:#1f7a6e;}
+
+  .ai-card{border-left:4px solid #2a9d8f;background:linear-gradient(180deg,#e8f6f4 0%,#ffffff 40%);}
+  .ai-card .role-header .avatar{border-color:#bfe6e0;}
     font-size:1.35rem;
     margin:56px 0 6px;
     letter-spacing:-.01em;
@@ -286,7 +291,7 @@
 
 <div class="wrap">
   <h2 style="margin-top:0;" id="orgdiagram"><span class="num">00</span>Organisationsdiagram</h2>
-  <p class="section-intro">Overblik over rapporteringslinjer. Kristian og Ulla udgør de to primære spor — kommercielt og delivery. Per og New Business Manager understøtter det kommercielle spor; Basesite-partnerskabet med Jesper Overgaard ligger uden for kernorganisationen.</p>
+  <p class="section-intro">Overblik over rapporteringslinjer. Kristian og Ulla udgør de to primære spor — kommercielt og delivery. Per og New Business Manager understøtter det kommercielle spor; Basesite-partnerskabet med Jesper Overgaard ligger uden for kernorganisationen. AI (Claude, GitHub Copilot, M365 Copilot og ChatGPT) er markeret som en særskilt, ikke-menneskelig ressource, der understøtter flere dele af organisationen på tværs.</p>
 
   <div class="orgchart">
     <ul>
@@ -313,6 +318,7 @@
               </li>
               <li>
                 <div class="node">
+                  <img class="avatar-sm" src="team/new-business-manager.png" alt="New Business Manager">
                   <div class="oc-name">New Business Manager</div>
                   <div class="oc-title">Ny rolle</div>
                 </div>
@@ -354,6 +360,13 @@
                   <div class="oc-title">Frontendudvikler</div>
                 </div>
               </li>
+              <li>
+                <div class="node">
+                  <img class="avatar-sm" src="team/praktikant.png" alt="Udvikler-praktikant">
+                  <div class="oc-name">Praktikant</div>
+                  <div class="oc-title">Udvikler-praktikant</div>
+                </div>
+              </li>
             </ul>
           </li>
           <li>
@@ -367,6 +380,13 @@
             <div class="node external">
               <div class="oc-name">Jesper Overgaard</div>
               <div class="oc-title">Ekstern partner · Basesite</div>
+            </div>
+          </li>
+          <li>
+            <div class="node ai-node">
+              <img class="avatar-sm" src="team/ai.png" alt="AI">
+              <div class="oc-name">AI</div>
+              <div class="oc-title">Claude · Copilot · ChatGPT</div>
             </div>
           </li>
         </ul>
@@ -592,6 +612,12 @@
         <div class="names"><div class="role-title" style="margin:0;font-size:1rem;"><span class="role-name">Sofie</span> — Frontendudvikler</div></div>
       </div>
     </div>
+    <div class="card role" style="margin:0;">
+      <div class="role-header">
+        <img class="avatar" src="team/praktikant.png" alt="Udvikler-praktikant">
+        <div class="names"><div class="role-title" style="margin:0;font-size:1rem;">Udvikler-praktikant</div></div>
+      </div>
+    </div>
   </div>
 
   <div class="card role">
@@ -618,8 +644,40 @@
     </div>
   </div>
 
+  <div class="card role ai-card">
+    <div class="role-header">
+      <img class="avatar" src="team/ai.png" alt="AI">
+      <div class="names"><div class="role-title" style="margin:0;"><span class="role-name">AI</span> — Claude, GitHub Copilot, M365 Copilot & ChatGPT</div></div>
+    </div>
+    <p style="margin-top:6px;color:var(--sub);font-size:.92rem;">AI er reelt en del af Diviso-teamet — ikke som én rolle, men som et sæt værktøjer der bruges på tværs af organisationen: Claude til analyse, rapportering og struktureret arbejde, GitHub Copilot i udviklingsteamet, M365 Copilot til dokumenter og mail, og ChatGPT til bredere sparring. Fælles for dem alle: de arbejder <em>under</em> en navngiven persons ansvar, aldrig som en selvstændig aktør.</p>
+    <div class="grid2">
+      <div>
+        <h4>Ansvar / bruges til</h4>
+        <ul>
+          <li>Kodeforslag, debugging og teknisk dokumentation (GitHub Copilot)</li>
+          <li>Analyser, rapporter, strategiarbejde og research (Claude)</li>
+          <li>Dokumenter, mails og møde-opsummeringer (M365 Copilot)</li>
+          <li>Almindelig sparring og idégenerering (ChatGPT)</li>
+          <li>Fremskynde førsteudkast, så mennesker bruger tiden på vurdering og finpudsning</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Skal ikke</h4>
+        <ul>
+          <li>Træffe selvstændige forretnings-, kunde- eller ansættelsesbeslutninger</li>
+          <li>Sende noget til kunder eller eksternt uden menneskelig gennemlæsning og godkendelse</li>
+          <li>Stå som eneste "ejer" af en opgave eller leverance — der skal altid være en navngiven person bag output</li>
+          <li>Håndtere følsomme data eller kundeoplysninger uden at overholde virksomhedens retningslinjer for AI-brug og GDPR</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
   <div class="card role">
-    <div class="role-title"><span class="role-name">New Business Manager</span> — ny rolle <span class="new-tag">Ny ansættelse</span></div>
+    <div class="role-header">
+      <img class="avatar" src="team/new-business-manager.png" alt="New Business Manager">
+      <div class="names"><div class="role-title" style="margin:0;"><span class="role-name">New Business Manager</span> — ny rolle <span class="new-tag">Ny ansættelse</span></div></div>
+    </div>
     <p style="margin-top:6px;color:var(--sub);font-size:.92rem;">Fuldtidsstilling. Refererer til Kristian (CSO) som en del af det kommercielle spor. Tidsfordeling: <strong>50% opsøgende salg af Diviso-konsulentprojekter, 50% OmniShare</strong>.</p>
     <div class="grid2">
       <div>
