@@ -133,7 +133,27 @@
     gap:6px;
     background:var(--card);
     box-shadow:0 1px 2px rgba(18,32,58,.04);
+    text-decoration:none;
+    color:inherit;
+    cursor:default;
   }
+  a.node, .joint-people a.joint-person{
+    cursor:pointer;
+    transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+  }
+  a.node:hover, .joint-people a.joint-person:hover{
+    transform:translateY(-2px);
+    box-shadow:0 4px 10px rgba(18,32,58,.1);
+    border-color:var(--accent);
+  }
+  a.node:hover .oc-name{color:var(--accent);}
+  .joint-people a.joint-person:hover{
+    transform:translateY(-2px);
+    box-shadow:none;
+    border-color:transparent;
+    background:rgba(255,255,255,.1);
+  }
+  .joint-people a.joint-person:hover .oc-name{color:#fff;}
   .node.root{border-color:var(--accent);background:var(--accent-soft);}
   .node .oc-name{font-weight:700;font-size:.85rem;color:var(--ink);text-align:center;}
   .node .oc-title{font-size:.72rem;color:var(--sub);text-align:center;}
@@ -162,7 +182,7 @@
     padding:16px 18px;
   }
   .joint-people{display:flex;flex-direction:column;align-items:center;gap:10px;}
-  .joint-person{display:flex;flex-direction:column;align-items:center;gap:4px;}
+  .joint-person{display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;color:inherit;border-radius:8px;padding:4px 6px;}
   .joint-person .oc-name{color:#fff;}
   .joint-person .oc-title{color:#cfe0ff;}
   .joint-plus{color:#cfe0ff;font-size:1.1rem;font-weight:700;}
@@ -205,7 +225,8 @@
   }
   h2 .num{color:var(--accent);font-variant-numeric:tabular-nums;margin-right:8px;}
   .section-intro{color:var(--sub);margin:0 0 24px;font-size:.97rem;}
-  h3{font-size:1.05rem;margin:28px 0 4px;}
+  h3{font-size:1.05rem;margin:28px 0 4px;scroll-margin-top:20px;}
+  .card.role{scroll-margin-top:20px;}
   h4{font-size:.92rem;margin:18px 0 4px;color:var(--sub);text-transform:uppercase;letter-spacing:.06em;}
 
   .card{
@@ -392,14 +413,14 @@
     font-weight:700;
     margin-bottom:10px;
   }
-  .sidebar nav ul{
+  .sidebar ul{
     list-style:none;
     margin:0;
     padding:0;
     border-left:2px solid var(--line);
   }
-  .sidebar nav li{margin:0;}
-  .sidebar nav a{
+  .sidebar li{margin:0;}
+  .sidebar a{
     display:block;
     padding:7px 0 7px 16px;
     margin-left:-2px;
@@ -410,8 +431,8 @@
     transition:color .15s, border-color .15s;
     line-height:1.3;
   }
-  .sidebar nav a:hover{color:var(--ink);}
-  .sidebar nav a.active{
+  .sidebar a:hover{color:var(--ink);}
+  .sidebar a.active{
     color:var(--accent);
     border-left-color:var(--accent);
     font-weight:700;
@@ -501,17 +522,17 @@
       <div class="oc-col-title">Ledelse</div>
       <div class="node root joint-lead">
         <div class="joint-people">
-          <div class="joint-person">
+          <a class="joint-person" href="#person-torsten">
             <img class="avatar-sm" src="team/torsten.jpg" alt="Torsten">
             <div class="oc-name">Torsten</div>
             <div class="oc-title">Ejer</div>
-          </div>
+          </a>
           <div class="joint-plus">+</div>
-          <div class="joint-person">
+          <a class="joint-person" href="#person-kristian">
             <img class="avatar-sm" src="team/kristian.png" alt="Kristian">
             <div class="oc-name">Kristian</div>
             <div class="oc-title">CSO & HR</div>
-          </div>
+          </a>
         </div>
         <div class="joint-caption">Fælles ledelsesansvar</div>
       </div>
@@ -524,30 +545,30 @@
         <div class="oc-name">Salg & Marketing</div>
         <div class="oc-title">Kommercielt spor · Kristian</div>
       </div>
-      <div class="node">
+      <a class="node" href="#person-mikkel">
         <img class="avatar-sm" src="team/mikkel.png" alt="Mikkel">
         <div class="oc-name">Mikkel</div>
         <div class="oc-title">Support, PM & Marketing</div>
-      </div>
-      <div class="node">
+      </a>
+      <a class="node" href="#person-nbm">
         <img class="avatar-sm" src="team/new-business-manager.png" alt="New Business Manager">
         <div class="oc-name">New Business Manager</div>
         <div class="oc-title">Ny rolle</div>
-      </div>
-      <div class="node">
+      </a>
+      <a class="node" href="#person-per">
         <img class="avatar-sm" src="team/per.png" alt="Per">
         <div class="oc-name">Per</div>
         <div class="oc-title">Google SEO & Ads</div>
-      </div>
-      <div class="node proposed">
+      </a>
+      <a class="node proposed" href="#person-salgselev">
         <img class="avatar-sm" src="team/salgselev.jpg" alt="Salgselev">
         <div class="oc-name">Salgselev</div>
         <div class="oc-title">Forslag til ny ansættelse</div>
-      </div>
-      <div class="node external">
+      </a>
+      <a class="node external" href="#person-jesper">
         <div class="oc-name">Jesper Overgaard</div>
         <div class="oc-title">Ekstern partner · Basesite</div>
-      </div>
+      </a>
     </div>
 
     <div class="oc-arrow">→</div>
@@ -557,37 +578,37 @@
         <div class="oc-name">Udvikling</div>
         <div class="oc-title">Delivery-spor</div>
       </div>
-      <div class="node">
+      <a class="node" href="#person-ulla">
         <img class="avatar-sm" src="team/ulla.png" alt="Ulla">
         <div class="oc-name">Ulla</div>
         <div class="oc-title">Head of Projects</div>
-      </div>
+      </a>
       <div class="oc-subgroup">
-        <div class="node">
+        <a class="node" href="#person-erik">
           <img class="avatar-sm" src="team/erik.png" alt="Erik">
           <div class="oc-name">Erik</div>
           <div class="oc-title">Senior-udvikler</div>
-        </div>
-        <div class="node">
+        </a>
+        <a class="node" href="#person-mads">
           <img class="avatar-sm" src="team/mads.png" alt="Mads">
           <div class="oc-name">Mads</div>
           <div class="oc-title">Udvikler, backend</div>
-        </div>
-        <div class="node">
+        </a>
+        <a class="node" href="#person-julie">
           <img class="avatar-sm" src="team/julie.png" alt="Julie">
           <div class="oc-name">Julie</div>
           <div class="oc-title">Udvikler, frontend</div>
-        </div>
-        <div class="node">
+        </a>
+        <a class="node" href="#person-sofie">
           <img class="avatar-sm" src="team/sofie.png" alt="Sofie">
           <div class="oc-name">Sofie</div>
           <div class="oc-title">Frontendudvikler</div>
-        </div>
-        <div class="node">
+        </a>
+        <a class="node" href="#person-praktikant">
           <img class="avatar-sm" src="team/praktikant.png" alt="Udvikler-praktikant">
           <div class="oc-name">Praktikant</div>
           <div class="oc-title">Udvikler-praktikant</div>
-        </div>
+        </a>
       </div>
     </div>
 
@@ -598,11 +619,11 @@
         <div class="oc-name">AI</div>
         <div class="oc-title">Tværgående ressource</div>
       </div>
-      <div class="node ai-node">
+      <a class="node ai-node" href="#person-ai">
         <img class="avatar-sm" src="team/ai.png" alt="AI">
         <div class="oc-name">AI-værktøjer</div>
         <div class="oc-title">Claude · Copilot · ChatGPT</div>
-      </div>
+      </a>
     </div>
   </div>
 </div>
@@ -612,7 +633,7 @@
   <h2 id="organisation"><span class="num">01</span>Organisation & roller</h2>
   <p class="section-intro">Fem roller dækker i dag drift, salg og udvikling. Hver rolle har et klart mandat — og lige så vigtigt, en klar liste over hvad rollen <em>ikke</em> skal tage sig af.</p>
 
-  <div class="card role">
+  <div class="card role" id="person-torsten">
     <div class="role-header">
       <img class="avatar" src="team/torsten.jpg" alt="Torsten">
       <div class="names"><div class="role-title" style="margin:0;">Torsten</div></div>
@@ -669,7 +690,7 @@
     </ul>
   </div>
 
-  <div class="card role">
+  <div class="card role" id="person-kristian">
     <div class="role-header">
       <img class="avatar" src="team/kristian.png" alt="Kristian">
       <div class="names"><div class="role-title" style="margin:0;"><span class="role-name">Kristian</span> — CSO & HR</div></div>
@@ -706,7 +727,7 @@
     </div>
   </div>
 
-  <div class="card role">
+  <div class="card role" id="person-mikkel">
     <div class="role-header">
       <img class="avatar" src="team/mikkel.png" alt="Mikkel">
       <div class="names"><div class="role-title" style="margin:0;"><span class="role-name">Mikkel</span> — Support, Junior Project Manager & Marketing</div></div>
@@ -742,7 +763,7 @@
     </div>
   </div>
 
-  <div class="card role">
+  <div class="card role" id="person-ulla">
     <div class="role-header">
       <img class="avatar" src="team/ulla.png" alt="Ulla">
       <div class="names"><div class="role-title" style="margin:0;"><span class="role-name">Ulla</span> — Head of Projects</div></div>
@@ -800,7 +821,7 @@
     </div>
   </div>
 
-  <div class="card role">
+  <div class="card role" id="person-erik">
     <div class="role-header">
       <img class="avatar" src="team/erik.png" alt="Erik">
       <div class="names"><div class="role-title" style="margin:0;"><span class="role-name">Erik</span> — Senior-udvikler</div></div>
@@ -836,26 +857,26 @@
   </div>
 
   <div class="grid2">
-    <div class="card role" style="margin:0;">
+    <div class="card role" style="margin:0;" id="person-mads">
       <div class="role-header">
         <img class="avatar" src="team/mads.png" alt="Mads">
         <div class="names"><div class="role-title" style="margin:0;font-size:1rem;"><span class="role-name">Mads</span> — Udvikler, backend</div></div>
       </div>
     </div>
-    <div class="card role" style="margin:0;">
+    <div class="card role" style="margin:0;" id="person-julie">
       <div class="role-header">
         <img class="avatar" src="team/julie.png" alt="Julie">
         <div class="names"><div class="role-title" style="margin:0;font-size:1rem;"><span class="role-name">Julie</span> — Udvikler, frontend</div></div>
       </div>
       <p style="margin:8px 0 0;color:var(--sub);font-size:.88rem;">Fokus på frontend i dag — udvikler sig på sigt ind i rollen som <strong>Umbraco Lead</strong>.</p>
     </div>
-    <div class="card role" style="margin:0;">
+    <div class="card role" style="margin:0;" id="person-sofie">
       <div class="role-header">
         <img class="avatar" src="team/sofie.png" alt="Sofie">
         <div class="names"><div class="role-title" style="margin:0;font-size:1rem;"><span class="role-name">Sofie</span> — Frontendudvikler</div></div>
       </div>
     </div>
-    <div class="card role" style="margin:0;">
+    <div class="card role" style="margin:0;" id="person-praktikant">
       <div class="role-header">
         <img class="avatar" src="team/praktikant.png" alt="Udvikler-praktikant">
         <div class="names"><div class="role-title" style="margin:0;font-size:1rem;">Udvikler-praktikant</div></div>
@@ -863,7 +884,7 @@
     </div>
   </div>
 
-  <div class="card role">
+  <div class="card role" id="person-per">
     <div class="role-header">
       <img class="avatar" src="team/per.png" alt="Per">
       <div class="names"><div class="role-title" style="margin:0;"><span class="role-name">Per</span> — Google SEO & Ads</div></div>
@@ -887,7 +908,7 @@
     </div>
   </div>
 
-  <div class="card role ai-card">
+  <div class="card role ai-card" id="person-ai">
     <div class="role-header">
       <img class="avatar" src="team/ai.png" alt="AI">
       <div class="names"><div class="role-title" style="margin:0;"><span class="role-name">AI</span> — Claude, GitHub Copilot, M365 Copilot & ChatGPT</div></div>
@@ -916,7 +937,7 @@
     </div>
   </div>
 
-  <div class="card role">
+  <div class="card role" id="person-nbm">
     <div class="role-header">
       <img class="avatar" src="team/new-business-manager.png" alt="New Business Manager">
       <div class="names"><div class="role-title" style="margin:0;"><span class="role-name">New Business Manager</span> — ny rolle <span class="new-tag">Ny ansættelse</span></div></div>
@@ -942,7 +963,7 @@
     </div>
   </div>
 
-  <div class="card role" style="border-left:4px solid var(--accent);border-style:dashed;">
+  <div class="card role" style="border-left:4px solid var(--accent);border-style:dashed;" id="person-salgselev">
     <div class="role-header">
       <img class="avatar" src="team/salgselev.jpg" alt="Salgselev">
       <div class="names"><div class="role-title" style="margin:0;"><span class="role-name">Salgselev</span> — forslag <span class="new-tag">Forslag til ny ansættelse</span></div></div>
@@ -1019,7 +1040,7 @@
     </ul>
   </div>
 
-  <h3>Spor 2 — Basesite: partnerskab med Jesper Overgaard</h3>
+  <h3 id="person-jesper">Spor 2 — Basesite: partnerskab med Jesper Overgaard</h3>
   <div class="card role">
     <p style="margin-top:0;color:var(--sub);font-size:.92rem;">I modsætning til de to andre spor er dette ikke kun en bemandingsbeslutning — det er en <strong>selskabsretlig beslutning</strong>. Et datterselskab med ekstern medejer kræver stiftelsesdokumenter, ejeraftale, vedtægter og en klar model for, hvordan indtægter og omkostninger fordeles mellem Diviso og datterselskabet.</p>
     <h4>Skal afklares før lancering</h4>
