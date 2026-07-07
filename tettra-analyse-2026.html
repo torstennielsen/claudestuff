@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tettra-alternativ Analyse | Diviso</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        main {
+            padding: 40px;
+        }
+
+        section {
+            margin-bottom: 50px;
+        }
+
+        section > h2 {
+            font-size: 1.8em;
+            color: #667eea;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: #667eea;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.15);
+        }
+
+        .card h3 {
+            font-size: 1.4em;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card p {
+            font-size: 0.95em;
+            line-height: 1.7;
+            color: #555;
+            margin-bottom: 12px;
+        }
+
+        .pros {
+            margin: 15px 0;
+        }
+
+        .pros strong {
+            color: #27ae60;
+        }
+
+        .cons {
+            margin: 15px 0;
+        }
+
+        .cons strong {
+            color: #e74c3c;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin: 3px 3px 3px 0;
+        }
+
+        .badge.critical {
+            background: #ffe5e5;
+            color: #c0392b;
+        }
+
+        .badge.pro {
+            background: #e8f8f5;
+            color: #27ae60;
+        }
+
+        .badge.caution {
+            background: #fef5e7;
+            color: #d68910;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+        }
+
+        .comparison-table th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .comparison-table .feature-name {
+            font-weight: 600;
+            color: #2c3e50;
+            width: 25%;
+        }
+
+        .tco {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .tco-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin: 10px 0;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .tco-row:last-child {
+            border-bottom: none;
+        }
+
+        .tco-label {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .tco-value {
+            color: #667eea;
+            font-weight: 700;
+            font-size: 1.1em;
+        }
+
+        .recommendation {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+
+        .recommendation h3 {
+            font-size: 1.6em;
+            margin-bottom: 15px;
+        }
+
+        .recommendation p {
+            font-size: 1.05em;
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+
+        .timeline {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .timeline h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .timeline ul {
+            list-style: none;
+            padding-left: 20px;
+        }
+
+        .timeline li {
+            margin: 8px 0;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .timeline li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .fallback-note {
+            background: #fef5e7;
+            border-left: 4px solid #f39c12;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            color: #7d6608;
+        }
+
+        footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .icon {
+            font-size: 1.5em;
+            margin-right: 5px;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 25px;
+            }
+
+            header h1 {
+                font-size: 1.6em;
+            }
+
+            main {
+                padding: 20px;
+            }
+
+            .tco-row {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-table {
+                font-size: 0.9em;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 8px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 Tettra-alternativ Analyse</h1>
+            <p>Diviso — Knowledge Base & Documentation Evaluation</p>
+        </header>
+
+        <main>
+            <!-- EXECUTIVE SUMMARY -->
+            <section>
+                <h2>🎯 Executive Summary</h2>
+                <div class="recommendation">
+                    <h3>Anbefaling: Claude Code Custom Løsning (med Notion som fallback)</h3>
+                    <p><strong>Hvad:</strong> Markdown-baseret dokumentation hosted på GitHub, synced til en web-UI bygget med Claude Code. Granular access control via Entra ID (M365) for interne + custom API-keys for kunder.</p>
+                    <p><strong>Hvorfor:</strong> Maksimal kontrol, Claude-integreret vedligeholdelse, git-driven versionering, ingen dyre SaaS-subscriptions.</p>
+                    <p><strong>Timeline:</strong> 4-6 uger til MVP, 2-3 uger til full-blown med customer auth.</p>
+                    <p><strong>Cost:</strong> ~3.000 DKK opsætning + minimal løbende (Azure hosting).</p>
+                    <p><strong>If not feasible:</strong> Pure Notion med approval-workflows som fallback — 1 uge til setup, ingen code.</p>
+                </div>
+            </section>
+
+            <!-- STATUS QUO -->
+            <section>
+                <h2>📊 Status Quo: Tettra i dag</h2>
+                <table class="comparison-table">
+                    <tr>
+                        <th>Område</th>
+                        <th>Status</th>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Indhold</td>
+                        <td>Onboarding, processer (dev/support/sales), teknisk dokumentation, kundehåndbog</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Opdateringsfrekvens</td>
+                        <td>Månedligt (regelmæssigt)</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Vedligeholdere</td>
+                        <td>Flere medarbejdere løbende (ingen klar ejer)</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Årlig pris</td>
+                        <td>~10.000 DKK</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Primært problem</td>
+                        <td>Pris + lyst til Claude-integrering + ingen git-integration</td>
+                    </tr>
+                </table>
+            </section>
+
+            <!-- OPTION COMPARISON -->
+            <section>
+                <h2>⚖️ Sammenligning af 3 Optioner</h2>
+
+                <div class="grid">
+                    <!-- OPTION 1: NOTION -->
+                    <div class="card">
+                        <h3>💡 Option 1: Pure Notion</h3>
+                        <p><strong>Setup:</strong> Notion workspace med interne sider + shareable links for kunder.</p>
+
+                        <div class="pros">
+                            <strong>✅ Pros:</strong>
+                            <ul style="margin-top: 5px;">
+                                <li>Simpel UI — folk ved hvordan det virker</li>
+                                <li>Relationer, databases, custom views uden code</li>
+                                <li>Granular sharing: per-page eller hele workspace</li>
+                                <li>Søg & filter built-in</li>
+                                <li>Ingen vedligeholdelsesomkostninger</li>
+                            </ul>
+                        </div>
+
+                        <div class="cons">
+                            <strong>❌ Cons:</strong>
+                            <ul style="margin-top: 5px;">
+                                <li>Ingen git-integration (data låst i Notion)</li>
+                                <li>Ingen Claude Code-integrering direkte</li>
+                                <li>2-person editor limit på free plan</li>
+                                <li>Entra ID auth kræver Notion Teams (pricey)</li>
+                                <li>Hvis du vil ændre senere: migrationsproblem</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <span class="badge pro">Hurtigt</span>
+                            <span class="badge caution">Låst ind</span>
+                            <span class="badge caution">No AI-sync</span>
+                        </div>
+                    </div>
+
+                    <!-- OPTION 2: SLACK/TEAMS -->
+                    <div class="card">
+                        <h3>💬 Option 2: Slack/Teams Canvas + Online Host</h3>
+                        <p><strong>Setup:</strong> Docs hosted på GitHub Pages / Vercel. Searchable fra Slack/Teams via integration.</p>
+
+                        <div class="pros">
+                            <strong>✅ Pros:</strong>
+                            <ul style="margin-top: 5px;">
+                                <li>Folk kan spørge "show me X" i Slack → resultat i tråd</li>
+                                <li>GitHub-drevet (git history, branches)</li>
+                                <li>Let at dele eksternt (bare URL)</li>
+                                <li>Billig hosting (free tier mulig)</li>
+                                <li>Integrerer med dine workflows allerede</li>
+                            </ul>
+                        </div>
+
+                        <div class="cons">
+                            <strong>❌ Cons:</strong>
+                            <ul style="margin-top: 5px;">
+                                <li>Slack searchable integration er ikke triviel (custom bot)</li>
+                                <li>Entra ID auth kræver ekstra werk</li>
+                                <li>Slack search bot kobes/bygges separat</li>
+                                <li>Granular per-dokument access: svært</li>
+                                <li>Slack/Teams Canvas selv er ikke persistent (messages expire)</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <span class="badge pro">Git-native</span>
+                            <span class="badge caution">Custom bot nødvendig</span>
+                            <span class="badge pro">Billig</span>
+                        </div>
+                    </div>
+
+                    <!-- OPTION 3: CLAUDE CODE -->
+                    <div class="card">
+                        <h3>⚙️ Option 3: Claude Code Custom (anbefalet)</h3>
+                        <p><strong>Setup:</strong> Markdown docs på GitHub + Claude Code-webapp med Entra ID auth + customer API-keys.</p>
+
+                        <div class="pros">
+                            <strong>✅ Pros:</strong>
+                            <ul style="margin-top: 5px;">
+                                <li>Claude hjælper med vedligeholdelse aktivt</li>
+                                <li>Git-driven — fuld version history</li>
+                                <li>Custom auth (Entra ID + per-customer keys)</li>
+                                <li>Granular access control (by section/tag)</li>
+                                <li>Søg, relateret indhold, smart features</li>
+                                <li>Du ejer koden 100%</li>
+                                <li>Kan bygges ud gradualt (MVP → full)</li>
+                            </ul>
+                        </div>
+
+                        <div class="cons">
+                            <strong>❌ Cons:</strong>
+                            <ul style="margin-top: 5px;">
+                                <li>Kræver 4-6 uger initial build</li>
+                                <li>Kræver ongoing vedligeholdelse (selv med Claude)</li>
+                                <li>Hvis Claude Code-infrastructure down: læses fra fallback</li>
+                                <li>Setup complexity over Notion/Slack</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <span class="badge pro">Git-driven</span>
+                            <span class="badge pro">AI-integrated</span>
+                            <span class="badge pro">Kontrol</span>
+                            <span class="badge critical">Setup tid</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FEATURE MATRIX -->
+                <h3 style="margin-top: 40px; color: #2c3e50;">Feature Sammenligning</h3>
+                <table class="comparison-table">
+                    <tr>
+                        <th>Feature</th>
+                        <th>Notion</th>
+                        <th>Slack/Teams + Host</th>
+                        <th>Claude Code</th>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Git integration</td>
+                        <td>❌ Nej</td>
+                        <td>✅ Ja (native)</td>
+                        <td>✅ Ja (native)</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Claude vedligeholdelse</td>
+                        <td>❌ Nej</td>
+                        <td>⚠️ Delvist (søg-bot)</td>
+                        <td>✅ Ja (full)</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Granular access</td>
+                        <td>⚠️ Per-side</td>
+                        <td>⚠️ Per-URL</td>
+                        <td>✅ By tag/section</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Entra ID (M365) auth</td>
+                        <td>⚠️ Notion Teams kun</td>
+                        <td>✅ Mulig (custom)</td>
+                        <td>✅ Implementeret</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Customer auth (API key)</td>
+                        <td>❌ Nej (kun links)</td>
+                        <td>⚠️ Manual (GitHub Pages only)</td>
+                        <td>✅ Built-in</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Søg & relateret</td>
+                        <td>✅ Notion native</td>
+                        <td>⚠️ GitHub search (basic)</td>
+                        <td>✅ Custom semantic</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Setup tid</td>
+                        <td>1-2 timer</td>
+                        <td>1-2 uger</td>
+                        <td>4-6 uger (MVP)</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Årlig cost</td>
+                        <td>0 DKK (free) - 2.000 DKK (Teams)</td>
+                        <td>0-500 DKK (hosting)</td>
+                        <td>~3.000 DKK (opsætning) + 100-200/md (hosting)</td>
+                    </tr>
+                </table>
+            </section>
+
+            <!-- TCO ANALYSIS -->
+            <section>
+                <h2>💰 Total Cost of Ownership (3 år)</h2>
+
+                <div class="tco">
+                    <h3 style="color: #2c3e50; margin-bottom: 20px;">År 1 Omkostninger</h3>
+
+                    <div class="tco-row">
+                        <div>
+                            <div class="tco-label">Notion</div>
+                            <div class="tco-value">2.000 DKK</div>
+                            <small>Notion Teams (3 editors, SSO)</small>
+                        </div>
+                        <div>
+                            <div class="tco-label">Slack/Teams + Host</div>
+                            <div class="tco-value">5.000 DKK</div>
+                            <small>Bot development + GitHub Pages</small>
+                        </div>
+                        <div>
+                            <div class="tco-label">Claude Code</div>
+                            <div class="tco-value">5.000 DKK</div>
+                            <small>3.000 setup + 1.800 hosting/year (Azure)</small>
+                        </div>
+                    </div>
+
+                    <h3 style="color: #2c3e50; margin: 30px 0 20px 0;">År 2-3 (løbende)</h3>
+
+                    <div class="tco-row">
+                        <div>
+                            <div class="tco-label">Notion</div>
+                            <div class="tco-value">4.000 DKK/år</div>
+                            <small>Notion Teams subscription</small>
+                        </div>
+                        <div>
+                            <div class="tco-label">Slack/Teams + Host</div>
+                            <div class="tco-value">1.500 DKK/år</div>
+                            <small>Bot maintenance + hosting</small>
+                        </div>
+                        <div>
+                            <div class="tco-label">Claude Code</div>
+                            <div class="tco-value">2.000 DKK/år</div>
+                            <small>Hosting + Claude Code ops</small>
+                        </div>
+                    </div>
+
+                    <h3 style="color: #2c3e50; margin: 30px 0 20px 0;">3-Års Total</h3>
+
+                    <div class="tco-row">
+                        <div>
+                            <div class="tco-label">Notion</div>
+                            <div class="tco-value">10.000 DKK</div>
+                            <small style="color: #666;">2k + 4k + 4k</small>
+                        </div>
+                        <div>
+                            <div class="tco-label">Slack/Teams + Host</div>
+                            <div class="tco-value">8.000 DKK</div>
+                            <small style="color: #666;">5k + 1.5k + 1.5k</small>
+                        </div>
+                        <div>
+                            <div class="tco-label">Claude Code</div>
+                            <div class="tco-value">9.000 DKK</div>
+                            <small style="color: #666;">5k + 2k + 2k</small>
+                        </div>
+                    </div>
+                </div>
+
+                <p style="margin-top: 20px; color: #666; font-style: italic;">
+                    <strong>Note:</strong> Tettra koster dig 30.000 DKK over 3 år. Claude Code-løsningen sparer 21.000 DKK og giver dig kontrol + git-history.
+                </p>
+            </section>
+
+            <!-- IMPLEMENTATION ROADMAP -->
+            <section>
+                <h2>🚀 Implementation Roadmap (Claude Code)</h2>
+
+                <div class="timeline">
+                    <h4>Fase 1: MVP (2-3 uger)</h4>
+                    <ul>
+                        <li><strong>Migrering:</strong> Eksportér Tettra til Markdown, push til GitHub repo</li>
+                        <li><strong>Web-app:</strong> React-baseret docsite med søg + tags</li>
+                        <li><strong>Auth:</strong> Simple API-key auth til start (kunder)</li>
+                        <li><strong>Hosting:</strong> Azure Static Web Apps eller Vercel</li>
+                        <li><strong>Claude:</strong> Prompt til "opdater doc X baseret på Y"</li>
+                    </ul>
+                </div>
+
+                <div class="timeline">
+                    <h4>Fase 2: Full (3-4 uger efter MVP)</h4>
+                    <ul>
+                        <li><strong>Entra ID:</strong> Intern M365-login for team</li>
+                        <li><strong>Customer segments:</strong> Granular access by customer group</li>
+                        <li><strong>Versioning:</strong> Git-drevet changelog per doc</li>
+                        <li><strong>Smart features:</strong> Related docs, Claude-suggested updates</li>
+                        <li><strong>Analytics:</strong> Track hvilke docs der læses mest</li>
+                    </ul>
+                </div>
+
+                <div class="timeline">
+                    <h4>Fase 3: Vedligeholdelse (løbende)</h4>
+                    <ul>
+                        <li><strong>Monthly:</strong> Claude Code-baseret audit (er docs opdateret?)</li>
+                        <li><strong>Sync GitHub + Display:</strong> Autodeploy ved push</li>
+                        <li><strong>Team prompter:</strong> Ulla/Mikkel kan updater docs via Claude chat</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- FALLBACK PLAN -->
+            <section>
+                <h2>🛡️ Fallback Plan: If Claude Code Deemed Risky</h2>
+
+                <div class="fallback-note">
+                    <strong>Go with Pure Notion instead:</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>Setup: 1-2 timer (template + share links)</li>
+                        <li>Cost: 2.000 DKK/år (Notion Teams med SSO)</li>
+                        <li>Trade-off: Ingen git, ingen Claude-vedligeholdelse, men stabilt & simpelt</li>
+                        <li>Futureboard: Migrate til Claude Code senere uden data-loss (Notion → Markdown export)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- KEY QUESTIONS FOR TORSTEN -->
+            <section>
+                <h2>❓ Kritiske Follow-up Spørgsmål</h2>
+
+                <div class="grid">
+                    <div class="card">
+                        <h3>1. Vedligeholdelse Ownership</h3>
+                        <p>Skal Ulla eller Mikkel have klart ownership, eller må flere folk redigere?</p>
+                        <p><strong>Impact:</strong> Påvirker approval workflows & git-branches.</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>2. Customer Segments</h3>
+                        <p>Hvor mange customer-grupper skal kunne se hver sit subset af docs?</p>
+                        <p><strong>Impact:</strong> Enkel (1-2 grupper) vs. kompleks (10+).</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>3. Markdown vs. WYSIWYG</h3>
+                        <p>Er team komfortable med at skrive Markdown, eller skal der være visual editor?</p>
+                        <p><strong>Impact:</strong> Claude Code kan tilføje WYSIWYG senere, men complexity stiger.</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>4. Migration Timeline</h3>
+                        <p>Kan I holde Tettra aktiv mens I bygger — eller skal det være "cutover"?</p>
+                        <p><strong>Impact:</strong> Parallelt drift = sikkert; cutover = presset launch.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- NEXT STEPS -->
+            <section>
+                <h2>📋 Næste Trin</h2>
+
+                <div style="background: #f8f9fa; padding: 25px; border-radius: 8px; border-left: 4px solid #667eea;">
+                    <h3 style="color: #667eea; margin-bottom: 15px;">If You're Green-Lighting Claude Code</h3>
+                    <ol style="margin-left: 20px;">
+                        <li><strong>Export fra Tettra:</strong> JSON/PDF → Markdown struktur. (~2 timer manuelt eller custom script)</li>
+                        <li><strong>GitHub setup:</strong> Repo strukturering (docs/ folder med tags/categories)</li>
+                        <li><strong>Claude Code kickoff:</strong> Jeg starter MVP-prototype (React + search + basic auth) </li>
+                        <li><strong>Week 2-3:</strong> You test, iterate, feedback</li>
+                        <li><strong>Week 4-6:</strong> Entra ID + customer segments</li>
+                        <li><strong>Go-live:</strong> Redirect fra Tettra → Claude Code site</li>
+                    </ol>
+                </div>
+
+                <div style="background: #fef5e7; padding: 25px; border-radius: 8px; border-left: 4px solid #f39c12; margin-top: 20px;">
+                    <h3 style="color: #d68910; margin-bottom: 15px;">If You're Going with Notion</h3>
+                    <ol style="margin-left: 20px;">
+                        <li><strong>Create Notion workspace:</strong> Template for dev/onboarding/API docs</li>
+                        <li><strong>Invite team + set perms:</strong> Granular per-page sharing for customers</li>
+                        <li><strong>Migrate docs:</strong> Copy from Tettra (or I'll script it)</li>
+                        <li><strong>Test:</strong> All team + sample customers</li>
+                        <li><strong>Go-live:</strong> Notify team, share public links</li>
+                    </ol>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Rapport genereret: <strong>7. juli 2026</strong></p>
+            <p>Vurderet af: Claude + Torsten Nielsen (Diviso)</p>
+            <p style="margin-top: 10px; color: #999;">Denne rapport er baseret på Divisos aktuelle setup, team-struktur og behov som af juli 2026.</p>
+        </footer>
+    </div>
+</body>
+</html>
