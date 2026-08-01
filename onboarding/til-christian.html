@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Velkommen til Diviso, Christian</title>
+<style>
+  :root{--ink:#1a1d21;--muted:#5b6470;--line:#e4e7ec;--bg:#f6f7f9;--card:#fff;--accent:#FE5819;--accent-soft:#fff1eb;--good:#1f9d5b;--blue:#1d6fe0;--blue-soft:#eaf2fe;}
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:760px;margin:0 auto;padding:32px 20px 80px;}
+  header.top{border-left:5px solid var(--accent);padding:4px 0 4px 18px;margin-bottom:26px;}
+  .kicker{text-transform:uppercase;letter-spacing:.12em;font-size:12px;font-weight:700;color:var(--accent);margin:0 0 6px;}
+  h1{font-size:30px;line-height:1.2;margin:0 0 6px;}
+  .sub{color:var(--muted);margin:0;font-size:15px;}
+  .intro{font-size:16px;margin:0 0 6px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin:18px 0;box-shadow:0 1px 2px rgba(16,24,40,.04);}
+  h2{font-size:20px;margin:0 0 4px;display:flex;align-items:center;gap:10px;}
+  .step{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:9px;background:var(--accent-soft);color:var(--accent);font-size:15px;font-weight:700;flex:none;}
+  h3{font-size:14px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:16px 0 6px;}
+  ul{margin:8px 0 0;padding-left:0;list-style:none;}
+  li{position:relative;padding:6px 0 6px 26px;border-bottom:1px dashed var(--line);}
+  li:last-child{border-bottom:none;}
+  li::before{content:"";position:absolute;left:4px;top:14px;width:8px;height:8px;border-radius:50%;background:var(--accent);}
+  .login{background:var(--blue-soft);border:1px solid #bcd8fb;}
+  .login h2{color:var(--blue);}
+  .login .step{background:#d6e6fc;color:var(--blue);}
+  .cred{background:#fff;border:1px solid #bcd8fb;border-radius:10px;padding:14px 16px;margin:12px 0 4px;font-family:"SF Mono",ui-monospace,Menlo,Consolas,monospace;font-size:15px;}
+  .cred div{padding:3px 0;}
+  .cred .lbl{color:var(--muted);font-family:inherit;display:inline-block;min-width:110px;}
+  .cred code{background:#eef4fd;padding:2px 8px;border-radius:6px;font-weight:600;color:#0f172a;}
+  .note{font-size:13.5px;color:var(--muted);margin-top:8px;}
+  .warm{background:linear-gradient(180deg,var(--accent-soft),#fff);border:1px solid #ffd9c8;}
+  .foot{color:var(--muted);font-size:13px;text-align:center;margin-top:30px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <p class="kicker">Diviso · Praktik efterår 2026</p>
+    <h1>Velkommen til Diviso, Christian! 👋</h1>
+    <p class="sub">Din guide til de første par uger</p>
+  </header>
+
+  <p class="intro">Vi glæder os rigtig meget til at have dig med på holdet. Her er, hvad du skal gøre for at komme godt fra start — tag det oppefra og ned.</p>
+
+  <section class="card login">
+    <h2><span class="step">1</span> Log ind på Microsoft 365</h2>
+    <p class="sub">Det allerførste: få adgang til din Diviso-konto og din mail.</p>
+    <p>Gå til <strong>office.com</strong> (eller outlook.com) og log ind med:</p>
+    <div class="cred">
+      <div><span class="lbl">Brugernavn:</span> <code>cn@diviso.dk</code></div>
+      <div><span class="lbl">Adgangskode:</span> <code>ONmba946</code></div>
+    </div>
+    <p class="note">Skift adgangskoden til din egen, når du er logget ind første gang. Åbn derefter <strong>Outlook</strong> og tjek at din mail virker — det er her, det meste kommunikation lander.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="step">2</span> Sæt dit udviklingsmiljø op</h2>
+    <ul>
+      <li>Installér <strong>Visual Studio</strong> og <strong>.NET</strong>.</li>
+      <li>Få et <strong>lokalt Umbraco-site</strong> op at køre — din mentor hjælper dig i gang med at clone et eksisterende projekt og få det til at bygge.</li>
+    </ul>
+    <p class="note">Bare rolig hvis der er lidt bøvl med at få det til at bygge første gang — det er helt normalt, og din mentor er klar til at hjælpe.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="step">3</span> Læs Tettra</h2>
+    <p>Du får adgang til <strong>Tettra</strong>, vores interne vidensbank. Læs den grundigt — især siderne med <strong>udvikler-links</strong> og guiden til <strong>fildrev/SharePoint</strong>. Det giver dig overblik over vores måde at arbejde på.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="step">4</span> Øvrige adgange</h2>
+    <ul>
+      <li><strong>Slack</strong> — vores daglige kommunikation. Sig gerne hej i kanalerne 🙂</li>
+      <li><strong>Teams</strong> — møder og standup.</li>
+      <li><strong>GitHub</strong> — du bliver tilføjet til vores organisation, så du kan hente og bidrage til kode.</li>
+    </ul>
+  </section>
+
+  <section class="card warm">
+    <h2>🚀 Din første opgave</h2>
+    <p>Når det praktiske er på plads, kaster vi os over et fedt projekt: du skal være med til at bygge en <strong>baseline for vores "basesite"</strong> — et Umbraco-fundament med lækkert design og genbrugelige moduler, som vi kan bygge en masse forskellige sider ud fra (camping, idræt, forbund osv.).</p>
+    <p style="margin-bottom:0;">Det rammer lige ned i det, du er god til — Umbraco (som du jo er certificeret i), design og C#. Vi glæder os til at se, hvad du kan lave! Sig endelig til, hvis du er i tvivl om noget — der er ingen dumme spørgsmål her.</p>
+  </section>
+
+  <p class="foot">Diviso ApS · Agerlandsvej 10 · 8800 Viborg</p>
+
+</div>
+</body>
+</html>
