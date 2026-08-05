@@ -2,184 +2,21 @@
 <html lang="da">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stripe-gebyrberegner</title>
+<meta http-equiv="refresh" content="0; url=https://c.tnielsen.eu/all/stripe-gebyr/">
+<title>Stripe-gebyrberegner — flyttet</title>
 <style>
-  :root{
-    --bg:#0f1115; --card:#181b22; --card2:#1f232c; --line:#2a2f3a;
-    --txt:#e6e9ef; --muted:#9aa3b2; --accent:#635bff; --accent2:#00d4b5;
-    --warn:#ffb020; --bad:#ff5c5c; --good:#3ddc97;
-  }
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{margin:0;background:var(--bg);color:var(--txt);
-    font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;padding:16px}
-  .wrap{max-width:880px;margin:0 auto}
-  .top{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:14px}
-  h1{font-size:18px;margin:0;white-space:nowrap}
-  .switch{display:flex;background:var(--card2);border:1px solid var(--line);border-radius:9px;padding:3px}
-  .switch button{background:transparent;border:none;color:var(--muted);font-size:14px;font-weight:600;
-    padding:8px 16px;border-radius:6px;cursor:pointer}
-  .switch button.active{background:var(--accent);color:#fff}
-  .amt{display:flex;align-items:center;gap:8px;margin-left:auto}
-  .amt label{font-size:13px;color:var(--muted)}
-  .amt input{width:110px;background:var(--card2);border:1px solid var(--line);color:var(--txt);
-    border-radius:8px;padding:8px 10px;font-size:15px;font-weight:600}
-  .amt input:focus{outline:none;border-color:var(--accent)}
-  .cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-  @media(max-width:720px){.cols{grid-template-columns:1fr}.amt{margin-left:0;width:100%}}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px}
-  .card h2{font-size:13px;margin:0 0 2px;color:var(--txt)}
-  .card .d{font-size:11px;color:var(--muted);margin:0 0 8px}
-  .secondInput{display:flex;align-items:center;gap:8px;margin:0 0 4px}
-  .secondInput label{font-size:11px;color:var(--muted)}
-  .secondInput input{width:90px;background:var(--card2);border:1px solid var(--line);color:var(--txt);
-    border-radius:6px;padding:5px 8px;font-size:13px}
-  .secondInput input:focus{outline:none;border-color:var(--accent)}
-  table{width:100%;border-collapse:collapse;font-size:13px}
-  th,td{text-align:right;padding:7px 6px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
-  th:first-child,td:first-child{text-align:left}
-  th{color:var(--muted);font-weight:600;font-size:11px}
-  tr:last-child td{border-bottom:none}
-  td.rate{color:var(--muted);font-size:11px}
-  tr.std td:first-child{color:var(--good);font-weight:600}
-  .good{color:var(--good)} .bad{color:var(--bad)} .warn{color:var(--warn)}
-  .mv{color:var(--accent2);font-weight:700} .val{font-weight:600}
-  /* indstillinger som diskret bar */
-  .settings{margin-top:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;
-    padding:10px 14px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
-  .settings .grp{display:flex;align-items:center;gap:6px}
-  .settings input[type=number]{width:64px;background:var(--card2);border:1px solid var(--line);color:var(--txt);
-    border-radius:6px;padding:4px 7px;font-size:12px}
-  .settings label{cursor:pointer;display:flex;align-items:center;gap:6px}
-  .settings .sep{color:var(--line)}
-  .hidden{display:none}
-  .foot{font-size:11px;color:var(--muted);text-align:center;margin-top:10px}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;background:#f7f9fc;color:#12203a;margin:0;padding:0;}
+.wrap{max-width:560px;margin:100px auto;padding:0 24px;text-align:center;}
+h1{font-size:1.4rem;margin:0 0 12px;}
+p{color:#5b6b85;line-height:1.6;}
+a{color:#1b3d8f;font-weight:600;}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="top">
-    <h1>Stripe-gebyr</h1>
-    <div class="switch">
-      <button id="btnOne" class="active" onclick="setMode('one')">Engangs</button>
-      <button id="btnSub" onclick="setMode('sub')">Abonnement</button>
-    </div>
-    <div class="amt">
-      <label id="amtLbl">Beløb</label>
-      <input id="mainAmt" type="number" value="29" step="1">
-    </div>
-  </div>
-
-  <div class="cols">
-    <!-- venstre: hovedresultat -->
-    <div class="card">
-      <h2 id="t1">Netto pr. korttype</h2>
-      <p class="d" id="d1">Hvad du får ud af beløbet.</p>
-      <table><thead id="h1"></thead><tbody id="b1"></tbody></table>
-    </div>
-    <!-- højre: gross-up / minimumstillæg -->
-    <div class="card">
-      <h2 id="t2">Tillæg for at dække gebyr</h2>
-      <p class="d" id="d2">Hvad du skal lægge oveni for at få beløbet netto.</p>
-      <table><thead id="h2"></thead><tbody id="b2"></tbody></table>
-    </div>
-  </div>
-
-  <!-- indstillinger diskret -->
-  <div class="settings">
-    <span style="color:var(--txt);font-weight:600">Indstillinger</span>
-    <div class="grp">Fast gebyr <input id="fixed" type="number" value="1.80" step="0.10"> kr.</div>
-    <span class="sep">|</span>
-    <label><input type="checkbox" id="fx"> Fremmed valuta (+2 % UK/intl.)</label>
-    <span class="sep" id="sbSep">|</span>
-    <label id="sbWrap"><input type="checkbox" id="selfbuilt"> Selvbygget abonnement (sparer 0,7 % Billing)</label>
-  </div>
-
-  <p class="foot">Stripe DK listepriser, juni 2026. Standard EØS = de fleste danske kunder. Abonnement antager Stripe Billing (0,7 %).</p>
+<h1>Denne side er flyttet</h1>
+<p>Stripe-gebyrberegner findes nu på Cloudflare Pages:</p>
+<p><a href="https://c.tnielsen.eu/all/stripe-gebyr/">https://c.tnielsen.eu/all/stripe-gebyr/</a></p>
 </div>
-
-<script>
-const kr = n => n.toLocaleString('da-DK',{minimumFractionDigits:2,maximumFractionDigits:2}) + ' kr.';
-const pct = n => n.toLocaleString('da-DK',{minimumFractionDigits:1,maximumFractionDigits:1}) + ' %';
-
-const CARDS=[
-  {name:'Standard E\u00d8S',base:1.5, fx:false,std:true},
-  {name:'Premium E\u00d8S', base:1.9, fx:false,std:false},
-  {name:'UK',              base:2.5, fx:true, std:false},
-  {name:'International',    base:3.25,fx:true, std:false}
-];
-let mode='one';
-
-function setMode(m){
-  mode=m;
-  document.getElementById('btnOne').classList.toggle('active',m==='one');
-  document.getElementById('btnSub').classList.toggle('active',m==='sub');
-  const sub=m==='sub';
-  document.getElementById('sbWrap').style.display=sub?'flex':'none';
-  document.getElementById('sbSep').style.display=sub?'inline':'none';
-  document.getElementById('amtLbl').textContent=sub?'Pris/md':'Beløb';
-  document.getElementById('t1').textContent=sub?'Netto pr. måned':'Netto pr. korttype';
-  document.getElementById('d1').textContent=sub?'Netto pr. faktura (md/kvt/år) + pr. md.':'Hvad du får ud af beløbet.';
-  document.getElementById('t2').textContent=sub?'Tillæg/md for at dække gebyr':'Tillæg for at dække gebyr';
-  document.getElementById('d2').textContent=sub?'Listepris/md + tillæg, for at få beløbet netto.':'Hvad du skal lægge oveni for at få beløbet netto.';
-  calc();
-}
-
-function pctFor(c){
-  const fx=document.getElementById('fx').checked&&c.fx?2:0;
-  const bill=(mode==='sub'&&!document.getElementById('selfbuilt').checked)?0.7:0;
-  return (c.base+fx+bill)/100;
-}
-function rateLbl(c){
-  const fx=document.getElementById('fx').checked&&c.fx?2:0;
-  const bill=(mode==='sub'&&!document.getElementById('selfbuilt').checked)?0.7:0;
-  return (c.base+fx+bill).toLocaleString('da-DK',{maximumFractionDigits:2})+' %';
-}
-const feeOf=(g,p,f)=>g*p+f;
-const grossFor=(t,p,f)=>(t+f)/(1-p);
-
-function calc(){
-  const fixed=parseFloat(document.getElementById('fixed').value)||0;
-  const amt=parseFloat(document.getElementById('mainAmt').value)||0;
-  const tgt=amt;
-  const h1=document.getElementById('h1'),b1=document.getElementById('b1');
-  const h2=document.getElementById('h2'),b2=document.getElementById('b2');
-
-  if(mode==='one'){
-    h1.innerHTML='<tr><th>Kort</th><th>Sats</th><th>Gebyr</th><th>Netto</th><th>%</th></tr>';
-    b1.innerHTML=CARDS.map(c=>{
-      const p=pctFor(c),fee=feeOf(amt,p,fixed),net=amt-fee,eff=amt>0?fee/amt*100:0;
-      return `<tr class="${c.std?'std':''}"><td>${c.name}</td><td class="rate">${rateLbl(c)}</td>`+
-        `<td class="bad">${kr(fee)}</td><td class="good val">${kr(net)}</td><td class="warn">${pct(eff)}</td></tr>`;
-    }).join('');
-    h2.innerHTML='<tr><th>Kort</th><th>Opkræv</th><th>Tillæg</th></tr>';
-    b2.innerHTML=CARDS.map(c=>{
-      const p=pctFor(c),g=grossFor(tgt,p,fixed);
-      return `<tr class="${c.std?'std':''}"><td>${c.name}</td><td class="val">${kr(g)}</td><td class="mv">+ ${kr(g-tgt)}</td></tr>`;
-    }).join('');
-    return;
-  }
-
-  const ivs=[1,3,12];
-  h1.innerHTML='<tr><th>Kort</th><th>Sats</th><th>Md</th><th>Kvt</th><th>År</th></tr>';
-  b1.innerHTML=CARDS.map(c=>{
-    const p=pctFor(c);
-    const cells=ivs.map(m=>{const g=amt*m;const net=g-feeOf(g,p,fixed);const netMo=net/m;
-      return `<td><div class="good val">${kr(net)}</div><div class="rate">${kr(netMo)}/md</div></td>`;}).join('');
-    return `<tr class="${c.std?'std':''}"><td>${c.name}</td><td class="rate">${rateLbl(c)}</td>${cells}</tr>`;
-  }).join('');
-  h2.innerHTML='<tr><th>Kort</th><th>Md</th><th>Kvt</th><th>År</th></tr>';
-  b2.innerHTML=CARDS.map(c=>{
-    const p=pctFor(c);
-    const cells=ivs.map(m=>{const tc=tgt*m;const g=grossFor(tc,p,fixed);const listMo=g/m;const add=(g-tc)/m;
-      return `<td><div class="val">${kr(listMo)}</div><div class="mv" style="font-size:11px">+ ${kr(add)}</div></td>`;}).join('');
-    return `<tr class="${c.std?'std':''}"><td>${c.name}</td>${cells}</tr>`;
-  }).join('');
-}
-
-document.querySelectorAll('input').forEach(e=>e.addEventListener('input',calc));
-setMode('one');
-</script>
 </body>
 </html>
