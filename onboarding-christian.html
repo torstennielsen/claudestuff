@@ -2,181 +2,21 @@
 <html lang="da">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Onboarding – Christian Nørgaard Nielsen</title>
+<meta http-equiv="refresh" content="0; url=https://c.tnielsen.eu/diviso/onboarding-christian/">
+<title>Onboarding — Christian — flyttet</title>
 <style>
-  :root{
-    --ink:#1a1d21;
-    --muted:#5b6470;
-    --line:#e4e7ec;
-    --bg:#f6f7f9;
-    --card:#ffffff;
-    --accent:#FE5819;
-    --accent-soft:#fff1eb;
-    --good:#1f9d5b;
-  }
-  *{box-sizing:border-box;}
-  body{
-    margin:0;
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    color:var(--ink);
-    background:var(--bg);
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-  }
-  .wrap{max-width:820px;margin:0 auto;padding:32px 20px 80px;}
-  header.top{
-    border-left:5px solid var(--accent);
-    padding:4px 0 4px 18px;
-    margin-bottom:28px;
-  }
-  .kicker{
-    text-transform:uppercase;
-    letter-spacing:.12em;
-    font-size:12px;
-    font-weight:700;
-    color:var(--accent);
-    margin:0 0 6px;
-  }
-  h1{font-size:30px;line-height:1.2;margin:0 0 6px;}
-  .sub{color:var(--muted);margin:0;font-size:15px;}
-  .card{
-    background:var(--card);
-    border:1px solid var(--line);
-    border-radius:14px;
-    padding:22px 24px;
-    margin:18px 0;
-    box-shadow:0 1px 2px rgba(16,24,40,.04);
-  }
-  h2{font-size:20px;margin:0 0 4px;display:flex;align-items:center;gap:10px;}
-  h2 .num{
-    display:inline-flex;align-items:center;justify-content:center;
-    width:26px;height:26px;border-radius:8px;
-    background:var(--accent-soft);color:var(--accent);
-    font-size:14px;font-weight:700;flex:none;
-  }
-  h3{font-size:15px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:18px 0 8px;}
-  .first{
-    background:linear-gradient(180deg,var(--accent-soft),#fff);
-    border:1px solid #ffd9c8;
-  }
-  .first h2{color:var(--accent);}
-  ul{margin:8px 0 0;padding-left:0;list-style:none;}
-  li{position:relative;padding:6px 0 6px 26px;border-bottom:1px dashed var(--line);}
-  li:last-child{border-bottom:none;}
-  li::before{
-    content:"";position:absolute;left:4px;top:14px;
-    width:8px;height:8px;border-radius:50%;background:var(--accent);
-  }
-  .first li::before{background:var(--accent);}
-  li strong{font-weight:650;}
-  .tag{
-    display:inline-block;font-size:12px;font-weight:600;
-    padding:2px 9px;border-radius:20px;margin-right:6px;
-    background:#eef1f4;color:var(--muted);
-  }
-  table{width:100%;border-collapse:collapse;margin-top:10px;font-size:15px;}
-  th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top;}
-  th{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);}
-  .yes{color:var(--good);font-weight:700;}
-  .no{color:#c0392b;font-weight:700;}
-  .chips{margin-top:4px;}
-  .chip{
-    display:inline-block;background:#eef1f4;border-radius:8px;
-    padding:3px 10px;margin:3px 5px 3px 0;font-size:13px;font-weight:600;
-  }
-  .milestone{
-    background:#0f172a;color:#e6edf5;border:none;
-  }
-  .milestone h2{color:#fff;}
-  .milestone .num{background:rgba(255,255,255,.12);color:#fff;}
-  .milestone strong{color:#fff;}
-  .foot{color:var(--muted);font-size:13px;text-align:center;margin-top:30px;}
-  .weekgrid{display:grid;grid-template-columns:1fr;gap:18px;}
-  @media(min-width:680px){.weekgrid{grid-template-columns:1fr 1fr;}}
-  .weekcard h2{font-size:17px;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;background:#f7f9fc;color:#12203a;margin:0;padding:0;}
+.wrap{max-width:560px;margin:100px auto;padding:0 24px;text-align:center;}
+h1{font-size:1.4rem;margin:0 0 12px;}
+p{color:#5b6b85;line-height:1.6;}
+a{color:#1b3d8f;font-weight:600;}
 </style>
 </head>
 <body>
 <div class="wrap">
-
-  <header class="top">
-    <p class="kicker">Diviso · Praktik efterår 2026</p>
-    <h1>Christian Nørgaard Nielsen</h1>
-    <p class="sub">Onboarding-plan &amp; kompetenceoverblik · Udviklerpraktikant</p>
-  </header>
-
-  <section class="card first">
-    <h2>⚡ Allerførst – dag 1</h2>
-    <p class="sub">Det her skal på plads, før noget som helst andet kan gå i gang:</p>
-    <ul>
-      <li><strong>Læs Tettra.</strong> Christian får Tettra-adgang provisioneret (han havde det ikke inden start) og sætter sig ind i udvikler-links, SharePoint/fildrev-guide og interne processer. Dette er hans første selvstændige opgave.</li>
-      <li><strong>Mail sat op</strong> – Outlook-konto oprettet og kørende.</li>
-      <li><strong>Udviklingsmiljø</strong> – Visual Studio + .NET installeret, og et lokalt Umbraco-site der bygger og kører.</li>
-      <li><strong>Adgange</strong> – GitHub (MySupport-aps-org), Slack, Teams, Umbraco.</li>
-      <li><strong>Mentor tildelt</strong> – fast go-to-person fra dag ét.</li>
-    </ul>
-  </section>
-
-  <section class="card">
-    <h2><span class="num">i</span> Kompetence-resumé</h2>
-    <p class="sub">Datamatiker på Erhvervsakademi MidtVest (Herning), 2024–2027. Praktik som afslutning på uddannelsen.</p>
-
-    <h3>Profil</h3>
-    <p>Full stack med hældning mod <strong>front end / design</strong>. Valgfag i UI/UX-design, webprogrammering og IT-sikkerhed. Beskriver sig selv som struktureret, detaljeorienteret og visuel i tilgangen — og god til samarbejde på tværs af teams.</p>
-
-    <h3>Teknisk niveau</h3>
-    <table>
-      <tr><th>Teknologi</th><th>Status</th></tr>
-      <tr><td><strong>SQL</strong></td><td class="yes">✓ På CV'et</td></tr>
-      <tr><td><strong>Umbraco</strong></td><td class="yes">✓ Professionel-certificering (2026)</td></tr>
-      <tr><td><strong>Blazor</strong></td><td class="no">Endnu ikke — men har ASP.NET-fundamentet</td></tr>
-      <tr><td><strong>MAUI</strong></td><td class="no">Endnu ikke — ingen mobil-erfaring</td></tr>
-    </table>
-    <div class="chips">
-      <span class="chip">C#</span><span class="chip">ASP.NET</span><span class="chip">SQL</span>
-      <span class="chip">Java</span><span class="chip">JavaScript</span><span class="chip">HTML/CSS</span>
-    </div>
-
-    <h3>Oplagt opstart</h3>
-    <p>Bygge en <strong>baseline for basesite</strong> — et Umbraco-fundament med lækkert design og genbrugelige moduler, som de brandede vertical-sites (campingsite, idrætssite, forbundssite osv.) kan bygges ud fra. Lav-risiko, greenfield, og rammer præcis hans styrker.</p>
-  </section>
-
-  <div class="weekgrid">
-    <section class="card weekcard">
-      <h2><span class="num">1</span> Uge 1</h2>
-      <p class="sub">Landing &amp; fundament</p>
-      <ul>
-        <li>Praktik-formalia, udstyr og alle adgange på plads (se "Allerførst").</li>
-        <li><strong>Læs Tettra</strong> grundigt — udvikler-links, fildrev og processer.</li>
-        <li>Intro til stack og arbejdsgange: standup, opgavebooking og især <strong>PR-disciplin</strong> (media-filer må aldrig med i pull requests).</li>
-        <li><strong>Warmup:</strong> clone et eksisterende Umbraco-site og få det til at bygge lokalt — så møder han CI/Appveyor-quirks i en sandkasse.</li>
-        <li>Gennemgå basesite-konceptet + de eksisterende Manus-prototyper som designreference.</li>
-        <li>Evt. tag <strong>jeres test</strong> for en baseline på niveau.</li>
-      </ul>
-    </section>
-
-    <section class="card weekcard">
-      <h2><span class="num">2</span> Uge 2</h2>
-      <p class="sub">Basesite baseline kickoff</p>
-      <ul>
-        <li>Med mentor: definér scope — hvilke moduler skal med (hero, navigation, CTA, sektioner, kontaktformular, footer — samme byggeklodser som på Veteranhjem).</li>
-        <li>Sæt Umbraco op fra bunden: document types + base styles.</li>
-        <li>Byg de første <strong>2–3 genbrugelige moduler</strong>, med design hentet fra Manus-prototyperne så det bliver lækkert.</li>
-        <li>Små, hyppige PRs med review undervejs.</li>
-      </ul>
-    </section>
-  </div>
-
-  <section class="card milestone">
-    <h2><span class="num">★</span> Milepæl efter ~2 uger</h2>
-    <p>Et <strong>kørende Umbraco-basesite</strong> med base-styling og et par færdige moduler — klar til at brande ud i de forskellige vertical-sites.</p>
-    <h3 style="color:#9fb0c4;">Vækstspor</h3>
-    <p style="margin:0;">Når baseline står, er <strong>Blazor</strong> det oplagte næste skridt — det bygger direkte oven på hans ASP.NET-viden og er jeres måde at bygge sites på. MAUI ligger længere ude og er ikke relevant for denne opgave.</p>
-  </section>
-
-  <p class="foot">Internt dokument · Diviso ApS</p>
-
+<h1>Denne side er flyttet</h1>
+<p>Onboarding — Christian findes nu på Cloudflare Pages:</p>
+<p><a href="https://c.tnielsen.eu/diviso/onboarding-christian/">https://c.tnielsen.eu/diviso/onboarding-christian/</a></p>
 </div>
 </body>
 </html>
